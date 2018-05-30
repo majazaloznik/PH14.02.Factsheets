@@ -1,0 +1,23 @@
+---
+title: data analysis journal for MENA factscheet PH 14.2 - May 2018
+author: mz
+output: pdf_document
+---
+
+# Wednesday 30.5.
+
+1. New github repository and R project: PH14.02.Factsheets
+
+2. Inspiration: IIASA Ageing Demographic Data Sheet - but turns out not really, althought it's really cool what they do with prospective age and stuff, it's not sth that is easy to run I think, since it requires annual data, which I don't have. 
+
+3. Oh, no, actually it looks like it is available: [Population interpolated by single age, annually from 1950 to 2100.](https://esa.un.org/unpd/wpp/Download/Standard/CSV/), downloaded into `data/raw`, we'll see how interested anyone is in that!
+
+4. OK, copy makefile from last one and copy out all the bespoke stuff. 
+
+5. `make dot`, `make journal`, `make readme` all work. 
+
+6. readme was giving a warning that it requires a nonempty title or pagetitle, so i added a yaml, even though i didn't used to have one. I mean it worked either way, but now there's no warning. 
+
+
+
+
