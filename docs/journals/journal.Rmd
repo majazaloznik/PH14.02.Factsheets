@@ -18,6 +18,12 @@ output: pdf_document
 
 6. readme was giving a warning that it requires a nonempty title or pagetitle, so i added a yaml, even though i didn't used to have one. I mean it worked either way, but now there's no warning. 
 
+7. OK, program for data download so it only happens once. 
 
 
+# Thursday 1.6.
+
+1. OK, so download script is in separate file, so won't need to be run again, then touched the .csv file, so the order is now correct. If I end up downloading any more stuff, just touch it and it will be newer than the prerequisite `00-download`. 
+
+2. I need list of countries in .csv format
 

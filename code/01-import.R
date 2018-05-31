@@ -1,10 +1,21 @@
 ##=============================================================================
-## 01. data download  =========================================================
+## 00. preliminaries ==========================================================
+## 01. data import ============================================================
 
+## 00. preliminaries ==========================================================
+library(readr)
+library(dplyr)
+## 01. data import  =========================================================
 
+# import country list
 
-## 01. data download  =========================================================
+cntryz <- read_csv("data/raw/cntry.list.csv", col_names = "country")
+# import population counts
+pop.df <- read_csv("data/raw/WPP2017_PBSAS.csv")
 
-paste0("https://esa.un.org/unpd/wpp/DVD/Files/",
-       "1_Indicators%20(Standard)/CSV_FILES/",
-       "WPP2017_PopulationBySingleAgeSex.csv")
+# select only cases and variables needed
+pop.df %>% 
+  filter(Location %in% pull(cntryz)) %>% 
+  select(-AgeGrpStart, -AgeGrpSpan) -> mena.pop
+
+saveRDS(mena.pop, "data/processed/mena.pop.rds")

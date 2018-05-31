@@ -97,7 +97,7 @@ endef
 
 .PHONY: all
 
-all: journal readme 
+all: journal readme methods analysis dot
 
 pdf: $(POSTER).pdf
 
@@ -120,11 +120,11 @@ $(DT/P)/make.dot: $(DIR)/Makefile
 journal: $(JRN)/journal.html $(JRN)/journal.pdf 
 
 # journal (with graph) render to  pdf
-$(JRN)/journal.pdf:  $(JRN)/journal.Rmd dot
+$(JRN)/journal.pdf:  $(JRN)/journal.Rmd 
 	$(rmd2pdf)
 
 # journal (with graph) render to  html
-$(JRN)/journal.html:  $(JRN)/journal.Rmd dot
+$(JRN)/journal.html:  $(JRN)/journal.Rmd 
 	$(rmd2html)
 
 
@@ -137,7 +137,7 @@ README.html: README.md
 # methods from Rmds ############################################################
 methods: $(RPRT)/methods.pdf
 
-$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd dot 
+$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  
 	$(rmd2pdf)
 
 
@@ -189,14 +189,19 @@ $(POSTER).dvi: $(POSTER).tex docs/presentations/lit.bib $(FIG/.eps)
 # dependency -- secondary output of 01-import
 #$(DT/I)/catalog.rds: $(CODE)/01-import.R
 
+
+analysis: $(DT/P)/mena.pop.rds
+
+$(DT/P)/mena.pop.rds: $(CODE)/01-import.R
+
+
 # required data for input to 01-import
-#$(CODE)/01-import.R: $(DT/R)/catalog.full.rds
-#touch $@
-  
-# download all populatj
-$(DT/R)/WPP2017_PBSAS.csv:  $(CODE)/01-import.R
+$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv
 	touch $@
-	# Rscript -e "source('$<')"
+  
+# download all population data - age single year sizes 
+$(DT/R)/WPP2017_PBSAS.csv:  $(CODE)/00-download.R
+	Rscript -e "source('$<')"
 
 
 

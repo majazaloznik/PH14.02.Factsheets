@@ -1,0 +1,20 @@
+---
+title: data analysis methods for MENA factscheet PH 14.2 - May 2018
+author: mz
+output: pdf_document
+---
+
+# Data 
+
+UN World Population Prospects - [Standard Projections](https://esa.un.org/unpd/wpp/Download/Standard/CSV/)
+
+* **LocID** (numeric): numeric code for the location; for countries and areas, it follows the ISO 3166-1 numeric standard
+* **Location** (string): name of the region, subregion, country or area
+* **VarID** (numeric): numeric code for the variant
+* **Variant** (string): projection variant name (Medium is the most used)
+* **Time** (string): label identifying the single year (e.g. 1950) or the period of the data (e.g. 1950-1955)
+* **MidPeriod** (numeric): numeric value identifying the mid period of the data, with the decimal representing the month (e.g. 1950.5 for July 1950)
+* **AgeGrp** (string): label identifying the single age (e.g. 15) or age group (e.g. 15-19)
+* **PopMale**: Male population for the individual age (thousands)
+* **PopFemale**: Female population for the individual age (thousands)
+* **PopTotal**: Total population for the individual age (thousands)
