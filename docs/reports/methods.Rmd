@@ -6,7 +6,7 @@ output: pdf_document
 
 # Data 
 
-UN World Population Prospects - [Standard Projections](https://esa.un.org/unpd/wpp/Download/Standard/CSV/)
+### UN World Population Prospects - [Standard Projections](https://esa.un.org/unpd/wpp/Download/Standard/CSV/)
 
 * **LocID** (numeric): numeric code for the location; for countries and areas, it follows the ISO 3166-1 numeric standard
 * **Location** (string): name of the region, subregion, country or area
@@ -15,6 +15,21 @@ UN World Population Prospects - [Standard Projections](https://esa.un.org/unpd/w
 * **Time** (string): label identifying the single year (e.g. 1950) or the period of the data (e.g. 1950-1955)
 * **MidPeriod** (numeric): numeric value identifying the mid period of the data, with the decimal representing the month (e.g. 1950.5 for July 1950)
 * **AgeGrp** (string): label identifying the single age (e.g. 15) or age group (e.g. 15-19)
-* **PopMale**: Male population for the individual age (thousands)
 * **PopFemale**: Female population for the individual age (thousands)
 * **PopTotal**: Total population for the individual age (thousands)
+* **PopMale**: Male population for the individual age (thousands)
+
+### UN LifeTables - Mortality Indicators. [*ibid*]
+
+Abridged life tables up to age 85 by sex and both sexes combined providing a set of values showing the mortality experience of a hypothetical group of infants born at the same time and subject throughout their lifetime to the specific mortality rates of a given period, from 1950-1955 to 2095-2100.
+
+* **mx**: Central death rate, nmx, for the age interval (x, x+n)
+* **qx**: Probability of dying (nqx), for an individual between age x and x+n
+* **px**: Probability of surviving, (npx), for an individual of age x to age x+n
+* **lx**: Number of survivors, (lx), at age (x) for 100000 births
+* **dx**: Number of deaths, (ndx), between ages x and x+n
+* **Lx**: Number of person-years lived, (nLx), between ages x and x+n
+* **Sx**: Survival ratio (nSx) corresponding to proportion of the life table population in age group (x, x+n) who are alive n year later
+* **Tx**: Person-years lived, (Tx), above age x
+* **ex**: Expectation of life (ex) at age x, i.e., average number of years lived subsequent to age x by those reaching age x
+* **ax**: Average number of years lived (nax) between ages x and x+n by those dying in the interval

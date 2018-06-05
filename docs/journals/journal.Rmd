@@ -25,5 +25,35 @@ output: pdf_document
 
 1. OK, so download script is in separate file, so won't need to be run again, then touched the .csv file, so the order is now correct. If I end up downloading any more stuff, just touch it and it will be newer than the prerequisite `00-download`. 
 
-2. I need list of countries in .csv format
+2. I need list of countries in .csv format, manually `cntry.list.csv` in `/raw`,
 
+3. `01-import.R` script to import full WPP population total dataset, extract the countries and save to rds. as processed. 
+
+
+# Monday 4.6. 
+
+1. After  consulting with Hafiz to exclude mauritania and western sahara and keep turkey. which is nice, since that leaves 20 countries, which should be easy to lay out. Removed the two countries from the country list. 
+
+# Tuesday 5.6.
+
+1. New code script `02-clean-data.R` To set up the data for plotting. 
+
+2. Ach, the dowload scripts are super problematic if they download more than a single file - then if you update the script it always has to redownload all of them. So instead let's put the downloads into the makefile directly as unix commands. 
+
+3. Here's one suggested [solution with curl](https://stackoverflow.com/questions/32672222/how-to-download-a-file-only-if-more-recently-changed-in-makefile) instead of wget. 
+
+4. Well, wget doesn't work on this windows machine anyway, so let's try curl then. And no need to complicate my life with the temp files. Hmm, but it doesn't work with just the file as a target and the curl command as a rule, says "no rule"?! 
+
+5. My bad, there was no rule, because i didn't add the folder. 
+
+6. OK: this is how it works: `curl -o new.filename http://xxx.com` as a rule, 
+
+7. Mini sidetrack trying out multiple cursors in rstudio. nice trick. Although a small bug, since multiline lines are not treated as single lines, which you might presumably expect, no?
+
+8. OK, now the question is how to figure out the old-age threshold, since the life tables data is for 5-year groups. So I need a funciton to get the intercept and slope from two points and then get me the age at which ex is 15. Maybe not linear interpolation either, how about splines? Let's see.
+
+9. Fuck Yes. Splines first attemtn with fmm is correct to second decimal compared to the Ageing datasheet from IIASA. 
+
+10. Althought that's actually suspicious. What if they didn't actually make an error? because I am now using the start of the age group, not the middle of the group. So the life expectancy of the group e.g. 50-54 is plotted as the expectancy of 50 year-olds, which is actually wrong, it should be the middle of the group? Actually no, checked in the Andy Hinde book, it is correct . I'll double check a few other country/year combos?
+
+11. Manually checking a few countries to see which method of spline to use. China and Togo 45-50 fit with MonoH.FC. 

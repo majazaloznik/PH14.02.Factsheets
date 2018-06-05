@@ -193,20 +193,25 @@ $(POSTER).dvi: $(POSTER).tex docs/presentations/lit.bib $(FIG/.eps)
 analysis: $(DT/P)/mena.pop.rds
 
 $(DT/P)/mena.pop.rds: $(CODE)/01-import.R
-
-
-# required data for input to 01-import
-$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv
-	touch $@
-  
-# download all population data - age single year sizes 
-$(DT/R)/WPP2017_PBSAS.csv:  $(CODE)/00-download.R
 	Rscript -e "source('$<')"
 
 
+# required data for input to 01-import
+$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LifeTable.csv $(DT/R)/cntry.list.csv
+	touch $@
+  
 
+# download all WPP 2017 population data
+$(DT/R)/WPP2017_PBSAS.csv: 
+	curl -o $@ "https://esa.un.org/unpd/wpp/DVD/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2017_PopulationBySingleAgeSex.csv"
 
+# download all WPP 2017 life table data
+$(DT/R)/WPP2017_LT.csv:
+	curl  -o $@	"https://esa.un.org/unpd/wpp/DVD/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2017_LifeTable.csv" 
 
+   
+       
+    
 
 
 
