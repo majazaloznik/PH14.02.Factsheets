@@ -2,6 +2,7 @@
 title: data analysis journal for MENA factscheet PH 14.2 - May 2018
 author: mz
 output: pdf_document
+bibliography: "../bib.bib"
 ---
 
 # Wednesday 30.5.
@@ -52,8 +53,35 @@ output: pdf_document
 
 8. OK, now the question is how to figure out the old-age threshold, since the life tables data is for 5-year groups. So I need a funciton to get the intercept and slope from two points and then get me the age at which ex is 15. Maybe not linear interpolation either, how about splines? Let's see.
 
-9. Fuck Yes. Splines first attemtn with fmm is correct to second decimal compared to the Ageing datasheet from IIASA. 
+9. Fuck Yes. Splines first attempt with fmm is correct to second decimal compared to the Ageing datasheet from IIASA. 
 
 10. Althought that's actually suspicious. What if they didn't actually make an error? because I am now using the start of the age group, not the middle of the group. So the life expectancy of the group e.g. 50-54 is plotted as the expectancy of 50 year-olds, which is actually wrong, it should be the middle of the group? Actually no, checked in the Andy Hinde book, it is correct . I'll double check a few other country/year combos?
 
-11. Manually checking a few countries to see which method of spline to use. China and Togo 45-50 fit with MonoH.FC. 
+11. Manually checking a few countries to see which method of spline to use. China and Togo 45-50 fit with MonoH.FC method, so does Algeria and Israel, so I'm happy using this. 
+
+# Wednesday 6.6. 
+
+1. OK, keep makefile up to date. `01-import` is now importing and reducing two .csv files, produces two rds files (one is connected via simple dependency only) and these are now inputs to `02-clean`. 
+
+2. OK, so now in data clean we need to write a function to get the old age threshold for each country/year/gender combo. Also write it up in teh methods.
+
+3. How do you do bibtex in knitted docs again? Ah, OK, that's easy.
+
+4. OK, now write a function to interpolate a single value, using splines, from vectors x and y. And make a very nice roxy example, this in itself could be a blog post about how splines work!
+
+5. Add `FunSPline.R` to makefile. 
+
+6. Clean data for old age threshold plots. 
+
+7. Write draft fundtion for plotting old age thresholds. One for each country, the other 20 totals in the background, and male and female added on top. 
+
+8. Find proportion of population over 65, then proportion over threshold! OK, so this is the population files, and here the issue is that up to a point there was an open ended group fot "80+" peeps. Which is not a number. 
+
+9. OK, now in order to get the proportionof the population over the old age threshold I first need the thresholds for each year. Done
+
+10. Now I need to get the population over that age in each Location/year combination. Got it, that's now an extra row in the population table. 
+
+11. Next step is splitting the year into two rows properly - atm the interpolated population is in the table twice, once as the proportion, and once as part of teh whole population for that age. 
+
+8. Smooth pipeline from 02 -> 03 and update makefile. 
+

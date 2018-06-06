@@ -2,6 +2,7 @@
 title: data analysis methods for MENA factscheet PH 14.2 - May 2018
 author: mz
 output: pdf_document
+bibliography: "../bib.bib"
 ---
 
 # Data 
@@ -33,3 +34,17 @@ Abridged life tables up to age 85 by sex and both sexes combined providing a set
 * **Tx**: Person-years lived, (Tx), above age x
 * **ex**: Expectation of life (ex) at age x, i.e., average number of years lived subsequent to age x by those reaching age x
 * **ax**: Average number of years lived (nax) between ages x and x+n by those dying in the interval
+
+# Calculations
+
+Calculating the *old-age threshold*, which is the age at which the remaining life expectancy is 15 years, was based on the abridged life tables which has **ex** values for five year groups, so I used splines to interpolate the age where **ex** equals 15. 
+
+Although even a linear interpolation would not change the calculations dramatically, so this is a minor point, but still..
+
+I use the `R` `stats` function `splinefun()` and the monotone Hermite spline cumputation according to the method of Fritsch and Carlson: `method = "monoH.FC"` which produces identical results (to the second decimal point)  as the ones published in the IIASA Ageing Demographic Data Sheet [@scherbov2018aging], for a random selection of a dozen country/year combinations. 
+
+See @sanderson2008rethinking for more info on prospective measures of ageing. 
+
+
+
+# References

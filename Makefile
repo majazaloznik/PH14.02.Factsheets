@@ -190,11 +190,17 @@ $(POSTER).dvi: $(POSTER).tex docs/presentations/lit.bib $(FIG/.eps)
 #$(DT/I)/catalog.rds: $(CODE)/01-import.R
 
 
-analysis: $(DT/P)/mena.pop.rds
+analysis: $(CODE)/02-clean-data.R
 
+# required data for input to 02-clean-data
+$(CODE)/02-clean-data.R: $(DT/P)/mena.pop.rds $(DT/P)/mena.lt.rds $(CODE)/FunSpline.R
+	touch $@
+	
 $(DT/P)/mena.pop.rds: $(CODE)/01-import.R
 	Rscript -e "source('$<')"
 
+# dependency only
+$(DT/P)/mena.lt.rds: $(CODE)/01-import.R
 
 # required data for input to 01-import
 $(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LifeTable.csv $(DT/R)/cntry.list.csv
