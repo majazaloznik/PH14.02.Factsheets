@@ -7,8 +7,8 @@ FunPlotOldAge <- function(country = "Algeria",
                           col.total = "palevioletred4",
                           col.male = "palevioletred3",
                           col.female = "palevioletred3"){
-  mena.old.age %>% 
-    filter(MidPeriod > 1980, MidPeriod < 2050) -> mena.old.age
+  mena.old.age.single.year %>% 
+    filter(MidPeriod > 1980, MidPeriod < 2050) -> mena.old.age.single.year
   par(bg = col.bg)
   par(mar = c(3,3,1,0))
   plot(2000, 50, 
@@ -18,27 +18,27 @@ FunPlotOldAge <- function(country = "Algeria",
        type = "n",
        ylab = "", xlab = "",
        axes = FALSE)
-  mena.old.age %>% 
+  mena.old.age.single.year %>% 
     group_by(Location) %>% 
-    lines(Total ~ MidPeriod, . ,
+    lines(Total.old.age.i ~ MidPeriod, . ,
           lwd = 3, col = col.20)
   for (i in seq(50, 80, 5)){
     lines(c(1980, 2050), c(i,i), col = "gray50", lty = 3)
   }
   
-  mena.old.age %>% 
+  mena.old.age.single.year %>% 
     filter(Location == country) %>% 
-    lines(Total ~ MidPeriod, . ,
+    lines(Total.old.age.i ~ MidPeriod, . ,
           lwd = 3, col = col.total )
   
-  mena.old.age %>% 
+  mena.old.age.single.year %>% 
     filter(Location == country) %>% 
-    lines(Male ~ MidPeriod, . ,
+    lines(Male.old.age.i ~ MidPeriod, . ,
           lwd = 3, col = col.male, lty = 1)
   
-  mena.old.age %>% 
+  mena.old.age.single.year %>% 
     filter(Location == country) %>% 
-    lines(Female ~ MidPeriod, . ,
+    lines(Female.old.age.i ~ MidPeriod, . ,
           lwd = 3, col = col.female, lty = 1)
   
   

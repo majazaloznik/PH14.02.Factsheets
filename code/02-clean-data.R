@@ -36,7 +36,7 @@ mena.pop %>%
 # for each year/country combination
 mena.lt %>% 
   group_by(Location, MidPeriod, Sex) %>% 
-  summarise(old.age=FunSpline(ex,AgeGrpStart))  %>% 
+  summarise(old.age=FunSpline(ex,AgeGrpStart, 15))  %>% 
   spread(key = Sex, value = old.age)  -> mena.old.age
 
 # use splines to get the age thresholds for each year
@@ -46,34 +46,44 @@ interpolating.years <- expand.grid(MidPeriod = seq(from=min(mena.old.age$MidPeri
                                                    to = max(mena.old.age$MidPeriod), by = 1),
                                    Location = unique(mena.old.age$Location))
 
-# interpolate the threshold for each single year
+# interpolate the threshold for each single year, for all three Sex groups
 mena.old.age %>% 
   right_join(interpolating.years) %>% 
-  select(-Female, -Male) %>% 
   group_by(Location) %>% 
-  mutate(threshold.interpolated = spline(MidPeriod, Total, xout = MidPeriod)$y) -> mena.old.age.single.year
+  mutate(Female.old.age.i = spline(MidPeriod, Female, xout = MidPeriod)$y,
+         Male.old.age.i = spline(MidPeriod, Male, xout = MidPeriod)$y,
+         Total.old.age.i = spline(MidPeriod, Total, xout = MidPeriod)$y) -> 
+  mena.old.age.single.year
   
-
-# interpolate population over threshold age. 
-mena.pop %>% 
-  right_join(mena.old.age.single.year, by = c("Time" = "MidPeriod", "Location" = "Location")) %>% 
-  select(-PopMale, -PopFemale, -MidPeriod, -Variant,  -Total) %>% 
-  mutate(Time = as.integer(Time),
-         VarID = VarID -1) %>% 
-  group_by(Location, Time) %>%  
-  summarise(PopTotal=FunSpline(AgeGrp,PopTotal, unique(threshold.interpolated)),
-            AgeGrp = unique(threshold.interpolated), 
-            threshold = unique(threshold.interpolated),
-            VarID = first(VarID )) -> mena.interpolated.old.age.pop
-
-# now merge that back with the full population table, sliding the extra rows in
-mena.pop %>% 
-  filter(Time >= 1953) %>% 
-  select(Location, Time, AgeGrp, VarID, PopTotal) %>% 
-  bind_rows(mena.interpolated.old.age.pop) %>% 
-  arrange(Location, Time, VarID, AgeGrp) %>% 
+# now merge that back with the full population table, sliding them as extra rows in
+mena.old.age.single.year %>% 
+  select(Location, MidPeriod, Total.old.age.i) %>% 
+  rename(AgeGrp = Total.old.age.i, Time = MidPeriod) %>% 
+  mutate(threshold = AgeGrp) %>% 
+  bind_rows(mena.pop) %>% 
+  select(c(1:4, 11)) %>% 
+  arrange(Location, Time,AgeGrp) %>% 
   group_by(Location, Time) %>% 
+  mutate(PopTotal = spline(AgeGrp, PopTotal, xout = AgeGrp)$y) %>% 
+  mutate(temp = ifelse(!is.na(threshold), lag(PopTotal), NA),
+         PopTotal = ifelse(!is.na(lead(threshold)), lead(PopTotal), PopTotal),
+         PopTotal = ifelse(!is.na(threshold), temp-PopTotal, PopTotal)) %>% 
+  select(-temp) %>% 
+  arrange(Location, Time, threshold) %>% 
   fill(threshold) %>% 
-  arrange(Location, Time, AgeGrp)-> x
-
-
+  arrange(Location, Time,AgeGrp)  %>% 
+  mutate(over.threshold = ifelse(AgeGrp < threshold, "under", "over")) %>% 
+  group_by(Location, Time, over.threshold) %>% 
+  summarise(PopTotal = sum(PopTotal)) %>% 
+  spread(over.threshold, PopTotal) %>% 
+  mutate(over.threshold = over/(over+under))  -> mena.over.threshold
+# 
+# 
+# left_join(mena.over.65, mena.over.threshold, by = c("Location" = "Location", "Time" = "Time")) -> x
+# 
+# x %>% 
+#   filter(Location == "Oman") -> a
+#   
+# plot(a$Time, a$prop.over.65, type = "l", xlim = c(1980, 2050), lwd = 2, ylim = c(0, 0.2)) 
+# lines(a$Time, a$over.threshold, lwd = 2, lty = 2, col = "red") 
+#           

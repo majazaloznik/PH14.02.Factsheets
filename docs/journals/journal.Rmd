@@ -83,5 +83,15 @@ bibliography: "../bib.bib"
 
 11. Next step is splitting the year into two rows properly - atm the interpolated population is in the table twice, once as the proportion, and once as part of teh whole population for that age. 
 
+# Thursday 7.6. 
+
+1. OOps, go back one step. The old-age thrshold was calculated for teh abridged life table, so every 5 years, let's fill in the intervening years as well. That makes teh chart smoother.
+
+2. Now restart the population interpolation. I've got it all in one table now, and interpolated
+
+3. Now need to split the full year into the interpolated and difference: If the threshold is 57.3, and there were 30,000 people in the 57 age group, there are now x in the 57.3 age group and 30,000-x in the 57 age group. So some sort of lag function to work only on these two rows. 
+
+4. OK, so I figured that, but there is an issue..Once I plot the proportion over/under the threshold, the fact that I had interpolated to get the five year individual year data is now super obvious and all jumpy.. So I think I may have to go back to five year data here. Oh, or isntead of interpolating the populations, I should only interpolate the proportions, i.e. at the last step. 
+
 8. Smooth pipeline from 02 -> 03 and update makefile. 
 
