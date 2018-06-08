@@ -49,11 +49,23 @@ See @sanderson2008rethinking for more info on prospective measures of ageing.
 
 Furthermore, the life tables are for five-year time periods as well. So after step one--finding the age at which ex in 15, for every 5-year period--comes step two, interpolating these for every individual year. 
 
+So we start with life expectancy values:
+
+$ex^{y = i_5}_{a = k_5}$ 
+
+where the $ex$ is given for five year age groups (except for first two, and last): 
+
+$k_5 = 0-1, 1-4, 5-9, ... 75-79, 80+$ 
+
+and for time periods of five years 
+
+$i_5 = 1950-55, 1955-60... 2095-2100$
+
+
 ## Proportion over old-age threshold
 
 So now we have the old-age threshold for every year. We also have the population data, single-year age groups, for every year. So in order to get the proportion of the population over the old age-threshold, we now need to interpolate the population. E.g. there are 30,000 people aged 62 but not yet 63. How many people are aged 62.3? Again, this interpolation could be done linearly, but since we have information on the populaition at ages 61 and 63 etc, it makes sense to use that in the calculation and use splines again. 
 
-Hmm, OK, there is a problem here, because the interpolation of the five year time periods makes the final proportion all jaggedy, but it kind of works..
 
 
 
