@@ -138,7 +138,7 @@ README.html: README.md
 # methods from Rmds ############################################################
 methods: $(RPRT)/methods.pdf
 
-$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  
+$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  $(DT/P)/demo.rds
 	$(rmd2pdf)
 
 
@@ -193,6 +193,9 @@ $(POSTER).dvi: $(POSTER).tex docs/presentations/lit.bib $(FIG/.eps)
 
 analysis: $(CODE)/02-clean-data.R
 
+$(DT/P)/demo.rds:  $(CODE)/02-clean-data.R
+		Rscript -e "source('$<')"
+		
 # required data for input to 02-clean-data
 $(CODE)/02-clean-data.R: $(DT/P)/mena.pop.rds $(DT/P)/mena.lt.rds $(CODE)/FunSpline.R
 	touch $@

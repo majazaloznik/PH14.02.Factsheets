@@ -1,7 +1,7 @@
 ##=============================================================================
 ## 00. preliminaries ==========================================================
 ## 01. data import ============================================================
-## 02. data culling  ===========================================================
+## 02. data export  ===========================================================
 ## 03. data interpolation =====================================================
 ##=============================================================================
 
@@ -19,7 +19,11 @@ pop <- readRDS("data/processed/mena.pop.rds")
 # import life expectacy data 
 lt <- readRDS("data/processed/mena.lt.rds")
 
-  
+## 02. data export  ===========================================================
+lt %>% 
+  filter(Location == "Algeria", Sex == "Total") -> demo
+saveRDS(demo, "data/processed/demo.rds")
+
 ## 03. data interpolation =====================================================
 
 # use splines to get old age threshold (15 years remaining life expectancy)
@@ -28,6 +32,7 @@ lt %>%
   group_by(Location, MidPeriod, Sex) %>% 
   summarise(old.age=FunSpline(ex,AgeGrpStart, 15))  %>% 
   spread(key = Sex, value = old.age)  -> old.age.threshold.5y
+
 
 # use splines to get the age thresholds for each year
 # first expand to get all years needed

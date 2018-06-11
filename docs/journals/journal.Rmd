@@ -91,7 +91,14 @@ bibliography: "../bib.bib"
 
 3. Now need to split the full year into the interpolated and difference: If the threshold is 57.3, and there were 30,000 people in the 57 age group, there are now x in the 57.3 age group and 30,000-x in the 57 age group. So some sort of lag function to work only on these two rows. 
 
-4. OK, so I figured that, but there is an issue..Once I plot the proportion over/under the threshold, the fact that I had interpolated to get the five year individual year data is now super obvious and all jumpy.. So I think I may have to go back to five year data here. Oh, or isntead of interpolating the populations, I should only interpolate the proportions, i.e. at the last step. 
+4. OK, so I figured that, but there is an issue..Once I plot the proportion over/under the threshold, the fact that I had interpolated to get the five year individual year data is now super obvious and all jumpy.. So I think I may have to go back to five year data here. Oh, or isntead of interpolating the populations, I should only interpolate the proportions, i.e. at the last step. So I've written this all out now on the train, gotta write it up into the methods now..
+
+# Friday 8.6. 
+
+1. OK, so methods, write up with equations the whole process...
+
+2. No, still trying to figure out the jumps. They aren't from the 5 year interpolations actually. They happen everytime the threshold value goes up a notch. So the issue is with the proportional populations above and below the threshold. OK, all good! I shouldn't have interpolated the proportion of the populaiton at the threshold age, ha!
+
 
 8. Smooth pipeline from 02 -> 03 and update makefile. 
 
