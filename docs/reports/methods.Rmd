@@ -134,9 +134,40 @@ We also have the population data, single-year age groups, for every year.
 $Pop_{y=i}^{x=k}$ where $k = 0,1,2...80$ and $y = 1950, 1951.. 2100$
 
 
-So in order to get the proportion of the population over the old age-threshold, we now need to interpolate the population. E.g. there are 30,000 people aged 62 but not yet 63. How many people are aged 62.3? Again, this interpolation could be done linearly, but since we have information on the populaition at ages 61 and 63 etc, it makes sense to use that in the calculation and use splines again. 
+So in order to get the proportion of the population over the old age-threshold, we now need to interpolate the population. E.g. there are 30,000 people aged 62 but not yet 63. How many people are aged 62.3? Again, this interpolation could be done linearly, but since we have information on the population at ages 61 and 63 etc, it makes sense to use that in the calculation and use splines again. 
+
+But of course (it turns out after a lot of odd results) I need to interpolate between the cumulative populations! So here is how this works via Figure 3. Here we start at the old-age threshold reading it off the x-axis--it's 62.89 for Algeria in 1988, and interpolate the cumulative population that is under that age from the y-axis. This cumulative population $Pop_{y=i}^{x<RLE^{15}_{y=i}}$ is then divided by the total population in year $y=i$ to get the proportion over the old-age threshold.
+
+$Prop > RLE^{15} = \frac{Pop_{y=i}^{x<RLE^{15}_{y=i}}}{\sum_{x = 1}^{x = 80+}{Pop^{x}_{y=i}}}$
 
 
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "Figure 3: Interpolation of populaiton over old-age threhsold"}
+library(dplyr)
+source(here::here("code/FunSpline.R"))
+demo.pop <- readRDS(here::here("data/processed/demo.pop.rds"))
+
+x <- demo.pop$AgeGrp
+y <- cumsum(demo.pop$PopTotal)
+
+plot(x, y, pch = 19, ylab = "Cumulative Population", xlab = "x (age)",
+     main = "Algeria in 1988", xlim = c(60, 65), ylim = c(23400, 23900))
+func = splinefun(x, y, method="monoH.FC",  ties = mean)
+
+x <- seq(55, 70, 0.5)
+y <- func(x)
+lines(x,y, lty = 2)
+
+abline(v = func2(15), col = "red", lty = 3, lwd = 1.5)
+arrows(func2(15),  23500, func2(15),23600, col = "red", lwd = 2,
+       length = 0.1) 
+points(func2(15), func(func2(15)), col = "red", pch = 19)
+abline(h= func(func2(15)),col = "red", lty = 3, lwd = 1.5)
+arrows(62,  func(func2(15)), 61,func(func2(15)), col = "red", lwd = 2,
+       length = 0.1) 
+
+```
+ 
 
 
 # References

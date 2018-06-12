@@ -98,7 +98,7 @@ endef
 
 .PHONY: all
 
-all: journal readme methods analysis dot
+all: journal readme methods  dot pdf
 
 pdf: $(POSTER).pdf
 
@@ -138,7 +138,7 @@ README.html: README.md
 # methods from Rmds ############################################################
 methods: $(RPRT)/methods.pdf
 
-$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  $(DT/P)/demo.rds
+$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  $(DT/P)/demo.rds $(DT/P)/demo.pop.rds
 	$(rmd2pdf)
 
 
@@ -191,13 +191,19 @@ $(POSTER).dvi: $(POSTER).tex docs/presentations/lit.bib $(FIG/.eps)
 #$(DT/I)/catalog.rds: $(CODE)/01-import.R
 
 
-analysis: $(CODE)/02-clean-data.R
+$(FIG/.eps): $(CODE)/03-plotting
 
-$(DT/P)/demo.rds:  $(CODE)/02-clean-data.R
-		Rscript -e "source('$<')"
-		
+$(CODE)/03-plotting: $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds
+	touch $@
+	
+$(DT/P)/demo.rds:  $(CODE)/02-transform-data.R
+	Rscript -e "source('$<')"
+
+# dependencies only
+$(DT/P)/demo.pop.rds $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds:  $(CODE)/02-transform-data.R
+
 # required data for input to 02-clean-data
-$(CODE)/02-clean-data.R: $(DT/P)/mena.pop.rds $(DT/P)/mena.lt.rds $(CODE)/FunSpline.R
+$(CODE)/02-transform-data.R: $(DT/P)/mena.pop.rds $(DT/P)/mena.lt.rds $(CODE)/FunSpline.R
 	touch $@
 	
 $(DT/P)/mena.pop.rds: $(CODE)/01-import.R
@@ -207,7 +213,7 @@ $(DT/P)/mena.pop.rds: $(CODE)/01-import.R
 $(DT/P)/mena.lt.rds: $(CODE)/01-import.R
 
 # required data for input to 01-import
-$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LifeTable.csv $(DT/R)/cntry.list.csv
+$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LT.csv $(DT/R)/cntry.list.csv
 	touch $@
   
 

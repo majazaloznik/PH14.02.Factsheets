@@ -37,7 +37,7 @@ bibliography: "../bib.bib"
 
 # Tuesday 5.6.
 
-1. New code script `02-clean-data.R` To set up the data for plotting. 
+1. New code script `02-transform-data.R` To set up the data for plotting. 
 
 2. Ach, the dowload scripts are super problematic if they download more than a single file - then if you update the script it always has to redownload all of them. So instead let's put the downloads into the makefile directly as unix commands. 
 
@@ -61,7 +61,7 @@ bibliography: "../bib.bib"
 
 # Wednesday 6.6. 
 
-1. OK, keep makefile up to date. `01-import` is now importing and reducing two .csv files, produces two rds files (one is connected via simple dependency only) and these are now inputs to `02-clean`. 
+1. OK, keep makefile up to date. `01-import` is now importing and reducing two .csv files, produces two rds files (one is connected via simple dependency only) and these are now inputs to `02-transform-data.R`. 
 
 2. OK, so now in data clean we need to write a function to get the old age threshold for each country/year/gender combo. Also write it up in teh methods.
 
@@ -97,8 +97,32 @@ bibliography: "../bib.bib"
 
 1. OK, so methods, write up with equations the whole process...
 
-2. No, still trying to figure out the jumps. They aren't from the 5 year interpolations actually. They happen everytime the threshold value goes up a notch. So the issue is with the proportional populations above and below the threshold. OK, all good! I shouldn't have interpolated the proportion of the populaiton at the threshold age, ha!
+2. No, still trying to figure out the jumps. They aren't from the 5 year interpolations actually. They happen everytime the threshold value goes up a notch. So the issue is with the proportional populations above and below the threshold. OK, all good! I shouldn't have interpolated the proportion of the populaiton at the threshold age, ha! My mistake, instead of taking the proportion between two ages, I interpolated the population at that age, which is wrong, since the population is the area, not the height. 
+
+3. This is now fixed, so the population over the old-age threshold is now calculating by assuming the population is uniformly distributed between ages x and x-1. BUT if I want to use splines, then I think I need to do this instead: take the cummulative sum of the population and interpolate that. Presumably the difference will be minimal, but still. 
+
+# Monday 11.6.2018
+
+1. Wrote up methods for calculation of age-old threshold. Including notation, kind of. 
+
+2. Added charts to make clear how the interpolations happen.
+
+3. Read up on numerical analysis to understand what splines are and how they work. 
+
+4. Wrote up interpolation of single years out of five year thresholds. 
+
+5. Also figured out that instead of the linear interpolation of the population over the threshold, I could also use splines if I used the cumulative population size instead. 
 
 
-8. Smooth pipeline from 02 -> 03 and update makefile. 
+# Tuesday 12.6. 2018
+
+1. Metdhods now written up for interpolation and splines with charts and notation.
+
+2. `02-transform-data.R` is also now updated and working great
+
+3. Smooth pipeline from 02 -> 03 and update makefile. 
+
+4. MOve threshold plotting function to own file and make it produce .eps directly. (Add 65 year hline). 
+
+
 
