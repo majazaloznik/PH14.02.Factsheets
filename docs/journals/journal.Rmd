@@ -111,7 +111,7 @@ bibliography: "../bib.bib"
 
 4. Wrote up interpolation of single years out of five year thresholds. 
 
-5. Also figured out that instead of the linear interpolation of the population over the threshold, I could also use splines if I used the cumulative population size instead. 
+5. Also figured out that instead of the linear interpolation of the population over the threshold, I could also use splines if I used the cumulative population size instead. ** But now it's jaggedy again!?
 
 
 # Tuesday 12.6. 2018
@@ -122,7 +122,25 @@ bibliography: "../bib.bib"
 
 3. Smooth pipeline from 02 -> 03 and update makefile. 
 
-4. MOve threshold plotting function to own file and make it produce .eps directly. (Add 65 year hline). 
+4. Move threshold plotting function to own file and make it produce .eps directly. (Add 65 year hline). 
+
+# Wednesday 13.6.2018
+
+1. Separate plotting function from write to postscript.
+
+2. Nah, even better, add `write=TRUE` option to plotting function to pick whether to write to default device or postscript. 
+
+# Thursday 13.6.2018
+
+1. Function for plotting proportions over 65 and over threshold. What should we underlay? 
+
+2. Shit, the interpolation of the cumulative populaiton is actually not working. I never plotted it I guess. The linear interpolatin worked fine, but now it's back to being jaggedy, god knows why. Oh, OK, seems I used < threshold instead of <= threshold. Seems fine now.
+
+3. OK, so plots of old age thresholds and proportion over 65/threshold are done. What else do I need? Pyramids? 
+
+4. Does this mean rewriting my pop pyramid funciton? Now to allow overlaying two pyramids?
 
 
+# Monday 18.6.2018
 
+1. I'll want to overlay two pyramids, but needs to be the outline of the second one, not filled out. So I need to rewrite the current `rect` code into a `polygon` one. Or rather `lines`. OK, that's now done

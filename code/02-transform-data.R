@@ -50,11 +50,10 @@ interpolating.years <- expand.grid(MidPeriod = seq(from=min(old.age.threshold.5y
 old.age.threshold.5y %>% 
   right_join(interpolating.years) %>% 
   group_by(Location) %>% 
-  mutate(Female.old.age.i = spline(MidPeriod, Female, xout = MidPeriod)$y,
-         Male.old.age.i = spline(MidPeriod, Male, xout = MidPeriod)$y,
-         Total.old.age.i = spline(MidPeriod, Total, xout = MidPeriod)$y) %>% 
-  select(Location, MidPeriod, Total.old.age.i) %>% 
-  rename(AgeGrp = Total.old.age.i, Time = MidPeriod) %>% 
+  mutate(Female= spline(MidPeriod, Female, xout = MidPeriod)$y,
+         Male = spline(MidPeriod, Male, xout = MidPeriod)$y,
+         Total = spline(MidPeriod, Total, xout = MidPeriod)$y) %>% 
+  rename(AgeGrp = Total, Time = MidPeriod) %>% 
   mutate(threshold = AgeGrp) ->   old.age.threshold.1y
 rm(interpolating.years, old.age.threshold.5y)
 
@@ -67,7 +66,7 @@ pop %>%
   arrange(Location, Time, threshold) %>% 
   fill(threshold) %>% 
   arrange(Location, Time, AgeGrp) %>% 
-  select(c(2,5,7,10, 11)) %>% 
+  select(c(2,5,7,10, 13)) %>% 
   arrange(Location, Time,AgeGrp) %>% 
   group_by(Location, Time) %>% 
   mutate(CumPop = spline(AgeGrp, CumPop, xout = AgeGrp)$y) ->  pop.old.age.threshold.1y
@@ -76,8 +75,9 @@ pop %>%
 # now summarise proportions over threshold and over 65
 pop.old.age.threshold.1y %>% 
   filter(Time >=1953, Time < 2098) %>% 
-  mutate(over.65 = ifelse(AgeGrp < 65, "under", "over"),
-         over.threshold = ifelse(AgeGrp < threshold, "under", "over")) %>% 
+  group_by(Location, Time) %>% 
+  mutate(over.65 = ifelse(AgeGrp <= 65, "under", "over"),
+         over.threshold = ifelse(AgeGrp <= threshold, "under", "over")) %>% 
   group_by(Location, Time, over.65) %>% 
   mutate(Pop.65 = max(CumPop)) %>% 
   group_by(Location, Time, over.threshold) %>% 
@@ -92,4 +92,5 @@ pop.old.age.threshold.1y %>%
 
 saveRDS(prop.over, "data/processed/prop.over.rds")
 saveRDS(old.age.threshold.1y, "data/processed/threshold.1y.rds")
+
 

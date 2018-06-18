@@ -5,7 +5,6 @@
 ##=============================================================================
 
 
-
 ## 00. preliminaries ==========================================================
 library(dplyr)
 
@@ -14,40 +13,23 @@ source("code/FunPlotThreshold.R")
 
 prop.over <- readRDS("data/processed/prop.over.rds")
 
+pop <- readRDS("data/processed/mena.pop.rds")
+
 ## 01. plotting thresholds ====================================================
 
 lapply(unique(threshold.1y$Location), FUN = FunPlotThreshold)
 
 
+FunPlotThreshold("Iraq", write = FALSE,  col.bg = "lightcyan2")
 
-FunPlotThreshold("Egypt")
-FunPlotThreshold("Algeria")
-FunPlotThreshold("Tunisia")
-FunPlotThreshold("Turkey")
 
 ## 02. plotting proportions over 65 ===========================================
 
 
+FunPlotProportions("Bahrain", 
+                   col.bg = "lightcyan2",
+                   write = FALSE)
+
+lapply(unique(threshold.1y$Location), function(x) FunPlotProportions(x, write = FALSE))
 
 
-
-country = "Egypt"
-par(mar = c(3,3,1,0))
-plot(2000, 0, 
-     xlim = c(1980, 2050), 
-     ylim = c(0, .2),
-     bty = "n",
-     type = "n",
-     ylab = "", xlab = "",
-     axes = FALSE)
-prop.over%>% 
-  filter(Location== country) %>% 
-  lines(prop.over.65 ~ Time, . ,
-        lwd = 3) 
-prop.over%>% 
-  filter(Location== country) %>% 
-  lines(prop.over.t ~ Time, . ,
-        lwd = 3, col = "red") 
-axis(2, pos = 1980, las = 2)
-axis(1)
-  
