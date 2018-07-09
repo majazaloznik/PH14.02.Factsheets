@@ -34,18 +34,18 @@
 #' 
 #' 
 FunPlotThreshold <- function(country = "Algeria", 
-                          col.bg = "white",
-                          col.20 = "gray85",
-                          col.total = "palevioletred4",
-                          col.male = "palevioletred3",
-                          col.female = "palevioletred3",
-                          write = TRUE, 
-                          height = 4,
-                          width = 6,
-                          col.grid = "white",
-                          lty.grid = 1,
-                          lwd.grid = 2){
-
+                             col.bg = "white",
+                             col.20 = "gray85",
+                             col.total = "palevioletred4",
+                             col.male = "palevioletred3",
+                             col.female = "palevioletred3",
+                             write = TRUE, 
+                             height = 4,
+                             width = 6,
+                             col.grid = "white",
+                             lty.grid = 1,
+                             lwd.grid = 2){
+  
   if(write) {
     postscript(file=here::here(paste0("figures/","threshold-",country,".eps")),
                horiz=FALSE,onefile=FALSE,
@@ -64,7 +64,7 @@ FunPlotThreshold <- function(country = "Algeria",
        ylab = "", xlab = "",
        axes = FALSE,
        main = country)
-
+  
   for (i in seq(50, 80, 5)){
     lines(c(1980, 2050), c(i,i), col = col.grid, lty = lty.grid,
           lwd = lwd.grid)
@@ -128,16 +128,16 @@ FunPlotThreshold <- function(country = "Algeria",
 #'
 #' @examples
 FunPlotProportions <- function(country = "Algeria", 
-                             col.bg = "white",
-                             col.20 = "gray85",
-                             col.65 = "mediumorchid2",
-                             col.threshold = "darkgoldenrod1",
-                             write = TRUE, 
-                             height = 4,
-                             width = 6,
-                             col.grid = "white",
-                             lty.grid = 1,
-                             lwd.grid = 2){
+                               col.bg = "white",
+                               col.20 = "gray85",
+                               col.65 = "mediumorchid2",
+                               col.threshold = "darkgoldenrod1",
+                               write = TRUE, 
+                               height = 4,
+                               width = 6,
+                               col.grid = "white",
+                               lty.grid = 1,
+                               lwd.grid = 2){
   
   if(write) {
     postscript(file=here::here(paste0("figures/","proportion-",country,".eps")),
@@ -162,7 +162,7 @@ FunPlotProportions <- function(country = "Algeria",
     lines(c(1980, 2050), c(i,i), col = col.grid, lty = lty.grid,
           lwd = lwd.grid)
   }
-
+  
   
   prop.over%>% 
     filter(Location== country) %>% 
@@ -179,7 +179,7 @@ FunPlotProportions <- function(country = "Algeria",
   axis(2, pos = 1980, las = 2)
   axis(1)
   
-
+  
   if(write) {
     dev.off() }
 }
@@ -223,102 +223,105 @@ FunPlotProportions <- function(country = "Algeria",
 #' @examples
 #' 
 #' 
-FunPyramidPlotNoAxes <- function (lx, rx, labels = NA, top.labels = c("Male", "Age", 
-                                                                      "Female"), main = "", 
-                                  laxlab = NULL, raxlab = NULL, unit = "", 
-                                  lxcol, rxcol, gap = 1, space = 0.2, ppmar = c(4, 2, 4, 2), 
-                                  labelcex = 1, add = FALSE, xlim, show.values = FALSE, ndig = 1, 
-                                  do.first = NULL, axes=FALSE, density=NULL, angle=45, lwd = 2, border="black",
-                                  ylab="",
-                                  col.overlay = "red", lx50, rx50) 
-{if (axes==FALSE) show.values <- FALSE
-if (any(c(lx, rx) < 0, na.rm = TRUE)) 
-  stop("Negative quantities not allowed")
-lxdim <- dim(lx)
-rxdim <- dim(rx)
-ncats <- ifelse(!is.null(lxdim), dim(lx)[1], length(lx))
-if (length(labels) == 1) 
-  labels <- 1:ncats
-ldim <- length(dim(labels))
-nlabels <- ifelse(ldim, length(labels[, 1]), length(labels))
-if (nlabels != ncats) 
-  stop("lx and labels must all be the same length")
-if (missing(xlim)) 
-  xlim <- rep(ifelse(!is.null(lxdim), 
-                     ceiling(max(c(rowSums(lx), rowSums(rx)), na.rm = TRUE)),
-                     ceiling(max(c(lx, rx, lx50, rx50),  na.rm = TRUE))), 2)
-if (!is.null(laxlab) && xlim[1] < max(laxlab)) 
-  xlim[1] <- max(laxlab)
-if (!is.null(raxlab) && xlim[2] < max(raxlab)) 
-  xlim[2] <- max(raxlab)
-oldmar <- par("mar")
-if (!add) {
-  par(mar = ppmar, cex.axis = labelcex)
-  plot(0, xlim = c(-(xlim[1] + gap), xlim[2] + gap), 
-       ylim = c(0, ncats + 1), type = "n", axes = FALSE, xlab = "", 
-       ylab = ylab, xaxs = "i", yaxs = "i", main = main)
-  if (!is.null(do.first)) 
-    eval(parse(text = do.first))
-  if (is.null(laxlab)) {
-    laxlab <- seq(xlim[1] - gap, 0, by = -1)
-    if (axes==TRUE) axis(1, at = -xlim[1]:-gap, labels = laxlab)
-  }
-  else {if (axes==TRUE) axis(1, at = -(laxlab + gap), labels = laxlab)}
-  if (is.null(raxlab)) {
-    raxlab <- 0:(xlim[2] - gap)
-    if (axes==TRUE) axis(1, at = gap:xlim[2], labels = raxlab)
-  }
-  else {if (axes==TRUE) axis(1, at = raxlab + gap, labels = raxlab)}
-  if (gap > 0) {
-    if (!is.null(lxdim)) 
-      if (axes==TRUE) axis(2, at = 1:ncats, labels = rep("", ncats), 
-                           pos = gap, tcl = -0.25)
-    else {if (axes==TRUE) axis(2, at = 1:ncats * as.logical(rx + 1), labels = rep("", 
-                                                                                  ncats), pos = gap, tcl = -0.25)}
-    if (!is.null(lxdim)) 
-      if (axes==TRUE) axis(4, at = 1:ncats, labels = rep("", ncats), 
-                           pos = -gap, tcl = -0.25)
-    else {if (axes==TRUE) axis(4, at = 1:ncats * as.logical(lx + 1), labels = rep("", 
-                                                                                  ncats), pos = gap, tcl = -0.25)}
-  }
-  if (is.null(dim(labels)) & axes==TRUE) {
-    if (gap) 
-      text(0, 1:ncats, labels, cex = labelcex)
-    else {
-      text(xlim[1], 1:ncats, labels, cex = labelcex, 
+FunPyramidPlotNoAxes <- function(lx, rx, 
+                                 lx50, rx50,
+                                 labels = NA, 
+                                 top.labels = c("Male", "Age", "Female"), 
+                                 main = "", 
+                                 laxlab = NULL, raxlab = NULL, unit = "", 
+                                 gap = 1, space = 0.2, 
+                                 ppmar = c(4, 2, 4, 2), 
+                                 labelcex = 1, add = FALSE, 
+                                 xlim, show.values = FALSE, ndig = 1, 
+                                 do.first = NULL, 
+                                 axes=FALSE, 
+                                 density=NULL, 
+                                 angle=45, 
+                                 lwd = 2, 
+                                 ylab="",
+                                 col.overlay = "red",
+                                 lxcol = "lightcyan3", 
+                                 rxcol = "lightcyan3", 
+                                 border = "lightcyan3") {
+  if (axes==FALSE) show.values <- FALSE
+  
+    ncats <- length(lx)
+  if (length(labels) == 1) 
+    labels <- 1:ncats
+  nlabels <- ifelse(length(dim(labels)), length(labels[, 1]), length(labels))
+  
+  if (missing(xlim)) 
+    xlim <- rep(ceiling(max(c(lx, rx, lx50, rx50),  na.rm = TRUE)), 2)
+  
+  if (!is.null(laxlab) && xlim[1] < max(laxlab)) 
+    xlim[1] <- max(laxlab)
+  if (!is.null(raxlab) && xlim[2] < max(raxlab)) 
+    xlim[2] <- max(raxlab)
+  
+  oldmar <- par("mar")
+  if (!add) {
+    par(mar = ppmar, cex.axis = labelcex)
+    plot(0, xlim = c(-(xlim[1] + gap), xlim[2] + gap), 
+         ylim = c(0, ncats + 2), type = "n", axes = FALSE, xlab = "", 
+         ylab = ylab, xaxs = "i", yaxs = "i", main = main)
+    if (!is.null(do.first)) 
+      eval(parse(text = do.first))
+    if (is.null(laxlab)) {
+      laxlab <- seq(xlim[1] - gap, 0, by = -1)
+      if (axes==TRUE) axis(1, at = -xlim[1]:-gap, labels = laxlab)
+    }
+    else {if (axes==TRUE) axis(1, at = -(laxlab + gap), labels = laxlab)}
+    if (is.null(raxlab)) {
+      raxlab <- 0:(xlim[2] - gap)
+      if (axes==TRUE) axis(1, at = gap:xlim[2], labels = raxlab)
+    }
+    else {if (axes==TRUE) axis(1, at = raxlab + gap, labels = raxlab)}
+    if (gap > 0) {
+      if (axes==TRUE) {
+        axis(2, at = 1:ncats, 
+             labels = rep("", ncats), pos = gap, tcl = -0.25)
+        axis(4, at = 1:ncats, 
+             labels = rep("", ncats), pos = gap, tcl = -0.25)
+      }}
+    if (is.null(dim(labels)) & axes==TRUE) {
+      if (gap) 
+        text(0, 1:ncats, labels, cex = labelcex)
+      else {
+        text(xlim[1], 1:ncats, labels, cex = labelcex, 
+             adj = 0)
+        text(xlim[2], 1:ncats, labels, cex = labelcex, 
+             adj = 1)
+      }
+    }
+    else { if ( axes==TRUE) {
+      if (gap) {
+        lpos <- -gap
+        rpos <- gap
+      }
+      else {
+        lpos <- -xlim[1]
+        rpos <- xlim[2]
+      }
+      text(lpos, 1:ncats, labels[, 1], pos = 4, cex = labelcex, 
            adj = 0)
-      text(xlim[2], 1:ncats, labels, cex = labelcex, 
+      text(rpos, 1:ncats, labels[, 2], pos = 2, cex = labelcex, 
            adj = 1)
-    }
+    }}
+    mtext(top.labels, 3, 0, at = c(-xlim[1]/2, 0, xlim[2]/2), 
+          adj = 0.5, cex = labelcex)
+    mtext(c(unit, unit), 1, 2, at = c(-xlim[1]/2, xlim[2]/2))
   }
-  else { if ( axes==TRUE) {
-    if (gap) {
-      lpos <- -gap
-      rpos <- gap
-    }
-    else {
-      lpos <- -xlim[1]
-      rpos <- xlim[2]
-    }
-    text(lpos, 1:ncats, labels[, 1], pos = 4, cex = labelcex, 
-         adj = 0)
-    text(rpos, 1:ncats, labels[, 2], pos = 2, cex = labelcex, 
-         adj = 1)
-  }}
-  mtext(top.labels, 3, 0, at = c(-xlim[1]/2, 0, xlim[2]/2), 
-        adj = 0.5, cex = labelcex)
-  mtext(c(unit, unit), 1, 2, at = c(-xlim[1]/2, xlim[2]/2))
-}
-halfwidth <- 0.5 
-
-
-rect(-(lx + gap), 1:ncats - halfwidth, rep(-gap, ncats), 
-     1:ncats + halfwidth, col = lxcol, density=density, angle=angle, lwd=lwd, border=border)
-
-rect(rep(gap, ncats), 1:ncats - halfwidth, (rx + gap), 
-     1:ncats + halfwidth, col = rxcol, density=density, angle=angle, lwd=lwd, border=border)
-
-if (lx50 & rx50) {
+  
+  halfwidth <- 0.5 
+  
+  # main plotting of pyramid
+  rect(-(lx + gap), 1:ncats - halfwidth, rep(-gap, ncats), 
+       1:ncats + halfwidth, col = lxcol, density=density, angle=angle, lwd=lwd, border=border)
+  
+  rect(rep(gap, ncats), 1:ncats - halfwidth, (rx + gap), 
+       1:ncats + halfwidth, col = rxcol, density=density, angle=angle, lwd=lwd, border=border)
+  
+# plotting of 2050 overlay
   lines(x = c(-gap, rep(rev(-(lx50 + gap)), each = 2), -gap), 
         y = c(rep((ncats):0 + halfwidth, each = 2) ), 
         col = col.overlay, lwd = 2 )
@@ -326,16 +329,16 @@ if (lx50 & rx50) {
   lines(x = c(-gap, rep(rev((rx50 + gap)), each = 2), -gap), 
         y = c(rep((ncats):0 + halfwidth, each = 2) ), 
         col = col.overlay, lwd = 2 )
+  
+  
+  if (show.values) {
+    par(xpd = TRUE)
+    text(-(gap + lx), 1:ncats, round(lx, ndig), pos = 2, 
+         cex = labelcex)
+    text(gap + rx, 1:ncats, round(rx, ndig), pos = 4, 
+         cex = labelcex)
+    par(xpd = FALSE)
+  }
+  return(oldmar)
 }
 
-
-if (show.values) {
-  par(xpd = TRUE)
-  text(-(gap + lx), 1:ncats, round(lx, ndig), pos = 2, 
-       cex = labelcex)
-  text(gap + rx, 1:ncats, round(rx, ndig), pos = 4, 
-       cex = labelcex)
-  par(xpd = FALSE)
-}
-return(oldmar)
-}
