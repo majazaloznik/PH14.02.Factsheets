@@ -42,34 +42,18 @@ lapply(unique(threshold.1y$Location), function(x) FunPlotProportions(x, write = 
 
 
 
-country <- "Iraq"
-pop %>% 
-  filter(Location == country,
-         Time == 2015) -> pyramid
-pop %>% 
-  filter(Location == country,
-         Time == 2050) -> pyramid.50
-
-FunPyramidPlotNoAxes(pyramid$PropMale,
-                     pyramid$PropFemale,
-                     lx50 = pyramid.50$PropMale,
-                     rx50 = pyramid.50$PropFemale,
+FunPyramidPlotNoAxes(country = "Iraq",
                      lxcol = "lightcyan3", rxcol = "lightcyan3", border = "lightcyan3",
-                     do.first = grid(ny = NA, col = "white", lty = 1, lwd = 1),
-                     laxlab = 0:2, raxlab = 0:2, axes = FALSE, gap = 0, show.values = TRUE)
+                     do.first = grid(ny = NA, col = "lightcyan3", lty = 1, lwd = 1),
+                     axes = FALSE, gap = 0, show.values = TRUE)
 
 
-country <- "Iraq"
-pop %>% 
-  filter(Location == country,
-         Time == 2015) -> pyramid
-pop %>% 
-  filter(Location == country,
-         Time == 2050) -> pyramid.50
 
-FunPyramidPlotNoAxes(pyramid$PropMale,
-                     pyramid$PropFemale,
-                     lx50 = pyramid.50$PropMale,
-                     rx50 = pyramid.50$PropFemale,
-                     labels = 1:length(pyramid$PopMale), gap = 0, add = TRUE)
+lapply(unique(threshold.1y$Location)[10:14], function(x) FunPyramidPlotNoAxes(country = x, 
+                                                                       gap = 0, xlim = c(3,1.5)))
+
+
+FunPyramidPlotNoAxes(country = "Tunisia", gap = 0, xlim = c(3,3))
 axis(1)
+
+max(pop$PropMale)

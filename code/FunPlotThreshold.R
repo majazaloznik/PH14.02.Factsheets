@@ -214,8 +214,8 @@ FunPlotProportions <- function(country = "Algeria",
 #' @param border 
 #' @param ylab 
 #' @param col.overlay 
-#' @param lx50 
-#' @param rx50 
+#' @param lx.50 
+#' @param rx.50 
 #'
 #' @return
 #' @export
@@ -223,10 +223,9 @@ FunPlotProportions <- function(country = "Algeria",
 #' @examples
 #' 
 #' 
-FunPyramidPlotNoAxes <- function(lx, rx, 
-                                 lx50, rx50,
+FunPyramidPlotNoAxes <- function(country,
                                  labels = NA, 
-                                 top.labels = c("Male", "Age", "Female"), 
+                                 top.labels = c("M", "", "F"), 
                                  main = "", 
                                  laxlab = NULL, raxlab = NULL, unit = "", 
                                  gap = 1, space = 0.2, 
@@ -243,6 +242,40 @@ FunPyramidPlotNoAxes <- function(lx, rx,
                                  lxcol = "lightcyan3", 
                                  rxcol = "lightcyan3", 
                                  border = "lightcyan3") {
+  # get data
+  pop %>% 
+    filter(Location == country,
+           Time == 2015) -> pyramid
+  pop %>% 
+    filter(Location == country,
+           Time == 2050) -> pyramid.50
+  lx <- pyramid$PropMale
+  rx <- pyramid$PropFemale
+  lx.50 <- pyramid.50$PropMale
+  rx.50 <- pyramid.50$PropFemale
+  # get thresholds and pop at that age
+  lx.t <- threshold.1y %>% 
+    filter(Location == country,
+           Time == 2015) %>% 
+    pull(Male)
+  lx.t.pop <- lx[floor(lx.t )]
+  rx.t <- threshold.1y %>% 
+    filter(Location == country,
+           Time == 2015) %>% 
+    pull(Female)
+  rx.t.pop <- rx[floor(rx.t )]
+  # get thresholds and pop at that age in 2050
+  lx.t.50 <- threshold.1y %>% 
+    filter(Location == country,
+           Time == 2050) %>% 
+    pull(Male)
+  lx.t.50.pop <- lx.50[floor(lx.t.50)]
+  rx.t.50 <- threshold.1y %>% 
+    filter(Location == country,
+           Time == 2050) %>% 
+    pull(Female)
+  rx.t.50.pop <- rx.50[floor(rx.t.50 )]
+  
   if (axes==FALSE) show.values <- FALSE
   
     ncats <- length(lx)
@@ -251,7 +284,7 @@ FunPyramidPlotNoAxes <- function(lx, rx,
   nlabels <- ifelse(length(dim(labels)), length(labels[, 1]), length(labels))
   
   if (missing(xlim)) 
-    xlim <- rep(ceiling(max(c(lx, rx, lx50, rx50),  na.rm = TRUE)), 2)
+    xlim <- c(1.7, 1.7)
   
   if (!is.null(laxlab) && xlim[1] < max(laxlab)) 
     xlim[1] <- max(laxlab)
@@ -263,9 +296,21 @@ FunPyramidPlotNoAxes <- function(lx, rx,
     par(mar = ppmar, cex.axis = labelcex)
     plot(0, xlim = c(-(xlim[1] + gap), xlim[2] + gap), 
          ylim = c(0, ncats + 2), type = "n", axes = FALSE, xlab = "", 
-         ylab = ylab, xaxs = "i", yaxs = "i", main = main)
+         ylab = ylab, xaxs = "r", yaxs = "i", main = main)
     if (!is.null(do.first)) 
-      eval(parse(text = do.first))
+      {eval(parse(text = do.first))} else {
+        lines(c(1,1), c(0,90), col = lxcol)
+        lines(c(-1,-1), c(0,90), col = lxcol)
+        lines(c(.5,.5), c(0,95), col = lxcol, lty = "62")
+        lines(c(-.5,-.5), c(0,95), col = lxcol, lty = "62")
+        lines(c(-2,-2), c(0,70), col = lxcol)
+        lines(c(1.5,1.5), c(0,80), col = lxcol, lty = "62")
+        lines(c(-1.5,-1.5), c(0,80), col = lxcol, lty = "62")
+        lines(c(-3,-3), c(0,50), col = lxcol)
+        lines(c(2.5,2.5), c(0,55), col = lxcol, lty = "62")
+        lines(c(-2.5,-2.5), c(0,55), col = lxcol, lty = "62")
+        #grid(ny = NA, col = lxcol, lty = 1, lwd = 1)
+        }
     if (is.null(laxlab)) {
       laxlab <- seq(xlim[1] - gap, 0, by = -1)
       if (axes==TRUE) axis(1, at = -xlim[1]:-gap, labels = laxlab)
@@ -307,9 +352,8 @@ FunPyramidPlotNoAxes <- function(lx, rx,
       text(rpos, 1:ncats, labels[, 2], pos = 2, cex = labelcex, 
            adj = 1)
     }}
-    mtext(top.labels, 3, 0, at = c(-xlim[1]/2, 0, xlim[2]/2), 
+    mtext(top.labels, 3, 0, at = c(-1, 0, 1), 
           adj = 0.5, cex = labelcex)
-    mtext(c(unit, unit), 1, 2, at = c(-xlim[1]/2, xlim[2]/2))
   }
   
   halfwidth <- 0.5 
@@ -320,17 +364,26 @@ FunPyramidPlotNoAxes <- function(lx, rx,
   
   rect(rep(gap, ncats), 1:ncats - halfwidth, (rx + gap), 
        1:ncats + halfwidth, col = rxcol, density=density, angle=angle, lwd=lwd, border=border)
+  lines(x = c(-3, 1.6), y = c(65, 65), lty = "11", col = border, lwd = 2)
   
+  lines(x = c(-lx.t.pop, 0), y = c(lx.t, lx.t), lty = "11", col = "white", lwd = 2)
+  lines(x = c(rx.t.pop, 0), y = c(rx.t, rx.t), lty = "11", col = "white", lwd = 2)
+  lines(x = c(0,0), y = c(0,100), col = "white")
 # plotting of 2050 overlay
-  lines(x = c(-gap, rep(rev(-(lx50 + gap)), each = 2), -gap), 
+  lines(x = c(-gap, rep(rev(-(lx.50 + gap)), each = 2), -gap), 
         y = c(rep((ncats):0 + halfwidth, each = 2) ), 
         col = col.overlay, lwd = 2 )
   
-  lines(x = c(-gap, rep(rev((rx50 + gap)), each = 2), -gap), 
+  lines(x = c(-gap, rep(rev((rx.50 + gap)), each = 2), -gap), 
         y = c(rep((ncats):0 + halfwidth, each = 2) ), 
         col = col.overlay, lwd = 2 )
   
+  lines(x = c(-lx.t.50.pop, 0), y = c(lx.t.50, lx.t.50), lty = "11", col = col.overlay, lwd = 2)
+  lines(x = c(rx.t.50.pop, 0), y = c(rx.t.50, rx.t.50), lty = "11", col = col.overlay, lwd = 2)
   
+  # country name
+  
+  text(-2, 75, country, cex = 1.7)
   if (show.values) {
     par(xpd = TRUE)
     text(-(gap + lx), 1:ncats, round(lx, ndig), pos = 2, 
