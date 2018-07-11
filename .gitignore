@@ -5,3 +5,5 @@
 data/
 *.html
 *.pdf
+*.eps
+docs/reports/

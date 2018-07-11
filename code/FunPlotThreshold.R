@@ -34,7 +34,7 @@
 #' 
 #' 
 FunPlotThreshold <- function(country = "Algeria", 
-                             col.bg = "white",
+                             col.bg = "steelblue4",
                              col.20 = "gray85",
                              col.total = "palevioletred4",
                              col.male = "palevioletred3",
@@ -42,9 +42,9 @@ FunPlotThreshold <- function(country = "Algeria",
                              write = TRUE, 
                              height = 4,
                              width = 6,
-                             col.grid = "white",
+                             col.grid = "lightcyan3",
                              lty.grid = 1,
-                             lwd.grid = 2){
+                             lwd.grid = 1){
   
   if(write) {
     postscript(file=here::here(paste0("figures/","threshold-",country,".eps")),
@@ -54,16 +54,15 @@ FunPlotThreshold <- function(country = "Algeria",
                paper="special") }
   threshold.1y %>% 
     filter(Time > 1980, Time < 2050) -> threshold.1y
-  par(bg = col.bg)
-  par(mar = c(3,3,1,0))
+  par(bg = col.bg )
+  par(mar = c(3,2,1,0))
   plot(2000, 50, 
        xlim = c(1980, 2050), 
        ylim = c(50, 80),
        bty = "n",
        type = "n",
        ylab = "", xlab = "",
-       axes = FALSE,
-       main = country)
+       axes = FALSE)
   
   for (i in seq(50, 80, 5)){
     lines(c(1980, 2050), c(i,i), col = col.grid, lty = lty.grid,
@@ -97,6 +96,8 @@ FunPlotThreshold <- function(country = "Algeria",
   
   
   abline(v = 2015, lty = 2, lwd = 2, col = "gray50")
+  text(2016, 80, "P", adj = c(0,1),  srt=90)
+  text(2012, 80, "E", adj = c(0,1),  srt=90)
   
   axis(2, pos = 1980, las = 2)
   axis(1)
@@ -128,16 +129,16 @@ FunPlotThreshold <- function(country = "Algeria",
 #'
 #' @examples
 FunPlotProportions <- function(country = "Algeria", 
-                               col.bg = "white",
+                               col.bg = "steelblue4",
                                col.20 = "gray85",
                                col.65 = "mediumorchid2",
                                col.threshold = "darkgoldenrod1",
                                write = TRUE, 
                                height = 4,
                                width = 6,
-                               col.grid = "white",
+                               col.grid = "lightcyan3",
                                lty.grid = 1,
-                               lwd.grid = 2){
+                               lwd.grid = 1){
   
   if(write) {
     postscript(file=here::here(paste0("figures/","proportion-",country,".eps")),
@@ -145,18 +146,18 @@ FunPlotProportions <- function(country = "Algeria",
                width=width,
                height=height,
                paper="special") }
+  par(bg = col.bg )
   prop.over %>% 
     filter(Time > 1980, Time < 2050) -> prop.over
   par(bg = col.bg)
-  par(mar = c(3,3,1,0))
+  par(mar = c(3,2,1,0))
   plot(2000, 50, 
        xlim = c(1980, 2050), 
        ylim = c(0, .2),
        bty = "n",
        type = "n",
        ylab = "", xlab = "",
-       axes = FALSE,
-       main = country)
+       axes = FALSE)
   
   for (i in seq(0, .2, .05)){
     lines(c(1980, 2050), c(i,i), col = col.grid, lty = lty.grid,
@@ -175,7 +176,8 @@ FunPlotProportions <- function(country = "Algeria",
   
   
   abline(v = 2015, lty = 2, lwd = 2, col = "gray50")
-  
+  text(2016, .20, "P", adj = c(0,1),  srt=90)
+  text(2012, .20, "E", adj = c(0,1),  srt=90)
   axis(2, pos = 1980, las = 2)
   axis(1)
   
@@ -225,11 +227,11 @@ FunPlotProportions <- function(country = "Algeria",
 #' 
 FunPyramidPlotNoAxes <- function(country,
                                  labels = NA, 
-                                 top.labels = c("M", "", "F"), 
+                                 top.labels = NULL, 
                                  main = "", 
                                  laxlab = NULL, raxlab = NULL, unit = "", 
                                  gap = 1, space = 0.2, 
-                                 ppmar = c(4, 2, 4, 2), 
+                                 ppmar = c(4, 1, 1, 0), 
                                  labelcex = 1, add = FALSE, 
                                  xlim, show.values = FALSE, ndig = 1, 
                                  do.first = NULL, 
@@ -241,7 +243,11 @@ FunPyramidPlotNoAxes <- function(country,
                                  col.overlay = "red",
                                  lxcol = "lightcyan3", 
                                  rxcol = "lightcyan3", 
-                                 border = "lightcyan3") {
+                                 border = "lightcyan3",
+                                 col.bg = background,
+                                 write = TRUE,
+                                 width = 8,
+                                 height = 5) {
   # get data
   pop %>% 
     filter(Location == country,
@@ -275,7 +281,13 @@ FunPyramidPlotNoAxes <- function(country,
            Time == 2050) %>% 
     pull(Female)
   rx.t.50.pop <- rx.50[floor(rx.t.50 )]
-  
+  if(write) {
+    postscript(file=here::here(paste0("figures/","pyramid-",country,".eps")),
+               horiz=FALSE,onefile=FALSE,
+               width=width,
+               height=height,
+               paper="special") }
+  par(bg = col.bg )
   if (axes==FALSE) show.values <- FALSE
   
     ncats <- length(lx)
@@ -353,7 +365,7 @@ FunPyramidPlotNoAxes <- function(country,
            adj = 1)
     }}
     mtext(top.labels, 3, 0, at = c(-1, 0, 1), 
-          adj = 0.5, cex = labelcex)
+          adj = c(0.5,0.5), cex = labelcex)
   }
   
   halfwidth <- 0.5 
@@ -364,26 +376,27 @@ FunPyramidPlotNoAxes <- function(country,
   
   rect(rep(gap, ncats), 1:ncats - halfwidth, (rx + gap), 
        1:ncats + halfwidth, col = rxcol, density=density, angle=angle, lwd=lwd, border=border)
-  lines(x = c(-3, 1.6), y = c(65, 65), lty = "11", col = border, lwd = 2)
+  lines(x = c(-3, 1.6), y = c(65, 65), lty = "11", col = border, lwd = lwd)
   
-  lines(x = c(-lx.t.pop, 0), y = c(lx.t, lx.t), lty = "11", col = "white", lwd = 2)
-  lines(x = c(rx.t.pop, 0), y = c(rx.t, rx.t), lty = "11", col = "white", lwd = 2)
+  lines(x = c(-lx.t.pop, 0), y = c(lx.t, lx.t), lty = "11", col = "white", lwd = lwd)
+  lines(x = c(rx.t.pop, 0), y = c(rx.t, rx.t), lty = "11", col = "white", lwd = lwd)
   lines(x = c(0,0), y = c(0,100), col = "white")
-# plotting of 2050 overlay
+
+  # plotting of 2050 overlay
   lines(x = c(-gap, rep(rev(-(lx.50 + gap)), each = 2), -gap), 
         y = c(rep((ncats):0 + halfwidth, each = 2) ), 
-        col = col.overlay, lwd = 2 )
+        col = col.overlay, lwd = 3)
   
   lines(x = c(-gap, rep(rev((rx.50 + gap)), each = 2), -gap), 
         y = c(rep((ncats):0 + halfwidth, each = 2) ), 
-        col = col.overlay, lwd = 2 )
+        col = col.overlay, lwd = 3 )
   
-  lines(x = c(-lx.t.50.pop, 0), y = c(lx.t.50, lx.t.50), lty = "11", col = col.overlay, lwd = 2)
-  lines(x = c(rx.t.50.pop, 0), y = c(rx.t.50, rx.t.50), lty = "11", col = col.overlay, lwd = 2)
-  
+  lines(x = c(-lx.t.50.pop, 0), y = c(lx.t.50, lx.t.50), lty = "11", col = col.overlay, lwd = lwd)
+  lines(x = c(rx.t.50.pop, 0), y = c(rx.t.50, rx.t.50), lty = "11", col = col.overlay, lwd = lwd)
+  axis(1, at = seq(-3, 1.5, .5), labels = c(3,2.5,2,1.5,1,.5,0,.5,1,1.5)) 
   # country name
   
-  text(-2, 75, country, cex = 1.7)
+  text(-3, 75, substr(country,1,3), cex = 1.7, adj = c(0, 0))
   if (show.values) {
     par(xpd = TRUE)
     text(-(gap + lx), 1:ncats, round(lx, ndig), pos = 2, 
@@ -392,6 +405,7 @@ FunPyramidPlotNoAxes <- function(country,
          cex = labelcex)
     par(xpd = FALSE)
   }
-  return(oldmar)
+  if(write) dev.off()
+  
 }
 

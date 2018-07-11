@@ -167,4 +167,16 @@ So need to go back to the data transforming script and add some props to the pop
 
 6. let's also add a x=0 line
 
+# Wednesday 11.7.2018
 
+1. Add x axis
+
+2. Aling country name left
+
+3. add save to .eps code to funciton 
+
+4. WOrk on layout of all 3 charts
+
+5. add estimate/projection text to line charts
+
+6. Now figure out background colors, add it as an argument to all the funcitons
