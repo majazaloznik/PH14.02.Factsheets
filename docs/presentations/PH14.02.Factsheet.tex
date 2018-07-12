@@ -1,0 +1,209 @@
+\documentclass[a3, landscape]{a0poster}
+\usepackage{graphicx,lipsum}
+\usepackage[paperwidth=297mm,paperheight=420mm,margin=0mm, landscape]{geometry}
+\usepackage{calc}
+\pagestyle{empty}
+\usepackage{xcolor}
+\usepackage{psfrag}
+\usepackage{pstricks,pst-node,pstricks-add, pst-text}
+\DeclareFixedFont{\RM}{T1}{ptm}{b}{n}{2cm}
+\definecolor{oxblue}{cmyk}{1,0.8,0,0.6}
+%\definecolor{oxblue}{RGB}{0,33,71}
+\definecolor{yell}{cmyk}{0.04,0.16,0.84,0}
+\definecolor{yell2}{cmyk}{0.16,0.59,0.96,0.02}
+\usepackage[space]{grffile} % for spaces in file names?
+\renewcommand{\labelitemi}{${\color{oxblue}\bullet}$}
+\usepackage{lmodern}
+\usepackage{xcolor}
+
+\usepackage{natbib}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{breaklinks=true}
+\usepackage[hyphenbreaks]{breakurl}
+\setlength{\bibsep}{0pt plus 0.3ex}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={black},
+    urlcolor={blue!90!black}
+}
+\DeclareRobustCommand{\firstsecond}[2]{#1}
+\makeatletter
+  \newcommand{\miniscule}{\@setfontsize\miniscule{4}{5}}%   
+  \newcommand{\minisculey}{\@setfontsize\miniscule{5}{6}}%
+      \newcommand{\minisculeyy}{\@setfontsize\miniscule{6}{8}}% \tiny: 5/6
+
+    \newcommand{\minisculeyyy}{\@setfontsize\miniscule{7}{8}}% \tiny: 5/6
+  \newcommand{\mini}{\@setfontsize\miniscule{8}{9}}% \tiny: 5/6
+  \newcommand{\maxi}{\@setfontsize\miniscule{10}{11}}% \tiny: 5/6
+    \newcommand{\maxier}{\@setfontsize\miniscule{11.5}{12}}% \tiny: 5/6
+  \newcommand{\BBB}{\@setfontsize\BBB{32}{33}}% \tiny: 5/6
+
+\makeatother
+\usepackage{epsf}
+
+\begin{document}
+
+
+\noindent\begin{pspicture}[showgrid=fasle](-0.5,0)(\paperwidth, \paperheight)
+
+%% HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\myheader{\psline(0.5,41.3)(29.2,41.3)
+\rput[bl](0.5,39.6){\BBB Ageing in the Middle East and North Africa}
+\psline(0.5,39.5)(29.2,39.5)
+\rput[bl](0.5,38.6){\small Measuring Population Ageing using Prospective Instead of Cronological Age }
+\psline(0.5,38.5)(29.2,38.5)
+\psline(0.5,1.2)(29.2,1.2)}
+
+
+%% FOOTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\myfooter{\rput[bl](0.5,0.3){\small\textsc{Population Horizons Factsheet VI.} 
+\scriptsize (2017) Vol.14 Issue 2}
+\rput[br](29.2,39.7){\includegraphics[height=1.4cm]{../../figures/dglogo}}
+
+\rput[br](29.2,0.05){
+\mini \emph{By Maja Zalo\v znik} -- DOI XXX -- S.5}
+}
+
+\rput[bl](-0.5,0){
+\myheader
+\myfooter}
+
+
+\def\x{7.175}%29.7 4  div
+\def\y{5.328 }% 37.3/30
+
+\psgrid[xunit =  \x , yunit = \y , subgriddiv=1, griddots=10, gridlabels=7pt](0,1)(0,0)(20,33)
+
+\def\linez{-0.7 }
+\def\linezDone{-0.50 }
+\def\linezDtwo{-0.85 }
+\def\indentz{0.1 }
+\def\rowtop{26 }
+\psset{xunit = \x cm, yunit = \y cm}
+
+\SpecialCoor
+\newlength{\myboxwidth}
+
+\setlength{\myboxwidth}{\x cm * \real{4.8}}%
+
+\rput[tl](!0 0.15 sub \rowtop 4.7 add ){
+\mini{\parbox[c]
+{\myboxwidth}{
+
+\maxi
+
+The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+\vspace{-0.15cm}
+
+\begin{quote}
+\emph{``Would you say that using contraception is mainly
+your decision, mainly your husband's/partner's
+decision, or did you both decide together?''}
+\end{quote}
+
+
+}}}
+
+\rput[tl](!5 0.15 sub \rowtop  4.7 add ){
+\mini{\parbox[c]
+{\myboxwidth}{
+\maxi
+
+This chart brings together the answers of over 800,000 women from a total of 144 surveys conducted in 67 countries---in some only once, in others up to four times over four waves. In each country we have split the respondents by urban/rural status.  The countries are arranged by regional groupings to allow for easier comparison and spotting patterns.  
+\vspace{4pt}
+
+The data is made publicly available by \citet{DHS} and was extracted$^*$ using the excellent \texttt{lodown} package in R \citep{lodown}. 
+}}}
+\psfrag{0.00}[c][c]{\miniscule{\emph{0.00}}}
+\psfrag{0.05}[c][c]{\miniscule{\emph{0.05}}}
+\psfrag{0.10}[c][c]{\miniscule{\emph{0.10}}}
+\psfrag{0.15}[c][c]{\miniscule{\emph{0.15}}}
+\psfrag{0.20}[c][c]{\miniscule{\emph{0.20}}}
+
+\psfrag{80}[c][c]{\miniscule{\emph{80}}}
+\psfrag{75}[c][c]{\miniscule{\emph{75}}}
+\psfrag{70}[c][c]{\miniscule{\emph{70}}}
+\psfrag{65}[c][c]{\miniscule{\emph{65}}}
+\psfrag{60}[c][c]{\miniscule{\emph{60}}}
+\psfrag{55}[c][c]{\miniscule{\emph{55}}}
+\psfrag{50}[c][c]{\miniscule{\emph{50}}}
+
+\psfrag{E}[rB][rB]{\miniscule{\emph{Estimate}}}
+\psfrag{P}[lB][lB]{\miniscule{\emph{Projection}}}
+
+\psfrag{M}[c][c]{\scriptsize{\emph{Male}}}
+\psfrag{F}[c][c]{\scriptsize{\emph{Female}}}
+
+\psfrag{2010}[l][l]{\miniscule{\emph{2010}}}
+\psfrag{2020}[l][l]{\miniscule{\emph{2020}}}
+\psfrag{2030}[l][l]{\miniscule{\emph{2030}}}
+\psfrag{2040}[l][l]{\miniscule{\emph{2040}}}
+\psfrag{2050}[l][l]{\miniscule{\emph{2050}}}
+\psfrag{1990}[l][l]{\miniscule{\emph{1990}}}
+\psfrag{1980}[l][l]{\miniscule{\emph{1980}}}
+\psfrag{Alg}[l][l]{\scriptsize{\emph{Algeria}}}
+\psfrag{Qat}[l][l]{\scriptsize{\emph{Qatar}}}
+\psfrag{Oma}[l][l]{\scriptsize{\emph{Oman}}}
+\psfrag{Mor}[l][l]{\scriptsize{\emph{Morocco}}}
+\psfrag{m}[c][c]{\minisculey{{Old-age threshold ($RLE^{15}$)}}}
+\psfrag{n}[c][c]{\minisculey{{Proportion over old age-threshold}}}
+
+
+\psfrag{0}[l][l]{\minisculey{\emph{0 \%}}}
+\psfrag{0.5}[l][l]{\minisculey{\emph{0.5 \%}}}
+\psfrag{1}[l][l]{\minisculey{\emph{1 \%}}}
+\psfrag{1.5}[l][l]{\minisculey{\emph{1.5 \%}}}
+\psfrag{2}[l][l]{\minisculey{\emph{2 \%}}}
+\psfrag{2.5}[l][l]{\minisculey{\emph{2.5 \%}}}
+\psfrag{3}[l][l]{\minisculey{\emph{3 \%}}}
+
+\def\oman{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Oman}}
+\rput[bl](0,0){\includegraphics[width=\x cm] {../../figures/pyramid-Oman}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-OMan}}
+	}
+	
+\def\tunisia{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Morocco}}
+\rput[bl](0,0){\includegraphics[width=\x cm] {../../figures/pyramid-Morocco}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Morocco}}
+	}
+
+\def\algeria{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Algeria}}
+\rput[bl](0,0){\includegraphics[width=\x cm] {../../figures/pyramid-Algeria}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Algeria}}
+	}
+		
+\rput[bl](0,1){\oman}	
+\rput[bl](1,1){\tunisia}
+\rput[bl](0,2){\algeria}
+
+\setlength{\myboxwidth}{\x cm * \real{5.3}}%
+
+
+\rput[tl](9.2,4.8){
+\mini{\parbox[c]
+{\myboxwidth}{\bibliographystyle{apa}
+\scriptsize \textsc{References:}
+
+\renewcommand\refname{}% removes default large title 
+
+
+\maxi{\bibliography{docs/presentations/lit}}
+\vspace*{.3cm}
+
+* All the code, summary tables, and further details are available at \url{https://github.com/majazaloznik/PH.14.01.Factsheets}
+
+$\dagger$ In Senegal and Peru multiple surveys from a single \emph{wave} have been merged together to keep with the \emph{one chart per wave} pattern. 
+
+$^\ddagger$ In 1998 the data for India is only for the state of Kerala. 
+}}}
+\psline(9.4, 2.7)(14.7,2.7)
+
+\end{pspicture}
+
+\end{document}

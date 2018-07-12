@@ -7,6 +7,7 @@
 
 ## 00. preliminaries ==========================================================
 library(dplyr)
+library(magrittr)
 source("code/FunPlotThreshold.R")
 
 # threshold for each country/age/gender combination
@@ -16,14 +17,23 @@ prop.over <- readRDS("data/processed/prop.over.rds")
 # single age populations for each each country/age/gender combination
 pop <- readRDS("data/processed/mena.pop.rds")
 
+col.total <- "darkgoldenrod2"
+col.male <- "darkgoldenrod1"
+col.female <- "darkgoldenrod1"
+background <- NA
 
+height.1 <- 3.341603
+height.2 <- 4.084
 
 ## 01. plotting thresholds ====================================================
 
 lapply(unique(threshold.1y$Location),
        function(x)  FunPlotThreshold(x,
-                                     height = 4.5, width = 5,
-                                     col.bg = background))
+                                     height = height.1, width = 5,
+                                     col.bg = background,
+                                     col.total = col.total,
+                                     col.male = col.male,
+                                     col.female = col.female))
 
 FunPlotThreshold("Iraq", write = FALSE,  col.bg = "lightcyan2",
                  height = 5, width = 5)
@@ -38,7 +48,7 @@ FunPlotProportions("Oman",
 lapply(unique(threshold.1y$Location), 
        function(x) FunPlotProportions(x, 
                                       write = TRUE, 
-                                      height = 4.5,
+                                      height = height.1,
                                       width = 5,
                                       col.bg = background))
 
@@ -50,13 +60,11 @@ lapply(unique(threshold.1y$Location),
 
 
 
-background <- NA
-
 
 lapply(unique(threshold.1y$Location)[10:14], 
        function(x) FunPyramidPlotNoAxes(
          country = x, lwd = 3,
-         height = 5.5, width = 10,
+         height = height.2, width = 10,
          gap = 0, xlim = c(3,1.5),
          col.bg = background))
 

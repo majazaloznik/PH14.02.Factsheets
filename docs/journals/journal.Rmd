@@ -179,4 +179,6 @@ So need to go back to the data transforming script and add some props to the pop
 
 5. add estimate/projection text to line charts
 
-6. Now figure out background colors, add it as an argument to all the funcitons
+6. Now figure out background colors, add it as an argument to all the funcitons. 
+
+
