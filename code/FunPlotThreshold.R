@@ -63,7 +63,7 @@ FunPlotThreshold <- function(country = "Algeria",
        type = "n",
        ylab = "", xlab = "",
        axes = FALSE)
-  mtext("m", side = 3, line = 1.5)
+  mtext("m", side = 3, line = .5)
   
   for (i in seq(55, 80, 5)){
     lines(c(1980, 2050), c(i,i), col = col.grid, lty = lty.grid,
@@ -159,7 +159,7 @@ FunPlotProportions <- function(country = "Algeria",
        type = "n",
        ylab = "", xlab = "",
        axes = FALSE)
-  mtext("n", side = 3, line = 1.5)
+  mtext("n", side = 3, line = .5)
   for (i in seq(0, .2, .05)){
     lines(c(1980, 2050), c(i,i), col = col.grid, lty = lty.grid,
           lwd = lwd.grid)

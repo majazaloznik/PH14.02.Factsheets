@@ -181,4 +181,30 @@ So need to go back to the data transforming script and add some props to the pop
 
 6. Now figure out background colors, add it as an argument to all the funcitons. 
 
+# Thursday 12.7.2018
 
+1. ugh, getting stuck in the pstricks \def and caluclation stuff. WHy does this not work:
+
+```
+\def\x{29.4 4 div}
+\psgrid[ \x cm, 1 cm]
+```
+There is something about defining x as a calculation that fucks it up. 
+
+# Thursday 26.7.2018
+
+1. OK, so the tex file has some sort of issue, it's not compiling. Also, I need to align the grid nicely.
+
+2. Step by step detective work eliminates all causes but for the two Algeria charts. 
+
+3. So what;s wrong with Algeria? Not sure, but rerunning the plots seems OK now. 
+
+4. Tweaks: emphasis in psfrag, main title location in charts.
+
+5. Tweak size so there is more room around each country. 
+
+# Friday 27.7.2018
+
+1. OK, might i do two maps? first need to migrate the map from one of the papers into this project. 
+
+2. OK, two maps provisionally OK. s
