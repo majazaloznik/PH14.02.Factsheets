@@ -87,13 +87,13 @@ FunPlotThreshold <- function(country = "Algeria",
   threshold.1y %>% 
     filter(Location == country) %>% 
     lines(Male ~ Time, . ,
-          lwd = 3, col = col.male)
+          lwd = 3, col = col.male, lty = 3)
   
   #women
   threshold.1y %>% 
     filter(Location == country) %>% 
     lines(Female ~ Time, . ,
-          lwd = 3, col = col.female)
+          lwd = 3, col = col.female, lty = 3)
   
   
   abline(v = 2015, lty = 2, lwd = 2, col = "gray50")
@@ -132,8 +132,8 @@ FunPlotThreshold <- function(country = "Algeria",
 FunPlotProportions <- function(country = "Algeria", 
                                col.bg = "steelblue4",
                                col.20 = "gray85",
-                               col.65 = "mediumorchid2",
-                               col.threshold = "darkgoldenrod1",
+                               col.65 = "slateblue1",
+                               col.threshold = "slateblue1",
                                write = TRUE, 
                                height = 4,
                                width = 6,
@@ -402,8 +402,28 @@ FunPyramidPlotNoAxes <- function(country,
   axis(1, at = seq(-3, 1.5, .5), labels = c(3,2.5,2,1.5,1,.5,0,.5,1,1.5)) 
   
   # country name
-  
-  text(-3, 75, substr(country,1,3), cex = 1.7, adj = c(0, 0))
+  if (country == "Iran") {
+    text(-3, 75, "X", cex = 1.7, adj = c(0, 0))}
+  else{  
+    if (country == "Iraq") {
+      text(-3, 75, "Z", cex = 1.7, adj = c(0, 0))}
+    else {
+      if (country == "Kuwait") {
+        text(-3, 75, "K", cex = 1.7, adj = c(0, 0))}
+      else{
+        if (country == "Palestine") {
+          text(-3, 75, "Q", cex = 1.7, adj = c(0, 0))}
+        else{
+          if (country == "Turkey") {
+            text(-3, 75, "W", cex = 1.7, adj = c(0, 0))}
+          else{
+            if(country == "UAE") {
+              text(-3, 75, "U", cex = 1.7, adj = c(0, 0))}
+            else{
+              if(country == "Yemen") {
+                text(-3, 75, "Y", cex = 1.7, adj = c(0, 0))}
+    else {text(-3, 75, substr(country,1,2), cex = 1.7, adj = c(0, 0))}}}}}}}
+
   if (show.values) {
     par(xpd = TRUE)
     text(-(gap + lx), 1:ncats, round(lx, ndig), pos = 2, 

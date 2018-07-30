@@ -72,10 +72,10 @@
 \myfooter}
 
 
-\def\x{7.175}%29.7 4  div
-\def\y{5.328 }% 37.3/30
+\def\x{5.74}% 29.7 4  div
+\def\y{6.216 }% 37.3/30
 \rput(!0 1.2 ){
-\psgrid[xunit =  \x , yunit = \y , subgriddiv=1, griddots=10, gridlabels=7pt](4,7)
+\psgrid[xunit =  \x , yunit = \y , subgriddiv=1, griddots=10, gridlabels=7pt](5,6)
 }
 
 \def\linez{-0.7 }
@@ -87,44 +87,72 @@
 
 \SpecialCoor
 \newlength{\myboxwidth}
+\setlength{\myboxwidth}{\x cm * \real{2} -0.4 cm}%
+\newlength{\myboxwidthT}
+\setlength{\myboxwidthT}{\x cm * \real{1} -0.4 cm}%
+\newlength{\myboxwidthTT}
+\setlength{\myboxwidthTT}{\x cm * \real{3} -0.4 cm}%
 
-\setlength{\myboxwidth}{\x cm * \real{1} -0.2 cm}%
-
-\rput[tl](!0 0.02 sub 7 1.2 \y div add 0.02 sub){
+\rput[tl](!0 0.01 sub 6 1.2 \y div add 0.02 sub){
 \mini{\parbox[c]
 {\myboxwidth}{
 
 \maxi
 
 The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
-\vspace{-0.15cm}
 
-\begin{quote}
-\emph{``Would you say that using contraception is mainly
-your decision, mainly your husband's/partner's
-decision, or did you both decide together?''}
-\end{quote}
+
+The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+
+The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
 
 }}}
 
-
-\rput[tl](!1 0.02 sub 7 1.2 \y div add 0.02 sub ){
+\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.02 sub){
 \mini{\parbox[c]
-{\myboxwidth}{
-\maxi
+{\myboxwidthTT }{
 
-This chart brings together the answers of over 800,000 women from a total of 144 surveys conducted in 67 countries---in some only once, in others up to four times over four waves. In each country we have split the respondents by urban/rural status.  The countries are arranged by regional groupings to allow for easier comparison and spotting patterns.  
-\vspace{4pt}
-
-The data is made publicly available by \citet{DHS} and was extracted$^*$ using the excellent \texttt{lodown} package in R \citep{lodown}. 
+\maxier
+\centering
+\textbf{Old-age threshold---age at which remaining life expectancy is 15 years ($RLE^{15}$)}
+\vspace{1ex}
 }}}
 
+\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.14 sub){
+\mini{\parbox[c]
+{\myboxwidthT}{
 
-\psfrag{0.00}[c][c]{\miniscule{\emph{0.00}}}
-\psfrag{0.05}[c][c]{\miniscule{\emph{0.05}}}
-\psfrag{0.10}[c][c]{\miniscule{\emph{0.10}}}
-\psfrag{0.15}[c][c]{\miniscule{\emph{0.15}}}
-\psfrag{0.20}[c][c]{\miniscule{\emph{0.20}}}
+
+
+\maxi
+The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+
+}}}
+
+\rput[tl](!1 0.01 sub 3 1.2 \y div add 0.02 sub){
+\mini{\parbox[c]
+{\myboxwidthTT }{
+
+\maxier
+\centering
+\textbf{Proportion of the population over the old-age threshold }
+\vspace{1ex}
+}}}
+
+\rput[tl](!3 0.01 sub 3 1.2 \y div add 0.14 sub){
+\mini{\parbox[c]
+{\myboxwidthT}{
+
+
+\maxi
+The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+
+}}}
+\psfrag{0.00}[c][c]{\miniscule{\emph{0}}}
+\psfrag{0.05}[c][c]{\miniscule{\emph{5}}}
+\psfrag{0.10}[c][c]{\miniscule{\emph{10}}}
+\psfrag{0.15}[c][c]{\miniscule{\emph{15}}}
+\psfrag{0.20}[c][c]{\miniscule{\emph{20}}}
 
 \psfrag{80}[c][c]{\miniscule{\emph{80}}}
 \psfrag{75}[c][c]{\miniscule{\emph{75}}}
@@ -134,41 +162,142 @@ The data is made publicly available by \citet{DHS} and was extracted$^*$ using t
 \psfrag{55}[c][c]{\miniscule{\emph{55}}}
 \psfrag{50}[c][c]{\miniscule{\emph{50}}}
 
+\psfrag{61}[c][c]{\miniscule{\emph{80}}}
+\psfrag{63}[c][c]{\miniscule{\emph{75}}}
+\psfrag{68}[c][c]{\miniscule{\emph{70}}}
+\psfrag{72}[c][c]{\miniscule{\emph{65}}}
+\psfrag{74}[c][c]{\miniscule{\emph{60}}}
+\psfrag{70}[c][c]{\miniscule{\emph{70}}}
+\psfrag{65}[c][c]{\miniscule{\emph{65}}}
+
 \psfrag{E}[rB][rB]{\miniscule{\emph{Estimate}}}
 \psfrag{P}[lB][lB]{\miniscule{\emph{Projection}}}
 
 \psfrag{M}[c][c]{\scriptsize{\emph{Male}}}
 \psfrag{F}[c][c]{\scriptsize{\emph{Female}}}
 
-\psfrag{2000}[l][l]{\miniscule{{2000}}}
-\psfrag{2010}[l][l]{\miniscule{{2010}}}
-\psfrag{2020}[l][l]{\miniscule{{2020}}}
-\psfrag{2030}[l][l]{\miniscule{{2030}}}
-\psfrag{2040}[l][l]{\miniscule{{2040}}}
-\psfrag{2050}[l][l]{\miniscule{{2050}}}
-\psfrag{1990}[l][l]{\miniscule{{1990}}}
-\psfrag{1980}[l][l]{\miniscule{{1980}}}
-\psfrag{Alg}[l][l]{\scriptsize{\emph{Algeria}}}
-\psfrag{Qat}[l][l]{\scriptsize{\emph{Qatar}}}
-\psfrag{Oma}[l][l]{\scriptsize{\emph{Oman}}}
-\psfrag{Mor}[l][l]{\scriptsize{\emph{Morocco}}}
+\psfrag{2000}[r][r][1][30]{\miniscule{{2000}}}
+\psfrag{2010}[r][r][1][30]{\miniscule{{2010}}}
+\psfrag{2020}[r][r][1][30]{\miniscule{{2020}}}
+\psfrag{2030}[r][r][1][30]{\miniscule{{2030}}}
+\psfrag{2040}[r][r][1][30]{\miniscule{{2040}}}
+\psfrag{2050}[r][r][1][30]{\miniscule{{2050}}}
+\psfrag{1990}[r][r][1][30]{\miniscule{{1990}}}
+\psfrag{1980}[r][r][1][30]{\miniscule{{1980}}}
+\psfrag{Al}[l][l]{\scriptsize{\emph{Algeria}}}
+\psfrag{Ba}[l][l]{\scriptsize{\emph{Bahrain}}}
+\psfrag{Eg}[l][l]{\scriptsize{\emph{Egypt}}}
+\psfrag{Qa}[l][l]{\scriptsize{\emph{Qatar}}}
+\psfrag{Om}[l][l]{\scriptsize{\emph{Oman}}}
+\psfrag{X}[l][l]{\scriptsize{\emph{Iran}}}
+\psfrag{Z}[l][l]{\scriptsize{\emph{Iraq}}}
+\psfrag{Is}[l][l]{\scriptsize{\emph{Israel}}}
+\psfrag{Jo}[l][l]{\scriptsize{\emph{Jordan}}}
+\psfrag{K}[l][l]{\scriptsize{\emph{Kuwait}}}
+\psfrag{Le}[l][l]{\scriptsize{\emph{Lebanon}}}
+\psfrag{Li}[l][l]{\scriptsize{\emph{Libya}}}
+\psfrag{Mo}[l][l]{\scriptsize{\emph{Morocco}}}
+\psfrag{Q}[l][l]{\scriptsize{\emph{Palestine}}}
+\psfrag{Sa}[l][l]{\scriptsize{\emph{Saudi Arabia}}}
+\psfrag{Sy}[l][l]{\scriptsize{\emph{Syria}}}
+\psfrag{W}[l][l]{\scriptsize{\emph{Turkey}}}
+\psfrag{Tu}[l][l]{\scriptsize{\emph{Tunisia}}}
+\psfrag{U}[l][l]{\scriptsize{\emph{UAE}}}
+\psfrag{Ye}[l][l]{\scriptsize{\emph{Yemen}}}
+
 \psfrag{m}[c][c]{\minisculey{\emph{Old-age threshold ($RLE^{15}$)}}}
-\psfrag{n}[c][c]{\minisculey{\emph{Proportion over old age-threshold}}}
+\psfrag{n}[c][c]{\minisculey{\emph{\% over old age-threshold}}}
 
 
-\psfrag{0}[l][l]{\minisculey{{0 \%}}}
-\psfrag{0.5}[l][l]{\minisculey{{0.5 \%}}}
-\psfrag{1}[l][l]{\minisculey{{1 \%}}}
-\psfrag{1.5}[l][l]{\minisculey{{1.5 \%}}}
-\psfrag{2}[l][l]{\minisculey{{2 \%}}}
-\psfrag{2.5}[l][l]{\minisculey{{2.5 \%}}}
-\psfrag{3}[l][l]{\minisculey{{3 \%}}}
+\psfrag{0}[lB][lB]{\miniscule{{0\%}}}
+\psfrag{0.5}[lB][lB]{\miniscule{{0.5\%}}}
+\psfrag{1}[lB][lB]{\miniscule{{1\%}}}
+\psfrag{1.5}[lB][lB]{\miniscule{{1.5\%}}}
+\psfrag{2}[lB][lB]{\miniscule{{2\%}}}
+\psfrag{2.5}[lB][lB]{\miniscule{{2.5\%}}}
+\psfrag{3}[lB][lB]{\miniscule{{3\%}}}
 
+\psfrag{MA}[c][c]{\minisculeyyy{\emph{Morocco}}}
+\psfrag{DZ}[c][c]{\minisculeyyy{\emph{Algeria}}}
+\psfrag{TN}[c][c]{\minisculeyyy{\emph{Tunisia}}}
+\psfrag{L}[c][c]{\minisculeyyy{\emph{Libya}}}
+\psfrag{EG}[c][c]{\minisculeyyy{\emph{Egypt}}}
+\psfrag{TR}[c][c]{\minisculeyyy{\emph{Turkey}}}
+\psfrag{IL}[c][c]{\minisculeyyy{\emph{Israel}}}
+\psfrag{LB}[c][c]{\minisculeyyy{\emph{Lebanon}}}
+\psfrag{PS}[c][c]{\minisculeyyy{\emph{Palestine}}}
+\psfrag{SY}[c][c]{\minisculeyyy{\emph{Syria}}}
+\psfrag{IQ}[c][c]{\minisculeyyy{\emph{Iraq}}}
+\psfrag{SA}[c][c]{\minisculeyyy{\emph{Saudi Arabia}}}
+\psfrag{JO}[c][c]{\minisculeyyy{\emph{Jordan}}}
+\psfrag{KW}[c][c]{\minisculeyyy{\emph{Kuwait}}}
+\psfrag{IR}[c][c]{\minisculeyyy{\emph{Iran}}}
+\psfrag{YE}[c][c]{\minisculeyyy{\emph{Yemen}}}
+\psfrag{OM}[c][c]{\minisculeyyy{\emph{Oman}}}
+\psfrag{AE}[c][c]{\minisculeyyy{\emph{UAE}}}
+\psfrag{BH}[c][c]{\minisculeyyy{\emph{Bahrain}}}
+\psfrag{QA}[c][c]{\minisculeyyy{\emph{Qatar}}}
+
+ 
 \def\algeria{
 \rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Algeria}}
 \rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Algeria}}
 \rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Algeria}}
 	}
+
+\def\bahrain{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Bahrain}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Bahrain}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Bahrain}}
+	}
+	
+\def\egypt{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Egypt}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Egypt}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Egypt}}
+	}
+	
+\def\iran{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Iran}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Iran}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Iran}}
+	}
+
+\def\iraq{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Iraq}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Iraq}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Iraq}}
+	}	
+
+\def\israel{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Israel}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Israel}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Israel}}
+	}	
+
+\def\jordan{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Jordan}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Jordan}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Jordan}}
+	}	
+\def\kuwait{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Kuwait}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Kuwait}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Kuwait}}
+	}			
+
+\def\lebanon{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Lebanon}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Lebanon}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Lebanon}}
+	}	
+	
+\def\libya{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Libya}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Libya}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Libya}}
+}	
+	
 	
 \def\oman{
 \rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Oman}}
@@ -176,26 +305,109 @@ The data is made publicly available by \citet{DHS} and was extracted$^*$ using t
 \rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-OMan}}
 	}
 	
-\def\tunisia{
+\def\morocco{
 \rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Morocco}}
 \rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Morocco}}
 \rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Morocco}}
 	}
+	
+	\def\palestine{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Palestine}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Palestine}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Palestine}}
+	}
+	
+	\def\qatar{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Qatar}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Qatar}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Qatar}}
+	}
+
+	\def\saudi{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-SaudiArabia}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-SaudiArabia}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-SaudiArabia}}
+	}
+	
+	\def\syria{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Syria}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Syria}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Syria}}
+	}
+	
+		\def\tunisia{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Tunisia}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Tunisia}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Tunisia}}
+	}
+		\def\turkey{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Turkey}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Turkey}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Turkey}}
+	}
+		\def\uae{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-UAE}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-UAE}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-UAE}}
+	}
+		\def\yemen{
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Yemen}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Yemen}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Yemen}}
+	}
+\rput[bl](!2 5 1.2 \y div add 0.02 sub){\algeria}
+\rput[bl](!3 5 1.2 \y div add 0.02 sub){\bahrain}
+\rput[bl](!4 5 1.2 \y div add 0.02 sub){\egypt}
+\rput[bl](!0 4 1.2 \y div add 0.02 sub){\iran}
+\rput[bl](!1 4 1.2 \y div add 0.02 sub){\iraq}
+\rput[bl](!2 4 1.2 \y div add 0.02 sub){\israel}
+\rput[bl](!3 4 1.2 \y div add 0.02 sub){\jordan}
+\rput[bl](!4 4 1.2 \y div add 0.02 sub){\kuwait}
+\rput[bl](!0 3 1.2 \y div add 0.02 sub){\lebanon}
+\rput[bl](!4 3 1.2 \y div add 0.02 sub){\libya}
+\rput[bl](!0 2 1.2 \y div add 0.02 sub){\morocco}
+\rput[bl](!4 2 1.2 \y div add 0.02 sub){\oman}
+\rput[bl](!0 1 1.2 \y div add 0.02 sub){\palestine}
+\rput[bl](!1 1 1.2 \y div add 0.02 sub){\qatar}
+\rput[bl](!2 1 1.2 \y div add 0.02 sub){\saudi}
+\rput[bl](!3 1 1.2 \y div add 0.02 sub){\syria}
+\rput[bl](!4 1 1.2 \y div add 0.02 sub){\tunisia}
+\rput[bl](!0 0 1.2 \y div add 0.02 sub){\turkey}
+\rput[bl](!1 0 1.2 \y div add 0.02 sub){\uae}
+\rput[bl](!2 0 1.2 \y div add 0.02 sub){\yemen}
+
+\psfrag{61}[l][l]{\minisculeyy{\emph{61}}}
+\psfrag{63}[l][l]{\minisculeyy{\emph{63}}}
+\psfrag{68}[l][l]{\minisculeyy{\emph{68}}}
+\psfrag{72}[l][l]{\minisculeyy{\emph{72}}}
+\psfrag{66}[l][l]{\minisculeyy{\emph{66}}}
+\psfrag{74}[l][l]{\minisculeyy{\emph{74}}}
+\psfrag{70}[l][l]{\minisculeyy{\emph{70}}}
+\psfrag{65}[l][l]{\minisculeyy{\emph{65}}}
+
+\psfrag{0.00}[l][l]{\minisculeyy{\emph{0\%}}}
+\psfrag{0.01}[l][l]{\minisculeyy{\emph{1\%}}}
+\psfrag{0.02}[l][l]{\minisculeyy{\emph{2\%}}}
+\psfrag{0.03}[l][l]{\minisculeyy{\emph{3\%}}}
+\psfrag{0.04}[l][l]{\minisculeyy{\emph{4\%}}}
+\psfrag{0.05}[l][l]{\minisculeyy{\emph{5\%}}}
+\psfrag{0.06}[l][l]{\minisculeyy{\emph{6\%}}}
+\psfrag{0.07}[l][l]{\minisculeyy{\emph{7\%}}}
+
+\psfrag{0}[l][l]{\minisculey{\emph{0}}}
+\psfrag{1000}[l][l]{\minisculey{\emph{1,000}}}
+\psfrag{2000 km}[l][l]{\minisculey{\emph{2,000 km}}}
+
 
 \def\mapt{
-\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{1.6}] {../../figures/map1}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {../../figures/map1}}
 }
 \def\mapp{
-\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{1.6}] {../../figures/map2}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {../../figures/map2}}
 }
-\rput[bl](!1 2 1.2 \y div add 0.02 sub){\mapt}	
-\rput[bl](!1 4 1.2 \y div add 0.02 sub){\mapp}	
-\rput[bl](!0 1 1.2 \y div add 0.02 sub){\oman}	
-\rput[bl](!1 1 1.2 \y div add 0.02 sub){\tunisia}
-\rput[bl](!0 0 1.2 \y div add 0.02 sub){\algeria}
+\rput[bl](!2 3 1.2 \y div add 0.02 sub){\mapt}	
+\rput[bl](!1 2 1.2 \y div add 0.02 sub){\mapp}	
 
-
-%
 
 \rput[tl](3,1){
 \mini{\parbox[c]

@@ -41,13 +41,15 @@ threshold.1y %>%
 prop.over %>% 
   filter(Time == 2018) %>% 
   select(Location, prop.over.t) -> proportion.2018
+
 # join with iso codes         
 df <- as.data.frame(left_join(left_join(threshold.2018, proportion.2018),
                               dsin, 
                               by = c("Location" = "official_name_en")))
+
 ## add the data to the starter map
 sPDF <- joinCountryData2Map(df, joinCode="ISO3", nameJoinColumn="ISO3166.1.Alpha.3")
-
+# subset only Mena countries
 sPDF.mena<-sPDF[which(sPDF$ISO3 %in% df$ISO3166.1.Alpha.3),]
 
 ## coordinates for country labels
@@ -59,26 +61,31 @@ sPDF.mena@data$NAME[sPDF.mena@data$NAME == "United Arab Emirates"] <- "UAE"
 sPDF.mena@data$Y[sPDF.mena@data$NAME == "Morocco"] <- 32
 sPDF.mena@data$X[sPDF.mena@data$NAME == "Israel"] <- 32
 sPDF.mena@data$Y[sPDF.mena@data$NAME == "Israel"] <- 32
-sPDF.mena@data$X[sPDF.mena@data$NAME == "Palestine"] <- 32
+sPDF.mena@data$X[sPDF.mena@data$NAME == "Palestine"] <- 31
 sPDF.mena@data$Y[sPDF.mena@data$NAME == "Palestine"] <- 33.5
 sPDF.mena@data$X[sPDF.mena@data$NAME == "Lebanon"] <- 33
 sPDF.mena@data$Y[sPDF.mena@data$NAME == "Lebanon"] <- 35
 sPDF.mena@data$Y[sPDF.mena@data$NAME == "Bahrain"] <- 27
-sPDF.mena@data$Y[sPDF.mena@data$NAME == "Saudi Arabia"] <- 25
+sPDF.mena@data$Y[sPDF.mena@data$NAME == "Saudi Arabia"] <- 24
 sPDF.mena@data$X[sPDF.mena@data$NAME == "Qatar"] <- 52
+sPDF.mena@data$X[sPDF.mena@data$NAME == "Jordan"] <- 38
+
+sPDF.mena@data$psfrag <- as.character(sPDF.mena@data$ISO_A2)
+sPDF.mena@data$psfrag[sPDF.mena@data$psfrag == "LY"] <- "L"
 
 ## colour palates
-
-
+threshold.pal <- c(rev(brewer.pal(3, "OrRd")[2:3]),
+                   "gold",
+                   brewer.pal(5, "YlGn")[2:5])
 
 ## 1. plot regular map ########################################################
 ###############################################################################
-leg.x <- -12
-leg.y <- 45
+#leg.x <- -12
+#leg.y <- 45
 w = 10
 h = 4.5
-cex = 0.9
-yi = 1.2
+#cex = 0.9
+#yi = 1.2
 
 par(xpd = TRUE)
 par(.pardefault)
@@ -94,18 +101,26 @@ postscript(file=here::here(paste0("figures/","map1",".eps")),
 # plot background
 
 par(mar = c(0,0,0,0))
-plot(sPDF, xlim = c(-12, 62), ylim = c(15, 42),
+plot(sPDF, xlim = c(-17, 62), ylim = c(13, 42),
      border="grey70", col="white")
 scale <- (map.scale(ratio = FALSE, relwidth=0.2))
 threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "threshold",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
-                             numCats = 6,
-                             catMethod = "pretty",
+                             numCats = 7,
+                             catMethod = c(61, 63, 65, 66, 68, 70, 72, 74),
                              add = TRUE, 
-                             colourPalette = brewer.pal(6, "YlGn"))
-
-text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$ISO_A2)
+                             colourPalette = threshold.pal)
+addMapLegend( cutVector  = threshold.legend$cutVector, 
+              legendLabels =  "all",
+              colourVector = threshold.legend$colourVector,
+              horizontal = FALSE,
+              legendShrink = 0.7,
+              legendMar = 37,
+              labelFontSize = 0.7,
+              mgp = c(3,.4,0),
+              tcl = -.3)
+text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$psfrag)
 
 
 dev.off()
@@ -124,9 +139,9 @@ postscript(file=here::here(paste0("figures/","map2",".eps")),
 # plot background
 
 par(mar = c(0,0,0,0))
-plot(sPDF, xlim = c(-12, 62), ylim = c(15, 42),
+plot(sPDF, xlim = c(-12, 67), ylim = c(13, 42),
      border="grey70", col="white")
-scale <- (map.scale(ratio = FALSE, relwidth=0.2))
+#scale <- (map.scale(ratio = FALSE, relwidth=0.2))
 proportion.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "prop.over.t",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
@@ -134,8 +149,17 @@ proportion.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "prop.over.t",
                              catMethod = "pretty",
                              add = TRUE, 
                              colourPalette = (brewer.pal(7, "RdPu")))
+addMapLegend( cutVector  = proportion.legend$cutVector, 
+              legendLabels =  "all",
+              colourVector = proportion.legend$colourVector,
+              horizontal = FALSE,
+              legendShrink = 0.7,
+              legendMar = 3,
+              labelFontSize = 0.7,
+              mgp = c(3,.4,0),
+              tcl = -.3)
 
-text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$ISO_A2)
+text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$psfrag)
 
 
 dev.off()
