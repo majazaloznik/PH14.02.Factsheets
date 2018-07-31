@@ -207,4 +207,24 @@ There is something about defining x as a calculation that fucks it up.
 
 1. OK, might i do two maps? first need to migrate the map from one of the papers into this project. 
 
-2. OK, two maps provisionally OK. s
+2. OK, two maps provisionally OK. 
+
+# Monday 28.7.2018
+
+1. Add country name labels to map. 
+
+2. So annoying! How to deal with psfrag broken labels. Need to be manually fixed
+
+3. Change layout to 5x6 and adjust plot heights and widths appropriately. 
+
+4. OK, adjust colours
+
+5. Make map scale/legends
+
+6. remove spaces from eps filenames, since includegraphics cannot handle them. 
+
+7. Complete layout
+
+# Tuesday 29.7.2018
+
+1. Write text

@@ -11,7 +11,7 @@
 %\definecolor{oxblue}{RGB}{0,33,71}
 \definecolor{yell}{cmyk}{0.04,0.16,0.84,0}
 \definecolor{yell2}{cmyk}{0.16,0.59,0.96,0.02}
-\usepackage[space]{grffile} % for spaces in file names?
+\usepackage[space]{grffile} % for spaces in file names? does this work? no?
 \renewcommand{\labelitemi}{${\color{oxblue}\bullet}$}
 \usepackage{lmodern}
 \usepackage{xcolor}
@@ -42,7 +42,6 @@
 
 \makeatother
 \usepackage{epsf}
-
 \begin{document}
 
 
@@ -52,7 +51,7 @@
 \def\myheader{\psline(0.5,41.3)(29.2,41.3)
 \rput[bl](0.5,39.6){\BBB Ageing in the Middle East and North Africa}
 \psline(0.5,39.5)(29.2,39.5)
-\rput[bl](0.5,38.6){\small Measuring Population Ageing using Prospective Instead of Cronological Age }
+\rput[bl](0.5,38.6){\small Measuring Population Ageing Using Prospective Instead of Cronological Age }
 \psline(0.5,38.5)(29.2,38.5)
 }
 
@@ -75,7 +74,7 @@
 \def\x{5.74}% 29.7 4  div
 \def\y{6.216 }% 37.3/30
 \rput(!0 1.2 ){
-\psgrid[xunit =  \x , yunit = \y , subgriddiv=1, griddots=10, gridlabels=7pt](5,6)
+%\psgrid[xunit =  \x , yunit = \y , subgriddiv=1, griddots=10, gridlabels=7pt](5,6)
 }
 
 \def\linez{-0.7 }
@@ -93,18 +92,23 @@
 \newlength{\myboxwidthTT}
 \setlength{\myboxwidthTT}{\x cm * \real{3} -0.4 cm}%
 
-\rput[tl](!0 0.01 sub 6 1.2 \y div add 0.02 sub){
+\rput[tl](!0 0.01 sub 6 1.2 \y div add 0.05 sub){
 \mini{\parbox[c]
 {\myboxwidth}{
 
 \maxi
 
-The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+This factsheet explores the ageing of the populations of Middle Eastern and North African coutnries using \emph{prospective age} instead of chronological age  \citep{Sanderson2008}. Using prospective age is akin to adjusting for inflation when comparing prices. It acknowledges the fact that a particular chronological age---e.g. the age of 65---means something very different in populations with low life expectancy than it does in a population with high life expectancy. 
+
+\vspace{.5em}
+
+Instead of defining old age as being over 65, we define it as being over an \emph{old-age threshold}: the age where the remaining life expectancy is 15 years or less. 
+
+\vspace{.5em}
+
+We use population pyramids to outline current and future (2050) age structures in each country, and the horizontal lines allow you to compare the prospective old-age thresholds (in purple) with the more common definition of old age as 65 years old (in gray).
 
 
-The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
-
-The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
 
 }}}
 
@@ -118,14 +122,11 @@ The Demographic and Health Survey (DHS) Programme has been conducting surveys to
 \vspace{1ex}
 }}}
 
-\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.14 sub){
+\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.10 sub){
 \mini{\parbox[c]
 {\myboxwidthT}{
-
-
-
 \maxi
-The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+The old-age thresholds have been calculated$^\dagger$ from abridged life tables \citep{un2017}. The map on the right shows the current old-age thresholds in each country. 
 
 }}}
 
@@ -139,13 +140,13 @@ The Demographic and Health Survey (DHS) Programme has been conducting surveys to
 \vspace{1ex}
 }}}
 
-\rput[tl](!3 0.01 sub 3 1.2 \y div add 0.14 sub){
+\rput[tl](!3 0.01 sub 3 1.2 \y div add 0.10 sub){
 \mini{\parbox[c]
 {\myboxwidthT}{
 
 
 \maxi
-The Demographic and Health Survey (DHS) Programme has been conducting surveys to monitor indicators in the areas of population, health, and nutrition in over 90 countries for over thirty years. Since \emph{Wave 4} they have been asking the following question of women who are married or cohabiting, and use contraception:
+A common measure of population ageing is the proportion of the population over 65. The map on the left instead shows the proportion of the population over the old-age threshold in each country. 
 
 }}}
 \psfrag{0.00}[c][c]{\miniscule{\emph{0}}}
@@ -203,7 +204,7 @@ The Demographic and Health Survey (DHS) Programme has been conducting surveys to
 \psfrag{W}[l][l]{\scriptsize{\emph{Turkey}}}
 \psfrag{Tu}[l][l]{\scriptsize{\emph{Tunisia}}}
 \psfrag{U}[l][l]{\scriptsize{\emph{UAE}}}
-\psfrag{Ye}[l][l]{\scriptsize{\emph{Yemen}}}
+\psfrag{Y}[l][l]{\scriptsize{\emph{Yemen}}}
 
 \psfrag{m}[c][c]{\minisculey{\emph{Old-age threshold ($RLE^{15}$)}}}
 \psfrag{n}[c][c]{\minisculey{\emph{\% over old age-threshold}}}
@@ -409,23 +410,21 @@ The Demographic and Health Survey (DHS) Programme has been conducting surveys to
 \rput[bl](!1 2 1.2 \y div add 0.02 sub){\mapp}	
 
 
-\rput[tl](3,1){
+\rput[bl](!3 0.02 1.2 \y div add ){
 \mini{\parbox[c]
 {\myboxwidth}{\bibliographystyle{apa}
 \scriptsize \textsc{References:}
+\vspace{-2cm}
 
 \renewcommand\refname{}% removes default large title 
 
-
-\maxi{\bibliography{docs/presentations/lit}}
+\maxi{\bibliography{../bib.bib}}
 \vspace*{.3cm}
 
-* All the code, summary tables, and further details are available at \url{https://github.com/majazaloznik/PH.14.01.Factsheets}
-
-$\dagger$ In Senegal and Peru multiple surveys from a single \emph{wave} have been merged together to keep with the \emph{one chart per wave} pattern. 
-
-$^\ddagger$ In 1998 the data for India is only for the state of Kerala. 
+$\dagger$ All the code, methodology, summary tables, and further details are available at \url{https://github.com/majazaloznik/PH.14.02.Factsheets}
 }}}
+
+
 \psline(9.4, 2.7)(14.7,2.7)
 
 \end{pspicture}

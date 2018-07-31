@@ -74,7 +74,7 @@ sPDF.mena@data$psfrag <- as.character(sPDF.mena@data$ISO_A2)
 sPDF.mena@data$psfrag[sPDF.mena@data$psfrag == "LY"] <- "L"
 
 ## colour palates
-threshold.pal <- c(rev(brewer.pal(3, "OrRd")[2:3]),
+threshold.pal <- c(rev(brewer.pal(4, "OrRd")[3:4]),
                    "gold",
                    brewer.pal(5, "YlGn")[2:5])
 
@@ -103,7 +103,8 @@ postscript(file=here::here(paste0("figures/","map1",".eps")),
 par(mar = c(0,0,0,0))
 plot(sPDF, xlim = c(-17, 62), ylim = c(13, 42),
      border="grey70", col="white")
-scale <- (map.scale(ratio = FALSE, relwidth=0.2))
+scale <- (map.scale(ratio = FALSE, relwidth=0.2,
+          c("a", "b", "c")))
 threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "threshold",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
@@ -141,14 +142,14 @@ postscript(file=here::here(paste0("figures/","map2",".eps")),
 par(mar = c(0,0,0,0))
 plot(sPDF, xlim = c(-12, 67), ylim = c(13, 42),
      border="grey70", col="white")
-#scale <- (map.scale(ratio = FALSE, relwidth=0.2))
+scale <- (map.scale(ratio = FALSE, relwidth=0.2))
 proportion.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "prop.over.t",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
                              numCats = 7,
                              catMethod = "pretty",
                              add = TRUE, 
-                             colourPalette = (brewer.pal(7, "RdPu")))
+                             colourPalette = (brewer.pal(7, "YlOrRd")))
 addMapLegend( cutVector  = proportion.legend$cutVector, 
               legendLabels =  "all",
               colourVector = proportion.legend$colourVector,
