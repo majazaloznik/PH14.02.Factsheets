@@ -81,19 +81,19 @@ FunPlotThreshold <- function(country = "Algeria",
   threshold.1y %>% 
     filter(Location == country) %>% 
     lines(AgeGrp ~ Time, . ,
-          lwd = 2, col = col.total )
+          lwd = 3, col = col.total )
   
   # men
   threshold.1y %>% 
     filter(Location == country) %>% 
     lines(Male ~ Time, . ,
-          lwd = 3, col = col.male, lty = 3)
+          lwd = 3, col = col.male, lty = "63")
   
   #women
   threshold.1y %>% 
     filter(Location == country) %>% 
     lines(Female ~ Time, . ,
-          lwd = 3, col = col.female, lty = 3)
+          lwd = 3, col = col.female, lty = "63")
   
   
   abline(v = 2015, lty = 2, lwd = 2, col = "gray50")
@@ -422,7 +422,10 @@ FunPyramidPlotNoAxes <- function(country,
             else{
               if(country == "Yemen") {
                 text(-3, 75, "Y", cex = 1.7, adj = c(0, 0))}
-    else {text(-3, 75, substr(country,1,2), cex = 1.7, adj = c(0, 0))}}}}}}}
+              else{
+                if(country == "Tunisia") {
+                  text(-3, 75, "t", cex = 1.7, adj = c(0, 0))}
+    else {text(-3, 75, substr(country,1,2), cex = 1.7, adj = c(0, 0))}}}}}}}}
 
   if (show.values) {
     par(xpd = TRUE)

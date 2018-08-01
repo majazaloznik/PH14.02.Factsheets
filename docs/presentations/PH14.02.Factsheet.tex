@@ -28,6 +28,9 @@
     citecolor={black},
     urlcolor={blue!90!black}
 }
+
+
+
 \DeclareRobustCommand{\firstsecond}[2]{#1}
 \makeatletter
   \newcommand{\miniscule}{\@setfontsize\miniscule{4}{5}}%   
@@ -42,6 +45,11 @@
 
 \makeatother
 \usepackage{epsf}
+
+
+
+
+
 \begin{document}
 
 
@@ -91,7 +99,7 @@
 \setlength{\myboxwidthT}{\x cm * \real{1} -0.4 cm}%
 \newlength{\myboxwidthTT}
 \setlength{\myboxwidthTT}{\x cm * \real{3} -0.4 cm}%
-
+\setlength{\bibhang}{0cm}
 \rput[tl](!0 0.01 sub 6 1.2 \y div add 0.05 sub){
 \mini{\parbox[c]
 {\myboxwidth}{
@@ -202,7 +210,7 @@ A common measure of population ageing is the proportion of the population over 6
 \psfrag{Sa}[l][l]{\scriptsize{\emph{Saudi Arabia}}}
 \psfrag{Sy}[l][l]{\scriptsize{\emph{Syria}}}
 \psfrag{W}[l][l]{\scriptsize{\emph{Turkey}}}
-\psfrag{Tu}[l][l]{\scriptsize{\emph{Tunisia}}}
+\psfrag{t}[l][l]{\scriptsize{\emph{Tunisia}}}
 \psfrag{U}[l][l]{\scriptsize{\emph{UAE}}}
 \psfrag{Y}[l][l]{\scriptsize{\emph{Yemen}}}
 
@@ -238,6 +246,8 @@ A common measure of population ageing is the proportion of the population over 6
 \psfrag{AE}[c][c]{\minisculeyyy{\emph{UAE}}}
 \psfrag{BH}[c][c]{\minisculeyyy{\emph{Bahrain}}}
 \psfrag{QA}[c][c]{\minisculeyyy{\emph{Qatar}}}
+
+
 
  
 \def\algeria{
@@ -356,26 +366,63 @@ A common measure of population ageing is the proportion of the population over 6
 \rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Yemen}}
 \rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Yemen}}
 	}
-\rput[bl](!2 5 1.2 \y div add 0.02 sub){\algeria}
-\rput[bl](!3 5 1.2 \y div add 0.02 sub){\bahrain}
-\rput[bl](!4 5 1.2 \y div add 0.02 sub){\egypt}
-\rput[bl](!0 4 1.2 \y div add 0.02 sub){\iran}
-\rput[bl](!1 4 1.2 \y div add 0.02 sub){\iraq}
-\rput[bl](!2 4 1.2 \y div add 0.02 sub){\israel}
-\rput[bl](!3 4 1.2 \y div add 0.02 sub){\jordan}
-\rput[bl](!4 4 1.2 \y div add 0.02 sub){\kuwait}
-\rput[bl](!0 3 1.2 \y div add 0.02 sub){\lebanon}
-\rput[bl](!4 3 1.2 \y div add 0.02 sub){\libya}
-\rput[bl](!0 2 1.2 \y div add 0.02 sub){\morocco}
-\rput[bl](!4 2 1.2 \y div add 0.02 sub){\oman}
-\rput[bl](!0 1 1.2 \y div add 0.02 sub){\palestine}
-\rput[bl](!1 1 1.2 \y div add 0.02 sub){\qatar}
-\rput[bl](!2 1 1.2 \y div add 0.02 sub){\saudi}
-\rput[bl](!3 1 1.2 \y div add 0.02 sub){\syria}
-\rput[bl](!4 1 1.2 \y div add 0.02 sub){\tunisia}
-\rput[bl](!0 0 1.2 \y div add 0.02 sub){\turkey}
-\rput[bl](!1 0 1.2 \y div add 0.02 sub){\uae}
-\rput[bl](!2 0 1.2 \y div add 0.02 sub){\yemen}
+	
+\def\ledge{
+\psfrag{a}[l][l]{\minisculeyy{\emph{$RLE^{15}$}}}
+\psfrag{g}[l][l]{\minisculeyy{\emph{Women}}}
+\psfrag{b}[l][l]{\minisculeyy{\emph{Men}}}
+\psfrag{m}[c][c]{\minisculeyy{\emph{Old-age threshold}}}
+
+\psfrag{n}[c][c]{\minisculeyy{\emph{\% of population}}}
+\psfrag{h}[l][l]{\minisculeyy{\emph{over 65}}}
+\psfrag{i}[l][l]{\minisculeyy{\emph{over $RLE^{15}$}}}
+
+
+
+\rput[bl](-0.05,0){
+\rput[bl](.45,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/proportion-legend}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-legend}}
+\pnode(0.35,0.80){A}
+\pnode(0.39,0.87){B}
+\nccurve[angleA = 20, , angleB = 180, nodesepA = 2pt, linewidth = .5pt]{A}{B}
+\pnode(0.35,0.745){C}
+\pnode(0.39,0.63){D}
+\nccurve[angleA = -20, , angleB = 180, nodesepA = 2pt, linewidth = .5pt]{C}{D}
+
+\pnode(0.35,0.76){E}
+\pnode(0.39,0.75){F}
+\nccurve[angleA = -0, , angleB = 180, nodesepA = 2pt, linewidth = .5pt]{E}{F}
+\psbrace[linecolor = gray, fillcolor = gray,braceWidthOuter = .1cm, braceWidthInner = .1cm, braceWidth = .025cm, rot = -90, ref = b](0.2, 0.85)(0.2, 0.63){\minisculeyy{\begin{tabular}{c} \emph{All MENA} \\
+\emph{countries}
+\end{tabular}}}}
+
+\psfrag{o}[r][r]{\minisculeyy{\emph{Population pyramids}}}
+\rput[bl](0.1,0.13){\includegraphics[width=\x cm *\real{1}]{../../figures/pyramid-legend}}
+}
+
+\rput[tl](!2 6 1.2 \y div add 0.04 sub){\tiny \textsc{Legends:}}
+\rput[bl](!2 5 1.2 \y div add 0.12 sub){\ledge}
+\rput[bl](!2 5 1.2 \y div add ){\psframe(-.02,0)(.97,.98)}
+\rput[bl](!3 5 1.2 \y div add 0.02 sub){\algeria}
+\rput[bl](!4 5 1.2 \y div add 0.02 sub){\bahrain}
+\rput[bl](!0 4 1.2 \y div add 0.02 sub){\egypt}
+\rput[bl](!1 4 1.2 \y div add 0.02 sub){\iran}
+\rput[bl](!2 4 1.2 \y div add 0.02 sub){\iraq}
+\rput[bl](!3 4 1.2 \y div add 0.02 sub){\israel}
+\rput[bl](!4 4 1.2 \y div add 0.02 sub){\jordan}
+\rput[bl](!0 3 1.2 \y div add 0.02 sub){\kuwait}
+\rput[bl](!4 3 1.2 \y div add 0.02 sub){\lebanon}
+\rput[bl](!0 2 1.2 \y div add 0.02 sub){\libya}
+\rput[bl](!4 2 1.2 \y div add 0.02 sub){\morocco}
+\rput[bl](!0 1 1.2 \y div add 0.02 sub){\oman}
+\rput[bl](!1 1 1.2 \y div add 0.02 sub){\palestine}
+\rput[bl](!2 1 1.2 \y div add 0.02 sub){\qatar}
+\rput[bl](!3 1 1.2 \y div add 0.02 sub){\saudi}
+\rput[bl](!4 1 1.2 \y div add 0.02 sub){\syria}
+\rput[bl](!0 0 1.2 \y div add 0.02 sub){\tunisia}
+\rput[bl](!1 0 1.2 \y div add 0.02 sub){\turkey}
+\rput[bl](!2 0 1.2 \y div add 0.02 sub){\uae}
+\rput[bl](!3 0 1.2 \y div add 0.02 sub){\yemen}
 
 \psfrag{61}[l][l]{\minisculeyy{\emph{61}}}
 \psfrag{63}[l][l]{\minisculeyy{\emph{63}}}
@@ -406,20 +453,23 @@ A common measure of population ageing is the proportion of the population over 6
 \def\mapp{
 \rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {../../figures/map2}}
 }
+
+
+
 \rput[bl](!2 3 1.2 \y div add 0.02 sub){\mapt}	
 \rput[bl](!1 2 1.2 \y div add 0.02 sub){\mapp}	
 
 
-\rput[bl](!3 0.02 1.2 \y div add ){
+\rput[bl](!4 0.02 1.2 \y div add ){
 \mini{\parbox[c]
-{\myboxwidth}{\bibliographystyle{apa}
+{\myboxwidthT}{\bibliographystyle{apa}
 \scriptsize \textsc{References:}
-\vspace{-2cm}
+\vspace{-2.3cm}
 
 \renewcommand\refname{}% removes default large title 
 
 \maxi{\bibliography{../bib.bib}}
-\vspace*{.3cm}
+\vspace*{.1cm}
 
 $\dagger$ All the code, methodology, summary tables, and further details are available at \url{https://github.com/majazaloznik/PH.14.02.Factsheets}
 }}}

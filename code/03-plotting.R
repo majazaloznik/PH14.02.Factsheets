@@ -61,12 +61,14 @@ col.male <- "slateblue1"
 col.female <- "slateblue1"
 col.threshold <- "slateblue1"
 col.65 <- "darkgoldenrod1"
-background <- NA
-
+background <- "white"
+col.bg <- NA
 width <- 10 # 5.74
 height.1 <- .45* width * 6.218 / 5.74
 height.2 <- .50 * width * 6.218 / 5.74
-
+lty.grid <- 1
+lwd.grid <- 1
+col.grid <- "lightcyan3"
 ## 01. plotting thresholds ====================================================
 
 lapply(unique(threshold.1y$Location),
@@ -77,8 +79,11 @@ lapply(unique(threshold.1y$Location),
                                      col.male = col.male,
                                      col.female = col.female))
 
-# FunPlotThreshold("Iraq", write = FALSE,  col.bg = "lightcyan2",
-#                 height = 5, width = 5)
+FunPlotThreshold("Bahrain", write = FALSE, 
+                 col.bg = "white",
+                 col.total = col.total,
+                 col.male = col.male,
+                 col.female = col.female)
 
 
 ## 02. plotting proportions over 65 ===========================================
@@ -102,8 +107,6 @@ lapply(unique(threshold.1y$Location),
 
 
 
-
-
 lapply(unique(threshold.1y$Location), 
        function(x) FunPyramidPlotNoAxes(
          country = x, lwd = 3,
@@ -112,6 +115,17 @@ lapply(unique(threshold.1y$Location),
          col.bg = background))
 
 
-# FunPyramidPlotNoAxes(country = "Algeria", gap = 0,xlim = c(3,1.5),
- #                    height = 5.5, width = 10, write = FALSE )
+FunPyramidPlotNoAxes(country = "Algeria", gap = 0,xlim = c(3,1.5),
+                    height = 5.5, width = 10, write = FALSE, col.bg = background)
 
+
+## 04. plot legned -threshold
+FunPlotThresholdLedge()
+
+## 05. plot legned -proportion
+
+FunPlotProportionLedge()
+
+## 06. plot pyramid legend
+
+FunPyramidPlotLedge()
