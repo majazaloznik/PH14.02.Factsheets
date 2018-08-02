@@ -102,9 +102,9 @@ postscript(file=here::here(paste0("figures/","map1",".eps")),
 
 par(mar = c(0,0,0,0))
 plot(sPDF, xlim = c(-17, 62), ylim = c(13, 42),
-     border="grey70", col="white")
-scale <- (map.scale(ratio = FALSE, relwidth=0.2,
-          c("a", "b", "c")))
+     border=col.20, col=NA)
+scale <- map.scale(ratio = FALSE, relwidth=0.2)
+
 threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "threshold",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
@@ -117,12 +117,11 @@ addMapLegend( cutVector  = threshold.legend$cutVector,
               colourVector = threshold.legend$colourVector,
               horizontal = FALSE,
               legendShrink = 0.7,
-              legendMar = 37,
+              legendMar = 65,
               labelFontSize = 0.7,
               mgp = c(3,.4,0),
               tcl = -.3)
 text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$psfrag)
-
 
 dev.off()
 

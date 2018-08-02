@@ -47,7 +47,7 @@ FunPlotThreshold <- function(country = "Algeria",
                              lwd.grid = 1){
   
   if(write) {
-    postscript(file=here::here(paste0("figures/","threshold-",country,".eps")),
+    postscript(file=here::here(paste0("figures/","threshold-",substr(country, 1,4),".eps")),
                horiz=FALSE,onefile=FALSE,
                width=width,
                height=height,
@@ -142,7 +142,7 @@ FunPlotProportions <- function(country = "Algeria",
                                lwd.grid = 1){
   
   if(write) {
-    postscript(file=here::here(paste0("figures/","proportion-",country,".eps")),
+    postscript(file=here::here(paste0("figures/","proportion-",substr(country, 1,4),".eps")),
                horiz=FALSE,onefile=FALSE,
                width=width,
                height=height,
@@ -244,9 +244,9 @@ FunPyramidPlotNoAxes <- function(country,
                                  lwd = 2, 
                                  ylab="",
                                  col.overlay = "red",
-                                 lxcol = "lightcyan3", 
-                                 rxcol = "lightcyan3", 
-                                 border = "lightcyan3",
+                                 lxcol = col.pyramid, 
+                                 rxcol = col.pyramid, 
+                                 border = col.pyramid,
                                  col.bg = NA,
                                  write = TRUE,
                                  width = 8,
@@ -285,7 +285,7 @@ FunPyramidPlotNoAxes <- function(country,
     pull(Female)
   rx.t.50.pop <- rx.50[floor(rx.t.50 )]
   if(write) {
-    postscript(file=here::here(paste0("figures/","pyramid-",country,".eps")),
+    postscript(file=here::here(paste0("figures/","pyramid-",substr(country, 1,4),".eps")),
                horiz=FALSE,onefile=FALSE,
                width=width,
                height=height,

@@ -30,7 +30,7 @@ FunPlotThresholdLedge <- function() {
     group_by(Location) %>% 
     filter(Time > 2005, Time < 2025) %>% 
     lines(AgeGrp ~ Time, . ,
-          lwd = 3, col = "gray85")
+          lwd = 3, col = col.20)
   lines(c(2000, 2030), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
   # total
@@ -127,12 +127,12 @@ FunPyramidPlotLedge <- function(country = "Jordan",
                                 axes=FALSE, 
                                 density=NULL, 
                                 angle=45, 
-                                lwd = 2, 
+                                lwd = 3, 
                                 ylab="",
                                 col.overlay = "red",
-                                lxcol = "lightcyan3", 
-                                rxcol = "lightcyan3", 
-                                border = "lightcyan3",
+                                lxcol = col.pyramid, 
+                                rxcol = col.pyramid, 
+                                border = col.pyramid,
                                 col.bg = NA,
                                 write = TRUE,
                                 width = 8,

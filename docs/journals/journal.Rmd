@@ -209,7 +209,7 @@ There is something about defining x as a calculation that fucks it up.
 
 2. OK, two maps provisionally OK. 
 
-# Monday 28.7.2018
+# Monday 30.7.2018
 
 1. Add country name labels to map. 
 
@@ -225,6 +225,35 @@ There is something about defining x as a calculation that fucks it up.
 
 7. Complete layout
 
-# Tuesday 29.7.2018
+# Tuesday 31.7.2018
 
 1. Write text
+
+# Wednesday 1.8.2018
+
+1. Write text some more.
+
+2. fix line types for m/f
+
+3. keep getting this ghostscript error where the df doesn't compile with a fatal error - and it's tricky to notice, because texmaker just leaves teh previous pdf open. It has sth to do with the .eps files i think, now i'm going one by one to figure out where the culprit is. ALgeria-proportion was the issue. No idea why it was corrupted, just reran it again and it's fine now. 
+
+4. Tunisia also has a psfrag label problem. fixed manually.
+
+5. COuld actually shift all countries by one, because references should fit into one block. UNless I add more footnotes there. Oh, and `\bibhang` is the lenght to adjust to get rid of the indentation in the references. 
+
+6. OK, now create a legend...
+
+7. Add curly braces to ledge. 
+
+8. Pyramid legend almost done.
+
+
+# Thursday 2.8.2018
+
+1. Make sure all backgrounds are the same (NA)
+
+2. Move the location variable recoding into 02-transform-data.R
+
+3. See what happens with a ps background
+
+4. SHould the map aslo be NA coloured for non mena countries?

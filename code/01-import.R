@@ -36,5 +36,5 @@ lt.df %>%
 saveRDS(mena.pop, "data/interim/mena.pop.rds")
 
 # save life expectancy data for mena countires
-saveRDS(mena.lt, "data/processed/mena.lt.rds")
+saveRDS(mena.lt, "data/interim/mena.lt.rds")
 

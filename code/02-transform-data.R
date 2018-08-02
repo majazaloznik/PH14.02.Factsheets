@@ -1,8 +1,8 @@
 ##=============================================================================
 ## 00. preliminaries ==========================================================
 ## 01. data import ============================================================
-## 02. data export  ===========================================================
-## 03. data interpolation =====================================================
+## 02. data interpolation =====================================================
+## 03. data transformation ====================================================
 ##=============================================================================
 
 ## 00. preliminaries ==========================================================
@@ -17,17 +17,10 @@ source(here::here("code/FunSpline.R"))
 pop <- readRDS("data/interim/mena.pop.rds")
 
 # import life expectacy data 
-lt <- readRDS("data/processed/mena.lt.rds")
+lt <- readRDS("data/interim/mena.lt.rds")
 
-## 02. data transformation ====================================================
 
-pop %>% 
-  group_by(Location, Time) %>% 
-  mutate(PropMale = 100*PopMale/sum(PopTotal),
-         PropFemale = 100*PopFemale/sum(PopTotal)) -> pop
-  
-
-## 03. data interpolation =====================================================
+## 02. data interpolation =====================================================
 
 # use splines to get old age threshold (15 years remaining life expectancy)
 # for each year/country combination
@@ -53,6 +46,7 @@ old.age.threshold.5y %>%
          Total = spline(MidPeriod, Total, xout = MidPeriod)$y) %>% 
   rename(AgeGrp = Total, Time = MidPeriod) %>% 
   mutate(threshold = AgeGrp) ->   old.age.threshold.1y
+
 rm(interpolating.years, old.age.threshold.5y)
 
 # now merge that back with the full population table, sliding them as extra rows in
@@ -86,6 +80,14 @@ pop.old.age.threshold.1y %>%
             under.65 = first(Pop.65)) %>% 
   mutate(prop.over.65 = (total-under.65)/total,
          prop.over.t = (total - under.t)/total)  -> prop.over
+
+## 03. data transformation ====================================================
+
+pop %>% 
+  group_by(Location, Time) %>% 
+  mutate(PropMale = 100*PopMale/sum(PopTotal),
+         PropFemale = 100*PopFemale/sum(PopTotal)) -> pop
+
 
 saveRDS(pop, "data/processed/mena.pop.rds")
 saveRDS(prop.over, "data/processed/prop.over.rds")

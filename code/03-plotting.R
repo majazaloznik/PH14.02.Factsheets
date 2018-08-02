@@ -9,6 +9,7 @@
 library(dplyr)
 library(magrittr)
 source("code/FunPlotThreshold.R")
+source("code/FunPlotLegends.R")
 
 # threshold for each country/age/gender combination
 threshold.1y <-readRDS("data/processed/threshold.1y.rds")
@@ -17,73 +18,40 @@ prop.over <- readRDS("data/processed/prop.over.rds")
 # single age populations for each each country/age/gender combination
 pop <- readRDS("data/processed/mena.pop.rds")
 
-# rename country names with spaces - includegraphics cannot handle them
-threshold.1y$Location[threshold.1y$Location == 
-                        "Iran (Islamic Republic of)"] <- "Iran"
-prop.over$Location[prop.over$Location == 
-                        "Iran (Islamic Republic of)"] <- "Iran"
-pop$Location[pop$Location == 
-                     "Iran (Islamic Republic of)"] <- "Iran"
+col.threshold <- rgb(109, 37, 111, maxColorValue = 255)
+col.total <- col.threshold
+col.male <- col.threshold
+col.female <- col.threshold
 
-threshold.1y$Location[threshold.1y$Location == 
-                        "State of Palestine"] <- "Palestine"
-prop.over$Location[prop.over$Location == 
-                     "State of Palestine"] <- "Palestine"
-pop$Location[pop$Location == 
-               "State of Palestine"] <- "Palestine"
-
-threshold.1y$Location[threshold.1y$Location == 
-                        "Saudi Arabia"] <- "SaudiArabia"
-prop.over$Location[prop.over$Location == 
-                     "Saudi Arabia"] <- "SaudiArabia"
-pop$Location[pop$Location == 
-               "Saudi Arabia"] <- "SaudiArabia"
-
-
-threshold.1y$Location[threshold.1y$Location == 
-                        "Syrian Arab Republic"] <- "Syria"
-prop.over$Location[prop.over$Location == 
-                     "Syrian Arab Republic"] <- "Syria"
-pop$Location[pop$Location == 
-               "Syrian Arab Republic"] <- "Syria"
-
-
-threshold.1y$Location[threshold.1y$Location == 
-                        "United Arab Emirates"] <- "UAE"
-prop.over$Location[prop.over$Location == 
-                     "United Arab Emirates"] <- "UAE"
-pop$Location[pop$Location == 
-               "United Arab Emirates"] <- "UAE"
-
-
-col.total <- "slateblue1"
-col.male <- "slateblue1"
-col.female <- "slateblue1"
-col.threshold <- "slateblue1"
 col.65 <- "darkgoldenrod1"
-background <- "white"
+col.20 <- "gray85"
 col.bg <- NA
+col.pyramid <- "cadetblue"
+col.overlay <- rgb(184, 68, 188, maxColorValue = 255)
 width <- 10 # 5.74
 height.1 <- .45* width * 6.218 / 5.74
 height.2 <- .50 * width * 6.218 / 5.74
 lty.grid <- 1
 lwd.grid <- 1
 col.grid <- "lightcyan3"
+
+
 ## 01. plotting thresholds ====================================================
 
 lapply(unique(threshold.1y$Location),
        function(x)  FunPlotThreshold(x,
                                      height = height.1, width = 5,
-                                     col.bg = background,
+                                     col.bg = col.bg,
                                      col.total = col.total,
                                      col.male = col.male,
-                                     col.female = col.female))
+                                     col.female = col.female,
+                                     col.20 = col.20))
 
-FunPlotThreshold("Bahrain", write = FALSE, 
-                 col.bg = "white",
-                 col.total = col.total,
-                 col.male = col.male,
-                 col.female = col.female)
+# FunPlotThreshold("Bahrain", write = FALSE, 
+#                  col.bg = "white",
+#                  col.total = col.total,
+#                  col.male = col.male,
+#                  col.female = col.female)
 
 
 ## 02. plotting proportions over 65 ===========================================
@@ -97,7 +65,7 @@ lapply(unique(threshold.1y$Location),
                                       width = 5,
                                       col.threshold = col.threshold,
                                       col.65 = col.65,
-                                      col.bg = background))
+                                      col.bg = col.bg))
 
 #FunPlotProportions("Oman", write = FALSE)
 
@@ -112,11 +80,13 @@ lapply(unique(threshold.1y$Location),
          country = x, lwd = 3,
          height = height.2, width = 10,
          gap = 0, xlim = c(3,1.5),
-         col.bg = background))
+         col.bg = col.bg, 
+         col.overlay = col.overlay))
 
-
-FunPyramidPlotNoAxes(country = "Algeria", gap = 0,xlim = c(3,1.5),
-                    height = 5.5, width = 10, write = FALSE, col.bg = background)
+# 
+# FunPyramidPlotNoAxes(country = "Iran", gap = 0,xlim = c(3,1.5), lwd = 3,
+#                      col.overlay = col.overlay,
+#                      height = 5.5, width = 10, write = FALSE, col.bg = col.bg)
 
 
 ## 04. plot legned -threshold
@@ -128,4 +98,4 @@ FunPlotProportionLedge()
 
 ## 06. plot pyramid legend
 
-FunPyramidPlotLedge()
+FunPyramidPlotLedge(col.overlay = col.overlay)
