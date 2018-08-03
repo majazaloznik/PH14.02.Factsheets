@@ -262,5 +262,17 @@ There is something about defining x as a calculation that fucks it up.
 
 6. The location variable recoding fucks so many things up, i need to take it out again. Now remove it from 02-transform and fix all the stuff that got muddled up...
 
-
 7. Location is now left as is, because the mapping join depends on it. Instead i just use the plotting fucntions to just take the first 4 letters or sth?
+
+
+# Friday 3.8.2018
+
+1. Finish the pyramid legend, maybe with background?
+
+2. Proportion legend is missing lines..
+
+3. OK, add pyramid labels. Maybe a proper legend for the two actual pyramids? OK, legends seem fine.
+
+4. I think the country names could be a bit higher
+
+5. Bits and bobs, looking good. 

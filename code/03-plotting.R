@@ -99,3 +99,4 @@ FunPlotProportionLedge()
 ## 06. plot pyramid legend
 
 FunPyramidPlotLedge(col.overlay = col.overlay)
+

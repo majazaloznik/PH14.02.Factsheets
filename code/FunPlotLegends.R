@@ -276,8 +276,8 @@ FunPyramidPlotLedge <- function(country = "Jordan",
   lines(x = c(0,0), y = c(0,100), col = "white")
   text(-0.5, 100, "o")
   
-  rect(-3,38, -2.7, 42, col = lxcol, border = lxcol)
-  rect(-3,30, -2.7, 35, border = col.overlay, lwd = 3)
+  rect(-3.1,38, -2.9, 42, col = lxcol, border = lxcol)
+  rect(-3.1,30, -2.9, 35, border = col.overlay, lwd = 3)
   
   
   dev.off() 
