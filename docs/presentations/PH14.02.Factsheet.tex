@@ -8,6 +8,7 @@
 \usepackage{pstricks,pst-node,pstricks-add, pst-text}
 \DeclareFixedFont{\RM}{T1}{ptm}{b}{n}{2cm}
 \definecolor{oxblue}{cmyk}{1,0.8,0,0.6}
+\definecolor{light-gray}{gray}{0.95}
 %\definecolor{oxblue}{RGB}{0,33,71}
 \definecolor{yell}{cmyk}{0.04,0.16,0.84,0}
 \definecolor{yell2}{cmyk}{0.16,0.59,0.96,0.02}
@@ -105,7 +106,7 @@
 \newlength{\myboxwidthTT}
 \setlength{\myboxwidthTT}{\x cm * \real{3} -0.4 cm}%
 \setlength{\bibhang}{0cm}
-\rput[tl](!0 0.01 sub 6 1.2 \y div add 0.05 sub){
+\rput[tl](!0 0.03 sub 6 1.2 \y div add 0.05 sub){
 \mini{\parbox[c]
 {\myboxwidth}{
 
@@ -115,11 +116,11 @@ This factsheet explores the ageing of the populations of Middle Eastern and Nort
 
 \vspace{.5em}
 
-Instead of defining old age as being over 65, we define it as being over an \emph{old-age threshold}: the age where the remaining life expectancy is 15 years or less. 
+Instead of defining old age as being over 65, we define it as being over an \emph{old-age threshold}: the age where the remaining life expectancy is 15 years or less ($RLE^{15})$
 
 \vspace{.5em}
 
-We use population pyramids to outline current and future (2050) age structures in each country, and the horizontal lines allow you to compare the prospective old-age thresholds (in purple) with the more common definition of old age as 65 years old (in gray).
+We use population pyramids to outline current and future (2050) age structures in each country, and the horizontal lines allow you to compare the prospective old-age thresholds (in purple) with the more common definition of old age as 65 years old (dashed horizontal line).
 
 
 
@@ -135,11 +136,11 @@ We use population pyramids to outline current and future (2050) age structures i
 \vspace{1ex}
 }}}
 
-\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.10 sub){
+\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.12 sub){
 \mini{\parbox[c]
 {\myboxwidthT}{
 \maxi
-The old-age thresholds have been calculated$^\dagger$ from abridged life tables \citep{un2017}. The map on the right shows the current old-age thresholds in each country. 
+The old-age thresholds have been calculated$^\dagger$ from abridged life tables \citep{un2017}. The map on the right shows the current old-age thresholds in each country. Yellow indicates the $RLE^{15}$ is about 65,  orange/red means it's lower and green means it's higher. In the latter countries using 65 as a definition of old age might paint a too pesimistic picture of how old their societies are compared to the countries in the red, where the proportion of over 65 is too optimistic a measure.   
 
 }}}
 
@@ -159,7 +160,7 @@ The old-age thresholds have been calculated$^\dagger$ from abridged life tables 
 
 
 \maxi
-A common measure of population ageing is the proportion of the population over 65. The map on the left instead shows the proportion of the population over the old-age threshold in each country. 
+A common measure of population ageing is the proportion of people over 65. The map on the left instead shows the proportion of the population over the old-age threshold in each country. This ranks the countries very differently than ranking them normally: now the oldest countries are Tunisia and Turkey rather than Israel and Lebanon. Or e.g. Yemen and Algeria have similarly old populations instead of Algeria having more than double the proportion of old people.
 
 }}}
 \psfrag{0.00}[c][c]{\miniscule{\emph{0}}}
@@ -376,9 +377,9 @@ A common measure of population ageing is the proportion of the population over 6
 \psfrag{a}[l][l]{\minisculeyy{\emph{$RLE^{15}$}}}
 \psfrag{g}[l][l]{\minisculeyy{\emph{Women}}}
 \psfrag{b}[l][l]{\minisculeyy{\emph{Men}}}
-\psfrag{m}[c][c]{\minisculeyy{\emph{Old-age threshold}}}
+\psfrag{m}[c][c]{\minisculeyy{\textbf{Old-age threshold}}}
 
-\psfrag{n}[c][c]{\minisculeyy{\emph{\% of population}}}
+\psfrag{n}[c][c]{\minisculeyy{\textbf{\% of population}}}
 \psfrag{h}[l][l]{\minisculeyy{\emph{over 65}}}
 \psfrag{i}[l][l]{\minisculeyy{\emph{over $RLE^{15}$}}}
 
@@ -387,27 +388,58 @@ A common measure of population ageing is the proportion of the population over 6
 \rput[bl](-0.05,0){
 \rput[bl](.45,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/proportion-legend}}
 \rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-legend}}
-\pnode(0.35,0.80){A}
-\pnode(0.39,0.87){B}
-\nccurve[angleA = 20, , angleB = 180, nodesepA = 2pt, linewidth = .5pt]{A}{B}
+
+\pnode(0.35,0.78){A}
+\pnode(0.385,0.87){B}
+\nccurve[angleA = 20, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{A}{B}
 \pnode(0.35,0.745){C}
-\pnode(0.39,0.63){D}
-\nccurve[angleA = -20, , angleB = 180, nodesepA = 2pt, linewidth = .5pt]{C}{D}
+\pnode(0.385,0.63){D}
+\nccurve[angleA = -20, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{C}{D}
 
 \pnode(0.35,0.76){E}
-\pnode(0.39,0.75){F}
-\nccurve[angleA = -0, , angleB = 180, nodesepA = 2pt, linewidth = .5pt]{E}{F}
+\pnode(0.385,0.75){F}
+\nccurve[angleA = -0, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{E}{F}
 \psbrace[linecolor = gray, fillcolor = gray,braceWidthOuter = .1cm, braceWidthInner = .1cm, braceWidth = .025cm, rot = -90, ref = b](0.2, 0.85)(0.2, 0.63){\minisculeyy{\begin{tabular}{c} \emph{All MENA} \\
 \emph{countries}
 \end{tabular}}}}
 
-\psfrag{o}[r][r]{\minisculeyy{\emph{Population pyramids}}}
+% pyramid legend
+\psfrag{o}[r][r]{\minisculeyy{\textbf{Population pyramids}}}
+
 \rput[bl](0.1,0.13){\includegraphics[width=\x cm *\real{1}]{../../figures/pyramid-legend}}
+
+\rput[r](0.43,0.43){\minisculeyy{\emph{$RLE^{15}$ in 2050}}}
+
+\pnode(0.72,0.373){G}
+\pnode(0.45,0.425){H}
+\nccurve[angleA = 110, , angleB = 0, nodesepA = 2pt, linewidth = .4pt]{G}{H}
+
+\pnode(0.81,0.385){I}
+\pnode(0.45,0.43){J}
+\nccurve[angleA = 110, , angleB = 0, nodesepA = 2pt, linewidth = .4pt]{I}{J}
+
+\rput[r](0.41,0.365){\minisculeyy{\emph{Age 65}}}
+\psline[linewidth = .4pt](0.41,0.365)(0.43,0.365)
+
+\rput[l](0.17,0.235){\minisculeyy{\emph{Population in 2018}}}
+\rput[l](0.17,0.195){\minisculeyy{\emph{Population in 2050}}}
+
+\rput[r](0.43,0.32){\minisculeyy{\emph{$RLE^{15}$ in 2018}}}
+
+\pnode(0.74,0.36){K}
+\pnode(0.45,0.32){L}
+\nccurve[angleA = -110, , angleB = 0, nodesepA = 2pt, linewidth = .4pt]{K}{L}
+
+\pnode(0.78,0.375){M}
+\pnode(0.45,0.315){N}
+\nccurve[angleA = -100, , angleB = 0, nodesepA = 2pt, linewidth = .4pt]{M}{N}
+
+
 }
 
+\rput[bl](!2 5 1.2 \y div add ){\psframe[fillcolor = light-gray, fillstyle = solid, linecolor = gray](-.02,0)(1,.98)}
 \rput[tl](!2 6 1.2 \y div add 0.04 sub){\tiny \textsc{Legends:}}
 \rput[bl](!2 5 1.2 \y div add 0.12 sub){\ledge}
-\rput[bl](!2 5 1.2 \y div add ){\psframe(-.02,0)(.97,.98)}
 \rput[bl](!3 5 1.2 \y div add 0.02 sub){\algeria}
 \rput[bl](!4 5 1.2 \y div add 0.02 sub){\bahrain}
 \rput[bl](!0 4 1.2 \y div add 0.02 sub){\egypt}

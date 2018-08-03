@@ -250,11 +250,12 @@ FunPyramidPlotNoAxes <- function(country,
                                  col.bg = NA,
                                  write = TRUE,
                                  width = 8,
-                                 height = 5) {
+                                 height = 5,
+                                 year = 2018) {
   # get data
   pop %>% 
     filter(Location == country,
-           Time == 2015) -> pyramid
+           Time == year) -> pyramid
   pop %>% 
     filter(Location == country,
            Time == 2050) -> pyramid.50
@@ -265,12 +266,12 @@ FunPyramidPlotNoAxes <- function(country,
   # get thresholds and pop at that age
   lx.t <- threshold.1y %>% 
     filter(Location == country,
-           Time == 2015) %>% 
+           Time == year) %>% 
     pull(Male)
   lx.t.pop <- lx[floor(lx.t )]
   rx.t <- threshold.1y %>% 
     filter(Location == country,
-           Time == 2015) %>% 
+           Time == year) %>% 
     pull(Female)
   rx.t.pop <- rx[floor(rx.t )]
   # get thresholds and pop at that age in 2050
@@ -403,29 +404,29 @@ FunPyramidPlotNoAxes <- function(country,
   
   # country name
   if (country == "Iran") {
-    text(-3, 75, "X", cex = 1.7, adj = c(0, 0))}
+    text(-3, 80, "X", cex = 1.7, adj = c(0, 0))}
   else{  
     if (country == "Iraq") {
-      text(-3, 75, "Z", cex = 1.7, adj = c(0, 0))}
+      text(-3, 80, "Z", cex = 1.7, adj = c(0, 0))}
     else {
       if (country == "Kuwait") {
-        text(-3, 75, "K", cex = 1.7, adj = c(0, 0))}
+        text(-3, 80, "K", cex = 1.7, adj = c(0, 0))}
       else{
         if (country == "Palestine") {
-          text(-3, 75, "Q", cex = 1.7, adj = c(0, 0))}
+          text(-3, 80, "Q", cex = 1.7, adj = c(0, 0))}
         else{
           if (country == "Turkey") {
-            text(-3, 75, "W", cex = 1.7, adj = c(0, 0))}
+            text(-3, 80, "W", cex = 1.7, adj = c(0, 0))}
           else{
             if(country == "UAE") {
-              text(-3, 75, "U", cex = 1.7, adj = c(0, 0))}
+              text(-3, 80, "U", cex = 1.7, adj = c(0, 0))}
             else{
               if(country == "Yemen") {
-                text(-3, 75, "Y", cex = 1.7, adj = c(0, 0))}
+                text(-3, 80, "Y", cex = 1.7, adj = c(0, 0))}
               else{
                 if(country == "Tunisia") {
-                  text(-3, 75, "t", cex = 1.7, adj = c(0, 0))}
-    else {text(-3, 75, substr(country,1,2), cex = 1.7, adj = c(0, 0))}}}}}}}}
+                  text(-3, 80, "t", cex = 1.7, adj = c(0, 0))}
+    else {text(-3, 80, substr(country,1,2), cex = 1.7, adj = c(0, 0))}}}}}}}}
 
   if (show.values) {
     par(xpd = TRUE)

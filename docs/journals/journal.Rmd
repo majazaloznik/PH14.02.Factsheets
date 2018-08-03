@@ -257,3 +257,10 @@ There is something about defining x as a calculation that fucks it up.
 3. See what happens with a ps background
 
 4. SHould the map aslo be NA coloured for non mena countries?
+
+5. Ok, play around with colours a bit, almost there
+
+6. The location variable recoding fucks so many things up, i need to take it out again. Now remove it from 02-transform and fix all the stuff that got muddled up...
+
+
+7. Location is now left as is, because the mapping join depends on it. Instead i just use the plotting fucntions to just take the first 4 letters or sth?

@@ -93,14 +93,14 @@ for (i in seq(0, .2, .05)){
 
 
 prop.over%>% 
-  filter(Location== "Syria") %>% 
+  filter(Location== "Syrian Arab Republic") %>% 
   filter(Time > 2020) %T>% 
   lines(prop.over.65 ~ Time, . ,
         lwd = 3, col = col.65) %>% 
   summarise(max = max(prop.over.65 )) -> m.65
 
 prop.over%>% 
-  filter(Location== "Syria") %>% 
+  filter(Location== "Syrian Arab Republic") %>% 
   filter(Time > 2020) %T>% 
   lines(prop.over.t ~ Time, . ,
         lwd = 3, col = col.threshold)
@@ -275,5 +275,10 @@ FunPyramidPlotLedge <- function(country = "Jordan",
   
   lines(x = c(0,0), y = c(0,100), col = "white")
   text(-0.5, 100, "o")
+  
+  rect(-3,38, -2.7, 42, col = lxcol, border = lxcol)
+  rect(-3,30, -2.7, 35, border = col.overlay, lwd = 3)
+  
+  
   dev.off() 
 }
