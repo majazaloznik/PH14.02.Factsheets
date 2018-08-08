@@ -1,25 +1,38 @@
 # VARIABLE DEFINITIONS  #######################################################
 ###############################################################################
 # folders #####################################################################
-DIR = .#
-CODE = $(DIR)/code
+DIR:= .#
+CODE:= $(DIR)/code
 
-DATA = $(DIR)/data
+DATA:= $(DIR)/data
 
-FIG = $(DIR)/figures
+FIG:= $(DIR)/figures
 
-DT/P = $(DATA)/processed
-DT/R = $(DATA)/raw
-DT/I = $(DATA)/interim
+DT/P:= $(DATA)/processed
+DT/R:= $(DATA)/raw
+DT/I:= $(DATA)/interim
 
-JRN := $(DIR)/docs/journals
-RPRT := $(DIR)/docs/reports
+DOC:= $(DIR)/docs
+JRN:= $(DOC)/journals
+RPRT:= $(DOC)/reports
 
-RESULTS := $(DIR)/results/human-readable
 
 # FILES #######################################################################
+
+
+# plot threshold files
+FIG/thresh :=  $(wildcard $(FIG)/thresh*.eps)
+# plot prop files
+FIG/prop :=  $(wildcard $(FIG)/prop*.eps)
+# plot pyramid files
+FIG/pyramid :=  $(wildcard $(FIG)/pyramid*.eps)
+
+# plot maps files
+FIG/maps :=  $(wildcard $(FIG)/map*.eps)
+
 # plot .eps files
 FIG/.eps :=  $(wildcard $(FIG)/*.eps)
+
 
 # all interim data filee
 DT/I/.rds :=  $(wildcard $(DT/I)/*.rds)
@@ -76,7 +89,7 @@ latex -interaction=nonstopmode --output-directory=$(@D) --aux-directory=$(@D) $<
 # recipe run dvips for a0poster i.e. move the header file
 define dvi2ps
 cp docs/presentations/a0header.ps a0header.ps
-dvips  -Pdownload35 -o $@ $<
+dvips  -Pdownload35 -q -o $@ $<
   rm a0header.ps
 endef
 
@@ -138,7 +151,7 @@ README.html: README.md
 # methods from Rmds ############################################################
 methods: $(RPRT)/methods.pdf
 
-$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  $(DT/P)/demo.rds $(DT/P)/demo.pop.rds
+$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  $(DT/P)/demo.rds $(DT/P)/demo.pop.rds $(DOC)/bib.bib
 	$(rmd2pdf)
 
 
@@ -149,73 +162,63 @@ $(POSTER).pdf: $(POSTER).ps
 $(POSTER).ps: $(POSTER).dvi
 	$(dvi2ps)
 
-$(POSTER).dvi: $(POSTER).tex docs/presentations/lit.bib $(FIG/.eps)
+$(POSTER).dvi: $(POSTER).tex $(DOC)/bib.bib $(FIG/maps) $(FIG/pyramid) $(FIG/prop) $(FIG/thresh) $(FIG)/dglogo.eps
 	$(tex2dvi)
 
 
 # DATA ANALYSIS ################################################################
-# plotting #####################################################################
-# produces .eps plots 
-#$(FIG/.eps): $(CODE)/03-data-plotting.R 
-#$(sourceR)
-
-#results: $(RESULTS)/final.data.csv	
-## dependency secondary outut of 03-data-plotting
-#$(RESULTS)/final.data.csv: $(CODE)/03-data-plotting.R 
-
-## required funcitons and data needed for the plotting script
-#$(CODE)/03-data-plotting.R: $(CODE)/FunPlotBar.R $(CODE)/FunTablePrep.R $(DT/P)/catalog.final.csv $(DT/P/.rds)
-#touch $@
-  
-  
-# cleaning data ################################################################
-# # dependency - multiple target 
-#$(DT/P/.rds): $(CODE)/02-clean.R 
-#$(sourceR)
-
-# dependency secondary outut of 02-clean.R
-#$(DT/P)/catalog.final.csv: $(CODE)/02-clean.R
-
-# all the required funcitons and data for the cleaning script
-#$(CODE)/02-clean.R: $(CODE)/FunDataExtractor.R $(DT/R)/UNcodes.csv $(DT/I/.rds) $(DT/I)/catalog.rds
-#touch $@
-  
-  
-  
-# importing data ################################################################
-# # dependency - multiple target 
-#$(DT/I/.rds): $(CODE)/01-import.R
-#$(sourceR)
-
-# dependency -- secondary output of 01-import
-#$(DT/I)/catalog.rds: $(CODE)/01-import.R
 
 
-$(FIG/.eps): $(CODE)/03-plotting
 
-$(CODE)/03-plotting: $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds
-	touch $@
+# mapping  #####################################################################
+$(FIG/maps):  $(CODE)/04-mapping.R
+	Rscript -e "source('$<')"
 	
-$(DT/P)/demo.rds:  $(CODE)/02-transform-data.R
+# required data and functions for 04-mapping - dependencies only
+$(CODE)/04-mapping.R: $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds $(DT/R)/ISO.country.codes.csv
+	touch $@
+
+# plotting #####################################################################
+
+# plot all main charts
+$(FIG)/proportion-Alge.eps: $(CODE)/03-plotting.R
+	Rscript -e "source('$<')"
+	
+# dependencies only
+$(FIG/thresh) $(FIG/pyramid) $(FIG/prop): $(CODE)/03-plotting.R
+
+# required data and functions for 03-plotting - dependencies only
+$(CODE)/03-plotting.R: $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds $(DT/P)/mena.pop.rds $(CODE)/FunPlots.R
+	touch $@
+
+# calculate splines and process data   ########################################	
+$(DT/P)/mena.pop.rds:  $(CODE)/02-transform-data.R
 	Rscript -e "source('$<')"
 
 # dependencies only
-$(DT/P)/demo.pop.rds $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds:  $(CODE)/02-transform-data.R
+$(DT/P)/demo.rds $(DT/P)/demo.pop.rds $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds:  $(CODE)/02-transform-data.R
 
 # required data for input to 02-clean-data
-$(CODE)/02-transform-data.R: $(DT/P)/mena.pop.rds $(DT/P)/mena.lt.rds $(CODE)/FunSpline.R
+$(CODE)/02-transform-data.R: $(DT/I)/mena.pop.rds $(DT/I)/mena.lt.rds $(CODE)/FunSpline.R
 	touch $@
+
+# import and clean data #######################################################
 	
-$(DT/P)/mena.pop.rds: $(CODE)/01-import.R
+$(DT/I)/mena.pop.rds: $(CODE)/01-import.R
 	Rscript -e "source('$<')"
 
 # dependency only
-$(DT/P)/mena.lt.rds: $(CODE)/01-import.R
+$(DT/I)/mena.lt.rds: $(CODE)/01-import.R
 
 # required data for input to 01-import
-$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LT.csv $(DT/R)/cntry.list.csv
+$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LT.csv
 	touch $@
+
+
   
+# download ISO country list data for mapping
+$(DT/R)/ISO.country.codes.csv:
+	curl  -o $@ "https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv"
 
 # download all WPP 2017 population data
 $(DT/R)/WPP2017_PBSAS.csv: 

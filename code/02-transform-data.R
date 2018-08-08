@@ -14,10 +14,10 @@ source(here::here("code/FunSpline.R"))
 ## 01. data import  =========================================================
 
 # import population data 
-pop <- readRDS("data/interim/mena.pop.rds")
+pop <- readRDS(here::here("data/interim/mena.pop.rds"))
 
 # import life expectacy data 
-lt <- readRDS("data/interim/mena.lt.rds")
+lt <- readRDS(here::here("data/interim/mena.lt.rds"))
 
 
 ## 02. data interpolation =====================================================
@@ -82,15 +82,25 @@ pop.old.age.threshold.1y %>%
          prop.over.t = (total - under.t)/total)  -> prop.over
 
 ## 03. data transformation ====================================================
-
 pop %>% 
   group_by(Location, Time) %>% 
   mutate(PropMale = 100*PopMale/sum(PopTotal),
          PropFemale = 100*PopFemale/sum(PopTotal)) -> pop
 
+## 04. save demo data for methods  ============================================
 
-saveRDS(pop, "data/processed/mena.pop.rds")
-saveRDS(prop.over, "data/processed/prop.over.rds")
-saveRDS(old.age.threshold.1y, "data/processed/threshold.1y.rds")
+lt %>% 
+  filter(Location == "Algeria", Sex == "Total") -> demo
+saveRDS(demo, here::here("data/processed/demo.rds"))
+
+pop %>% 
+  filter(Location == "Algeria", Time == 1988) %>% 
+  select(AgeGrp, PopTotal) -> demo.pop
+saveRDS(demo.pop, here::here("data/processed/demo.pop.rds"))
+
+
+saveRDS(pop, here::here("data/processed/mena.pop.rds"))
+saveRDS(prop.over, here::here("data/processed/prop.over.rds"))
+saveRDS(old.age.threshold.1y, here::here("data/processed/threshold.1y.rds"))
 
 

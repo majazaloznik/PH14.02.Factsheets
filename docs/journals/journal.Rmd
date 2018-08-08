@@ -276,3 +276,27 @@ There is something about defining x as a calculation that fucks it up.
 4. I think the country names could be a bit higher
 
 5. Bits and bobs, looking good. 
+
+# Wednesday 8.8.18
+
+1. OK, let's first update the makefile and make sure it works properly as a whole. WHy did I stop doing this as i went along?!
+* `journal` = OK
+* `readme` = OK, add make.png and a bit more info
+* `dot` = OK
+* `01-import` = OK
+* `02-transform-data` - looks like I deleted the demo stuff! that goes into the mehtods report, so found that again and added it.
+* `methods` = OK, add `bib.bib`
+* change assignments to `:=` (simple assignment, immediately expanded) just because it was inconsistent
+* `03-plotting` = OK
+* `04-mapping`: hm, there is some data import and cleaning going on there that needs to be taken out now.. 
+* careful, in 01 there is also a country list that was not reproducably sourced.. So I've added it directly and removed that .cvs to make it reproducable.  
+* running whole latex thing didn't work because of relative paths to figures in .tex file. try `\graphicspath` to set several options in the preamble. 
+* fixed the .bib file relativity as well and now it seems to work! (see tiddlywiki)
+* still issue with running a bunch of stuff that neednt be run? Sorted 
+* First split the .eps files so they are not overlapping. OK
+* Hm, so what to do when i want to use the same parameter e.g. a colour in two `.R` files? TODO
+* Also, because the latex and dvips stuff is so verbose, i can't see the --degug information..
+* Make sure all relative path references use `here::here()` to be safe! OK
+
+2. Looks like this is all done!
+3. Except still have the issue of multiple outputs (esp figures) from a single R script and how to handle that in Make

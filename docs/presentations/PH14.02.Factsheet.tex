@@ -1,5 +1,6 @@
 \documentclass[a3]{a0poster}
 \usepackage{graphicx,lipsum}
+\graphicspath{{figures/}{../../figures/}}
 \usepackage[paperwidth=297mm,paperheight=420mm,margin=0mm]{geometry}
 \usepackage{calc}
 \pagestyle{empty}
@@ -30,6 +31,10 @@
     urlcolor={blue!90!black}
 }
 
+\makeatletter
+\providecommand*{\input@path}{}
+\g@addto@macro\input@path{{../}{../../figures/}}% append
+\makeatother
 
 
 \DeclareRobustCommand{\firstsecond}[2]{#1}
@@ -62,7 +67,7 @@
 \def\myheader{\psline(0.5,41.3)(29.2,41.3)
 \rput[bl](0.5,39.6){\BBB Ageing in the Middle East and North Africa}
 \psline(0.5,39.5)(29.2,39.5)
-\rput[bl](0.5,38.6){\small Measuring Population Ageing Using Prospective Instead of Cronological Age }
+\rput[bl](0.5,38.6){\small Measuring Population Ageing Using Prospective Instead of Chronological Age }
 \psline(0.5,38.5)(29.2,38.5)
 }
 
@@ -71,7 +76,7 @@
 
 \def\myfooter{\rput[bl](0.5,0.3){\small\textsc{Population Horizons Factsheet VI.} 
 \scriptsize (2017) Vol.14 Issue 2}
-\rput[br](29.2,39.7){\includegraphics[height=1.4cm]{../../figures/dglogo}}
+\rput[br](29.2,39.7){\includegraphics[height=1.4cm]{dglogo}}
 \psline(0.5,1.2)(29.2,1.2)
 \rput[br](29.2,0.05){
 \mini \emph{By Maja Zalo\v znik} -- DOI XXX -- S.5}
@@ -112,7 +117,7 @@
 
 \maxi
 
-This factsheet explores the ageing of the populations of Middle Eastern and North African coutnries using \emph{prospective age} instead of chronological age  \citep{Sanderson2008}. Using prospective age is akin to adjusting for inflation when comparing prices. It acknowledges the fact that a particular chronological age---e.g. the age of 65---means something very different in populations with low life expectancy than it does in a population with high life expectancy. 
+This factsheet explores the ageing of the populations of Middle Eastern and North African countries using \emph{prospective age} instead of chronological age  \citep{Sanderson2008}. Using prospective age is akin to adjusting for inflation when comparing prices. It acknowledges the fact that a particular chronological age---e.g. the age of 65---means something very different in populations with low life expectancy than it does in a population with high life expectancy. 
 
 \vspace{.5em}
 
@@ -140,7 +145,7 @@ We use population pyramids to outline current and future (2050) age structures i
 \mini{\parbox[c]
 {\myboxwidthT}{
 \maxi
-The old-age thresholds have been calculated$^\dagger$ from abridged life tables \citep{un2017}. The map on the right shows the current old-age thresholds in each country. Yellow indicates the $RLE^{15}$ is about 65,  orange/red means it's lower and green means it's higher. In the latter countries using 65 as a definition of old age might paint a too pesimistic picture of how old their societies are compared to the countries in the red, where the proportion of over 65 is too optimistic a measure.   
+The old-age thresholds have been calculated$^\dagger$ from abridged life tables \citep{un2017}. The map on the right shows the current old-age thresholds in each country. Yellow indicates the $RLE^{15}$ is about 65,  orange/red means it's lower and green means it's higher. In the latter countries using 65 as a definition of old age might paint a too pessimistic picture of how old their societies are compared to the countries in the red, where the proportion of over 65 is too optimistic a measure.   
 
 }}}
 
@@ -257,120 +262,120 @@ A common measure of population ageing is the proportion of people over 65. The m
 
  
 \def\algeria{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Alge}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Alge}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Alge}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Alge}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Alge}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Alge}}
 	}
 
 \def\bahrain{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Bahr}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Bahr}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Bahr}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Bahr}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Bahr}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Bahr}}
 	}
 	
 \def\egypt{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Egyp}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Egyp}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Egyp}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Egyp}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Egyp}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Egyp}}
 	}
 	
 \def\iran{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Iran}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Iran}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Iran}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Iran}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Iran}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Iran}}
 	}
 
 \def\iraq{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Iraq}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Iraq}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Iraq}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Iraq}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Iraq}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Iraq}}
 	}	
 
 \def\israel{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Isra}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Isra}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Isra}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Isra}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Isra}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Isra}}
 	}	
 
 \def\jordan{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Jord}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Jord}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Jord}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Jord}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Jord}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Jord}}
 	}	
 \def\kuwait{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Kuwa}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Kuwa}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Kuwa}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Kuwa}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Kuwa}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Kuwa}}
 	}			
 
 \def\lebanon{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Leba}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Leba}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Leba}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Leba}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Leba}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Leba}}
 	}	
 	
 \def\libya{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Liby}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Liby}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Liby}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Liby}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Liby}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Liby}}
 }	
 	
 	
 \def\oman{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Oman}}
-\rput[bl](0,.04){\includegraphics[width=\x cm] {../../figures/pyramid-Oman}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-OMan}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Oman}}
+\rput[bl](0,.04){\includegraphics[width=\x cm] {pyramid-Oman}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-OMan}}
 	}
 	
 \def\morocco{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Moro}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Moro}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Moro}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Moro}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Moro}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Moro}}
 	}
 	
 	\def\palestine{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Stat}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Stat}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Stat}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Stat}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Stat}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Stat}}
 	}
 	
 	\def\qatar{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Qata}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Qata}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Qata}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Qata}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Qata}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Qata}}
 	}
 
 	\def\saudi{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/threshold-Saud}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Saud}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Saud}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}] {threshold-Saud}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Saud}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Saud}}
 	}
 	
 	\def\syria{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Syri}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Syri}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Syri}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-Syri}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Syri}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Syri}}
 	}
 	
 		\def\tunisia{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Tuni}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Tuni}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Tuni}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-Tuni}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Tuni}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Tuni}}
 	}
 		\def\turkey{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Turk}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Turk}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Turk}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-Turk}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Turk}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Turk}}
 	}
 		\def\uae{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Unit}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Unit}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Unit}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-Unit}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Unit}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Unit}}
 	}
 		\def\yemen{
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-Yeme}}
-\rput[bl](0,0.04){\includegraphics[width=\x cm] {../../figures/pyramid-Yeme}}
-\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {../../figures/proportion-Yeme}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-Yeme}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm] {pyramid-Yeme}}
+\rput[bl](.5,.55){\includegraphics[width=\x cm *\real{.5}] {proportion-Yeme}}
 	}
 	
 \def\ledge{
@@ -386,8 +391,8 @@ A common measure of population ageing is the proportion of people over 65. The m
 
 
 \rput[bl](-0.05,0){
-\rput[bl](.45,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/proportion-legend}}
-\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{../../figures/threshold-legend}}
+\rput[bl](.45,.55){\includegraphics[width=\x cm *\real{.5}]{proportion-legend}}
+\rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-legend}}
 
 \pnode(0.35,0.78){A}
 \pnode(0.385,0.87){B}
@@ -406,7 +411,7 @@ A common measure of population ageing is the proportion of people over 65. The m
 % pyramid legend
 \psfrag{o}[r][r]{\minisculeyy{\textbf{Population pyramids}}}
 
-\rput[bl](0.1,0.13){\includegraphics[width=\x cm *\real{1}]{../../figures/pyramid-legend}}
+\rput[bl](0.1,0.13){\includegraphics[width=\x cm *\real{1}]{pyramid-legend}}
 
 \rput[r](0.43,0.43){\minisculeyy{\emph{$RLE^{15}$ in 2050}}}
 
@@ -485,10 +490,10 @@ A common measure of population ageing is the proportion of people over 65. The m
 
 
 \def\mapt{
-\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {../../figures/map1}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {map1}}
 }
 \def\mapp{
-\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {../../figures/map2}}
+\rput[bl](0,0.04){\includegraphics[width=\x cm *\real{2}] {map2}}
 }
 
 
@@ -505,7 +510,8 @@ A common measure of population ageing is the proportion of people over 65. The m
 
 \renewcommand\refname{}% removes default large title 
 
-\maxi{\bibliography{../bib.bib}}
+%\maxi{\bibliography{../bib.bib}}
+\maxi{\bibliography{docs/bib.bib}}
 \vspace*{.1cm}
 
 $\dagger$ All the code, methodology, summary tables, and further details are available at \url{https://github.com/majazaloznik/PH.14.02.Factsheets}

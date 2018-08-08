@@ -21,19 +21,15 @@ library(maps)
 ## 0. load data      ##########################################################
 
 # threshold for each country/age/gender combination
-threshold.1y <-readRDS("data/processed/threshold.1y.rds")
+threshold.1y <-readRDS(here::here("data/processed/threshold.1y.rds"))
 # prop over threshold and over 65 for each country/age/gender combination
-prop.over <- readRDS("data/processed/prop.over.rds")
+prop.over <- readRDS(here::here("data/processed/prop.over.rds"))
 
 # # get country and region code table
-# urlfile<-'https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv'
-# dsin <-read.csv(urlfile)
-# ## This looks like a very useful file, so I'll save it for future use:
-# write.csv(dsin, file = "data/raw/ISO.country.codes.csv", row.names = FALSE)
-dsin <- read.csv( file = "data/raw/ISO.country.codes.csv")
+dsin <- read.csv(file = here::here("data/raw/ISO.country.codes.csv"))
 
 
-## 0.2 clean data #############################################################
+## 0.2 prepare data ###########################################################
 threshold.1y %>% 
   filter(Time == 2018) %>% 
   select(Location, threshold) -> threshold.2018
@@ -73,33 +69,23 @@ sPDF.mena@data$X[sPDF.mena@data$NAME == "Jordan"] <- 38
 sPDF.mena@data$psfrag <- as.character(sPDF.mena@data$ISO_A2)
 sPDF.mena@data$psfrag[sPDF.mena@data$psfrag == "LY"] <- "L"
 
-## colour palates
+## colour palates and other defaults
 threshold.pal <- c(rev(brewer.pal(4, "OrRd")[3:4]),
                    "gold",
                    brewer.pal(5, "YlGn")[2:5])
+w <- 10
+h <- 4.5
+col.20 <- "gray85"
 
 ## 1. plot regular map ########################################################
-###############################################################################
-#leg.x <- -12
-#leg.y <- 45
-w = 10
-h = 4.5
-#cex = 0.9
-#yi = 1.2
-
-par(xpd = TRUE)
-par(.pardefault)
-par(mar = c(0,0,0,0))
-
-
 
 postscript(file=here::here(paste0("figures/","map1",".eps")),
            horiz=FALSE,onefile=FALSE,
            width=w,
            height=h,
            paper="special")
-# plot background
 
+# plot background
 par(mar = c(0,0,0,0))
 plot(sPDF, xlim = c(-17, 62), ylim = c(13, 42),
      border=col.20, col=NA)
@@ -122,13 +108,11 @@ addMapLegend( cutVector  = threshold.legend$cutVector,
               mgp = c(3,.4,0),
               tcl = -.3)
 text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$psfrag)
-
 dev.off()
 
 
 
-
-## Map of proportions #########################################################
+## 2. plot proportion map #####################################################
 
 
 postscript(file=here::here(paste0("figures/","map2",".eps")),
@@ -136,8 +120,8 @@ postscript(file=here::here(paste0("figures/","map2",".eps")),
            width=w,
            height=h,
            paper="special")
-# plot background
 
+# plot background
 par(mar = c(0,0,0,0))
 plot(sPDF, xlim = c(-12, 67), ylim = c(13, 42),
      border="grey70", col="white")
@@ -160,7 +144,5 @@ addMapLegend( cutVector  = proportion.legend$cutVector,
               tcl = -.3)
 
 text(sPDF.mena@data$X, sPDF.mena@data$Y, sPDF.mena@data$psfrag)
-
-
 dev.off()
 

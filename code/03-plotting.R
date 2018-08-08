@@ -8,15 +8,14 @@
 ## 00. preliminaries ==========================================================
 library(dplyr)
 library(magrittr)
-source("code/FunPlotThreshold.R")
-source("code/FunPlotLegends.R")
+source(here::here("code/FunPlots.R"))
 
 # threshold for each country/age/gender combination
-threshold.1y <-readRDS("data/processed/threshold.1y.rds")
+threshold.1y <-readRDS(here::here("data/processed/threshold.1y.rds"))
 # prop over threshold and over 65 for each country/age/gender combination
-prop.over <- readRDS("data/processed/prop.over.rds")
+prop.over <- readRDS(here::here("data/processed/prop.over.rds"))
 # single age populations for each each country/age/gender combination
-pop <- readRDS("data/processed/mena.pop.rds")
+pop <- readRDS(here::here("data/processed/mena.pop.rds"))
 
 col.threshold <- rgb(109, 37, 111, maxColorValue = 255)
 col.total <- col.threshold
@@ -47,16 +46,7 @@ lapply(unique(threshold.1y$Location),
                                      col.female = col.female,
                                      col.20 = col.20))
 
-# FunPlotThreshold("Bahrain", write = FALSE, 
-#                  col.bg = "white",
-#                  col.total = col.total,
-#                  col.male = col.male,
-#                  col.female = col.female)
-
-
 ## 02. plotting proportions over 65 ===========================================
-
-
 
 lapply(unique(threshold.1y$Location), 
        function(x) FunPlotProportions(x, 
@@ -67,13 +57,8 @@ lapply(unique(threshold.1y$Location),
                                       col.65 = col.65,
                                       col.bg = col.bg))
 
-#FunPlotProportions("Oman", write = FALSE)
 
-
-
-##  03. plotting the pyramid
-
-
+##  03. plotting the pyramid  =================================================
 
 lapply(unique(threshold.1y$Location), 
        function(x) FunPyramidPlotNoAxes(
@@ -83,20 +68,14 @@ lapply(unique(threshold.1y$Location),
          col.bg = col.bg, 
          col.overlay = col.overlay))
 
-# 
-# FunPyramidPlotNoAxes(country = "Iran", gap = 0,xlim = c(3,1.5), lwd = 3,
-#                      col.overlay = col.overlay,
-#                      height = 5.5, width = 10, write = FALSE, col.bg = col.bg)
-
-
-## 04. plot legned -threshold
+## 04. plot legned -threshold  ================================================
 FunPlotThresholdLedge()
 
-## 05. plot legned -proportion
+## 05. plot legned -proportion  ===============================================
 
 FunPlotProportionLedge()
 
-## 06. plot pyramid legend
+## 06. plot pyramid legend  ===================================================
 
 FunPyramidPlotLedge(col.overlay = col.overlay)
 

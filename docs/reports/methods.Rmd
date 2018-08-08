@@ -45,7 +45,7 @@ Although even a linear interpolation would not change the calculations dramatica
 
 I use the `R` `stats` function `splinefun()` and the monotone Hermite spline cumputation according to the method of Fritsch and Carlson: `method = "monoH.FC"` which produces identical results (to the second decimal point)  as the ones published in the IIASA Ageing Demographic Data Sheet [@scherbov2018aging], for a random selection of a dozen country/year combinations. 
 
-See @sanderson2008rethinking for more info on prospective measures of ageing. 
+See @Sanderson2008 for more info on prospective measures of ageing. 
 
 Furthermore, the life tables are for five-year time periods as well. So after step one--finding the age at which ex in 15, for every 5-year period--comes step two, interpolating these for every individual year. 
 
@@ -88,7 +88,7 @@ abline(v= func2(15),col = "red", lty = 3, lwd = 1.5)
 
 Now technically, this chart in Figure 1 is a misleading because I am not actually using the spline $g(e_x)$. I am doing the inverse and getting the spline function for $g(x)$, so that I can then enter $e_x = 15$ and get out the value of $x$ i.e. the age. In doing this I am assuming that the funciton is monotonic--or rather that it is monotonic in the area that I'm interested in. Which is fine, because teh only point at which it isn't monotonic is at the highest $e_x$ values (i.e. at birth). But the value $e_x=15$ occurs only once, so this is OK.
 
-So let's call the old-age threshold at time $y = i$, following @sanderson2008rethinking, $RLE^{15}_{y=i}$, and in this case we only have it for five year time periods so $RLE^{15}_{y=i_5}$. RLE stands for remainling life expectancy.
+So let's call the old-age threshold at time $y = i$, following @Sanderson2008, $RLE^{15}_{y=i}$, and in this case we only have it for five year time periods so $RLE^{15}_{y=i_5}$. RLE stands for remainling life expectancy.
 
 
 Then, for a smoother graph, and because we will need them in the next step, we then use splines to interpolate to single years instead of the five year periods. Here the MidPeriod variable is assumed as the correct for each old-age threshold, and the intervening periods are then interpolated. Because of this I don't have data for the first and last couple of years: the first time period is 1950-55 with 1953 as the MidPeriod. This is treated  as the input data for the interpolation of the individual year thresholds. 
