@@ -25,14 +25,14 @@ col.female <- col.threshold
 col.65 <- "darkgoldenrod1"
 col.20 <- "gray85"
 col.bg <- NA
-col.pyramid <- "cadetblue"
+col.pyramid <- "gray65"
 col.overlay <- rgb(184, 68, 188, maxColorValue = 255)
 width <- 10 # 5.74
 height.1 <- .45* width * 6.218 / 5.74
 height.2 <- .50 * width * 6.218 / 5.74
 lty.grid <- 1
 lwd.grid <- 1
-col.grid <- "lightcyan3"
+col.grid <- "gray85"
 
 
 ## 01. plotting thresholds ====================================================

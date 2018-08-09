@@ -66,7 +66,7 @@ pop %>%
 
 # now summarise proportions over threshold and over 65
 pop.old.age.threshold.1y %>% 
-  filter(Time >=1953, Time < 2098) %>% 
+  filter(Time >=1953, Time <= 2098) %>% 
   group_by(Location, Time) %>% 
   mutate(over.65 = ifelse(AgeGrp <= 65, "under", "over"),
          over.threshold = ifelse(AgeGrp <= threshold, "under", "over")) %>% 
@@ -82,6 +82,7 @@ pop.old.age.threshold.1y %>%
          prop.over.t = (total - under.t)/total)  -> prop.over
 
 ## 03. data transformation ====================================================
+# turn into percent instead of proportions
 pop %>% 
   group_by(Location, Time) %>% 
   mutate(PropMale = 100*PopMale/sum(PopTotal),
@@ -98,9 +99,12 @@ pop %>%
   select(AgeGrp, PopTotal) -> demo.pop
 saveRDS(demo.pop, here::here("data/processed/demo.pop.rds"))
 
-
+## 05. save data for plotting  ================================================
 saveRDS(pop, here::here("data/processed/mena.pop.rds"))
 saveRDS(prop.over, here::here("data/processed/prop.over.rds"))
 saveRDS(old.age.threshold.1y, here::here("data/processed/threshold.1y.rds"))
 
-
+## 05. save csv data for easy access ===========================================
+prospective_ages <- left_join(old.age.threshold.1y, prop.over) %>% 
+  select(-AgeGrp)
+write_csv(prospective_ages, "results/human-readable/final.data.csv")

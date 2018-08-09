@@ -300,3 +300,32 @@ There is something about defining x as a calculation that fucks it up.
 
 2. Looks like this is all done!
 3. Except still have the issue of multiple outputs (esp figures) from a single R script and how to handle that in Make
+
+# Thursday 9.8.2018
+
+1. OK, can i try to figure out how the mutlitple output files work again? When 04-mapping produces two maps it isn't run twice is it? Hmm, yes it is actually. Did I figure anything out in my make-journal last factsheet?
+
+2. NO, it seems I had not :(... So this is the situation:
+* I have scripts that produce multiple outputs. 
+* This is fine if I am happy to have each one plotted in the dot map: then I simply pick one of them to be the rule-setting one, and the others I put in a dependency only line, with no recipe. This has the disadvantage that it assumes all of the outputs are always created, since it only checks the first one. 
+* Alternatively I would write individual rules so that make checks each target. If the first one needs to be remade, then it will be remade, which will also produce all the other targets, so they won't be remade another time. Is that true? Lemme check. No, it's not true, it will rerun the recipe each time.
+* oh christ.  a minimal reproducible example with multiple outputs form one .r file. And eliminting all possibilities back the solution was that if I set the dependency xx: $(multiplefigs) above $(multiplefigs): R file, then, because of the := assingment, $(multiplefigs) is several instead of any!! Hm, not the `:=` either, seems just the order is important!? 
+3. OK, step back and think about it: what do you want it to do? 
+
+* I want it to run if none of the targets are there/old
+* I want it to run if one of the targets is missing/old
+* SO basically if *any* of the targets are missing or old I want to run it, but only once. 
+
+4. Mini repex seems to indicate actually that if -n prints out multple rounds of the same command, it will only perform it once in real life. **OK, so this is clearly very important: ** the `-n` option is not indicative of the number of times a rule will be invoked!
+
+5. Might also be an issue to do with the fact that wildcard expansion is performed by the shell, while target and prerequisit expansion is performed by make. And then there is the `wildcard` function as well.. Which apparenlty forces the globbing to occur immediately, while with `*^? ` make waits until the variable is used 
+
+6. Phew, looks like this is actually OK now. I threw out the wildcards, adn double checked that make is not actually rerunning the plotting script 20 times etc and all looks good. 
+
+7. Prepare readme to be presentable.
+
+8. Add .csv file of data for quick access.
+
+9. Why is the thresold data 1953-2098 and the prop over data only 1953-2097? OK, found the `<` and changed to `<=`.
+
+10. Add .csv file to makefile. 
