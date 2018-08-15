@@ -32,7 +32,7 @@ dsin <- read.csv(file = here::here("data/raw/ISO.country.codes.csv"))
 ## 0.2 prepare data ###########################################################
 threshold.1y %>% 
   filter(Time == 2018) %>% 
-  select(Location, threshold) -> threshold.2018
+  select(Location, Total) -> threshold.2018
 
 prop.over %>% 
   filter(Time == 2018) %>% 
@@ -91,7 +91,7 @@ plot(sPDF, xlim = c(-17, 62), ylim = c(13, 42),
      border=col.20, col=NA)
 scale <- map.scale(ratio = FALSE, relwidth=0.2)
 
-threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "threshold",
+threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "Total",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
                              numCats = 7,

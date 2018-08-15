@@ -18,7 +18,7 @@
 #' following variables: 
 #' Location = country 
 #' Time = year
-#' Female, Male and AgeGrp are the thresholds for women, men and both
+#' Female, Male and Total are the thresholds for women, men and both
 #' This function plots for a single country the three trends - men, women and 
 #' both, while also in gray printing the trends for the other 20 countries
 #' for total only. 
@@ -79,14 +79,14 @@ FunPlotThreshold <- function(country = "Algeria",
   # background lines
   threshold.1y %>% 
     group_by(Location) %>% 
-    lines(AgeGrp ~ Time, . ,
+    lines(Total ~ Time, . ,
           lwd = 3, col = col.20)
   lines(c(1980, 2050), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
   # total
   threshold.1y %>% 
     filter(Location == country) %>% 
-    lines(AgeGrp ~ Time, . ,
+    lines(Total ~ Time, . ,
           lwd = 3, col = col.total )
   
   # men
@@ -479,7 +479,7 @@ FunPlotThresholdLedge <- function() {
   threshold.1y %>% 
     group_by(Location) %>% 
     filter(Time > 2005, Time < 2025) %>% 
-    lines(AgeGrp ~ Time, . ,
+    lines(Total ~ Time, . ,
           lwd = 3, col = col.20)
   lines(c(2000, 2030), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
@@ -487,7 +487,7 @@ FunPlotThresholdLedge <- function() {
   threshold.1y %>% 
     filter(Location == "Bahrain") %>% 
     filter(Time > 2005, Time < 2025) %>% 
-    lines(AgeGrp ~ Time, . ,
+    lines(Total ~ Time, . ,
           lwd = 3, col = col.total )
   
   # men

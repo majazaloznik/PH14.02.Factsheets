@@ -329,3 +329,15 @@ There is something about defining x as a calculation that fucks it up.
 9. Why is the thresold data 1953-2098 and the prop over data only 1953-2097? OK, found the `<` and changed to `<=`.
 
 10. Add .csv file to makefile. 
+
+11. This is all good.
+
+12. Next step is to take out the data analysis and make a separate prospecive age data repository. 
+
+# Wednesday 15.8.2018
+
+1. OK, removed all the interpolation into a separate data repository. 
+
+2. rerunning the data analysis also fixed the fact that I had <= 65 instead of <65, which I should ahve noticed when reading George's editorial, where the decimals were slightly off. 
+
+

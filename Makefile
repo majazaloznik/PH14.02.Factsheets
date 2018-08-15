@@ -96,7 +96,7 @@ endef
 # DEPENDENCIES   ##############################################################
 ###############################################################################
 
-all: journal readme methods dot pdf
+all: journal readme dot pdf
 
 pdf: $(POSTER).pdf
 
@@ -133,12 +133,6 @@ readme: README.html
 README.html: README.md $(FIG)/extract.png
 	$(rmd2html)
 
-# methods from Rmds ############################################################
-methods: $(RPRT)/methods.pdf
-
-$(RPRT)/methods.pdf:  $(RPRT)/methods.Rmd  $(DT/P)/demo.rds $(DT/P)/demo.pop.rds $(DOC)/bib.bib
-	$(rmd2pdf)
-
 
 # POSTER #######################################################################
 $(POSTER).pdf: $(POSTER).ps
@@ -173,10 +167,10 @@ $(DT/P)/mena.pop.rds:  $(CODE)/02-transform-data.R
 	Rscript -e "source('$<')"
 
 # dependencies only
-$(DT/P)/demo.rds $(DT/P)/demo.pop.rds $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds $(RESULTS):  $(CODE)/02-transform-data.R
+$(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds:  $(CODE)/02-transform-data.R
 
 # required data for input to 02-clean-data
-$(CODE)/02-transform-data.R: $(DT/I)/mena.pop.rds $(DT/I)/mena.lt.rds $(CODE)/FunSpline.R
+$(CODE)/02-transform-data.R: $(DT/I)/mena.pop.rds $(DT/I)/mena.prosp.age.rds $(CODE)/FunSpline.R
 	touch $@
 
 # import and clean data #######################################################
@@ -185,10 +179,10 @@ $(DT/I)/mena.pop.rds: $(CODE)/01-import.R
 	Rscript -e "source('$<')"
 
 # dependency only
-$(DT/I)/mena.lt.rds: $(CODE)/01-import.R
+$(DT/I)/mena.prosp.age.rds: $(CODE)/01-import.R
 
 # required data for input to 01-import
-$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/WPP2017_LT.csv
+$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/final.data.csv
 	touch $@
 
 # download ISO country list data for mapping
@@ -199,11 +193,7 @@ $(DT/R)/ISO.country.codes.csv:
 $(DT/R)/WPP2017_PBSAS.csv: 
 	curl -o $@ "https://esa.un.org/unpd/wpp/DVD/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2017_PopulationBySingleAgeSex.csv"
 
-# download all WPP 2017 life table data
-$(DT/R)/WPP2017_LT.csv:
-	curl  -o $@	"https://esa.un.org/unpd/wpp/DVD/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2017_LifeTable.csv" 
-
-   
+# download figshare data - TODO
        
     
 
