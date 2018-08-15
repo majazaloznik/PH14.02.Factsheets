@@ -340,4 +340,4 @@ There is something about defining x as a calculation that fucks it up.
 
 2. rerunning the data analysis also fixed the fact that I had <= 65 instead of <65, which I should ahve noticed when reading George's editorial, where the decimals were slightly off. 
 
-
+3. I could add the proportions of populaiton over 65 for men and women as well?

@@ -16,9 +16,9 @@
 #' 
 #' Using a preformated dataframe `threshold.1y` which has data on the 
 #' following variables: 
-#' Location = country 
-#' Time = year
-#' Female, Male and Total are the thresholds for women, men and both
+#' location = country 
+#' time = year
+#' female, Male and total are the thresholds for women, men and both
 #' This function plots for a single country the three trends - men, women and 
 #' both, while also in gray printing the trends for the other 20 countries
 #' for total only. 
@@ -59,7 +59,7 @@ FunPlotThreshold <- function(country = "Algeria",
                height=height,
                paper="special") }
   threshold.1y %>% 
-    filter(Time > 1980, Time < 2050) -> threshold.1y
+    filter(time > 1980, time < 2050) -> threshold.1y
   par(bg = col.bg )
   par(mar = c(3,2,2.5,0))
   plot(2000, 50, 
@@ -78,27 +78,27 @@ FunPlotThreshold <- function(country = "Algeria",
   
   # background lines
   threshold.1y %>% 
-    group_by(Location) %>% 
-    lines(Total ~ Time, . ,
+    group_by(location) %>% 
+    lines(total ~ time, . ,
           lwd = 3, col = col.20)
   lines(c(1980, 2050), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
   # total
   threshold.1y %>% 
-    filter(Location == country) %>% 
-    lines(Total ~ Time, . ,
+    filter(location == country) %>% 
+    lines(total ~ time, . ,
           lwd = 3, col = col.total )
   
   # men
   threshold.1y %>% 
-    filter(Location == country) %>% 
-    lines(Male ~ Time, . ,
+    filter(location == country) %>% 
+    lines(male ~ time, . ,
           lwd = 3, col = col.male, lty = "63")
   
   #women
   threshold.1y %>% 
-    filter(Location == country) %>% 
-    lines(Female ~ Time, . ,
+    filter(location == country) %>% 
+    lines(female ~ time, . ,
           lwd = 3, col = col.female, lty = "63")
   
   
@@ -155,7 +155,7 @@ FunPlotProportions <- function(country = "Algeria",
                paper="special") }
   par(bg = col.bg )
   prop.over %>% 
-    filter(Time > 1980, Time < 2050) -> prop.over
+    filter(time > 1980, time < 2050) -> prop.over
   par(bg = col.bg)
   par(mar = c(3,2,2.5,0))
   plot(2000, 50, 
@@ -173,14 +173,14 @@ FunPlotProportions <- function(country = "Algeria",
   
   
   prop.over%>% 
-    filter(Location== country) %T>% 
-    lines(prop.over.65 ~ Time, . ,
+    filter(location== country) %T>% 
+    lines(prop.over.65 ~ time, . ,
           lwd = 3, col = col.65) %>% 
     summarise(max = max(prop.over.65 )) -> m.65
   
   prop.over%>% 
-    filter(Location== country) %>% 
-    lines(prop.over.t ~ Time, . ,
+    filter(location== country) %>% 
+    lines(prop.over.t ~ time, . ,
           lwd = 3, col = col.threshold)
   
   
@@ -261,36 +261,36 @@ FunPyramidPlotNoAxes <- function(country,
                                  year = 2018) {
   # get data
   pop %>% 
-    filter(Location == country,
-           Time == year) -> pyramid
+    filter(location == country,
+           time == year) -> pyramid
   pop %>% 
-    filter(Location == country,
-           Time == 2050) -> pyramid.50
-  lx <- pyramid$PropMale
-  rx <- pyramid$PropFemale
-  lx.50 <- pyramid.50$PropMale
-  rx.50 <- pyramid.50$PropFemale
+    filter(location == country,
+           time == 2050) -> pyramid.50
+  lx <- pyramid$prop_male
+  rx <- pyramid$prop_female
+  lx.50 <- pyramid.50$prop_male
+  rx.50 <- pyramid.50$prop_female
   # get thresholds and pop at that age
   lx.t <- threshold.1y %>% 
-    filter(Location == country,
-           Time == year) %>% 
-    pull(Male)
+    filter(location == country,
+           time == year) %>% 
+    pull(male)
   lx.t.pop <- lx[floor(lx.t )]
   rx.t <- threshold.1y %>% 
-    filter(Location == country,
-           Time == year) %>% 
-    pull(Female)
+    filter(location == country,
+           time == year) %>% 
+    pull(female)
   rx.t.pop <- rx[floor(rx.t )]
   # get thresholds and pop at that age in 2050
   lx.t.50 <- threshold.1y %>% 
-    filter(Location == country,
-           Time == 2050) %>% 
-    pull(Male)
+    filter(location == country,
+           time == 2050) %>% 
+    pull(male)
   lx.t.50.pop <- lx.50[floor(lx.t.50)]
   rx.t.50 <- threshold.1y %>% 
-    filter(Location == country,
-           Time == 2050) %>% 
-    pull(Female)
+    filter(location == country,
+           time == 2050) %>% 
+    pull(female)
   rx.t.50.pop <- rx.50[floor(rx.t.50 )]
   if(write) {
     postscript(file=here::here(paste0("figures/","pyramid-",substr(country, 1,4),".eps")),
@@ -459,7 +459,7 @@ FunPlotThresholdLedge <- function() {
              paper="special") 
   
   threshold.1y %>% 
-    filter(Time > 1980, Time < 2050) -> threshold.1y
+    filter(time > 1980, time < 2050) -> threshold.1y
   par(mar = c(2,2,2.5,0))
   plot(2000, 50, 
        xlim = c(1990, 2040), 
@@ -477,31 +477,31 @@ FunPlotThresholdLedge <- function() {
   
   # background lines
   threshold.1y %>% 
-    group_by(Location) %>% 
-    filter(Time > 2005, Time < 2025) %>% 
-    lines(Total ~ Time, . ,
+    group_by(location) %>% 
+    filter(time > 2005, time < 2025) %>% 
+    lines(total ~ time, . ,
           lwd = 3, col = col.20)
   lines(c(2000, 2030), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
   # total
   threshold.1y %>% 
-    filter(Location == "Bahrain") %>% 
-    filter(Time > 2005, Time < 2025) %>% 
-    lines(Total ~ Time, . ,
+    filter(location == "Bahrain") %>% 
+    filter(time > 2005, time < 2025) %>% 
+    lines(total ~ time, . ,
           lwd = 3, col = col.total )
   
   # men
   threshold.1y %>% 
-    filter(Location == "Bahrain") %>% 
-    filter(Time > 2005, Time < 2025) %>% 
-    lines(Male ~ Time, . ,
+    filter(location == "Bahrain") %>% 
+    filter(time > 2005, time < 2025) %>% 
+    lines(male ~ time, . ,
           lwd = 3, col = col.male, lty = "63")
   
   #women
   threshold.1y %>% 
-    filter(Location == "Bahrain") %>% 
-    filter(Time > 2005, Time < 2025) %>% 
-    lines(Female ~ Time, . ,
+    filter(location == "Bahrain") %>% 
+    filter(time > 2005, time < 2025) %>% 
+    lines(female ~ time, . ,
           lwd = 3, col = col.female, lty = "63")
   
   
@@ -527,7 +527,7 @@ FunPlotProportionLedge <- function() {
   
   par(bg = col.bg )
   prop.over %>% 
-    filter(Time > 1980, Time < 2050) -> prop.over
+    filter(time > 1980, time < 2050) -> prop.over
   par(bg = col.bg)
   par(mar = c(3,2,2.5,0))
   plot(2000, 50, 
@@ -545,16 +545,16 @@ FunPlotProportionLedge <- function() {
   
   
   prop.over%>% 
-    filter(Location== "Syrian Arab Republic") %>% 
-    filter(Time > 2020) %T>% 
-    lines(prop.over.65 ~ Time, . ,
+    filter(location== "Syrian Arab Republic") %>% 
+    filter(time > 2020) %T>% 
+    lines(prop.over.65 ~ time, . ,
           lwd = 3, col = col.65) %>% 
     summarise(max = max(prop.over.65 )) -> m.65
   
   prop.over%>% 
-    filter(Location== "Syrian Arab Republic") %>% 
-    filter(Time > 2020) %T>% 
-    lines(prop.over.t ~ Time, . ,
+    filter(location== "Syrian Arab Republic") %>% 
+    filter(time > 2020) %T>% 
+    lines(prop.over.t ~ time, . ,
           lwd = 3, col = col.threshold)
   
   text(2053, .12, "h")
@@ -593,36 +593,36 @@ FunPyramidPlotLedge <- function(country = "Jordan",
   # get data
   
   pop %>% 
-    filter(Location == country,
-           Time == 2015) -> pyramid
+    filter(location == country,
+           time == 2015) -> pyramid
   pop %>% 
-    filter(Location == country,
-           Time == 2050) -> pyramid.50
-  lx <- pyramid$PropMale
-  rx <- pyramid$PropFemale
-  lx.50 <- pyramid.50$PropMale
-  rx.50 <- pyramid.50$PropFemale
+    filter(location == country,
+           time == 2050) -> pyramid.50
+  lx <- pyramid$prop_male
+  rx <- pyramid$prop_female
+  lx.50 <- pyramid.50$prop_male
+  rx.50 <- pyramid.50$prop_female
   # get thresholds and pop at that age
   lx.t <- threshold.1y %>% 
-    filter(Location == country,
-           Time == 2015) %>% 
-    pull(Male)
+    filter(location == country,
+           time == 2015) %>% 
+    pull(male)
   lx.t.pop <- lx[floor(lx.t )]
   rx.t <- threshold.1y %>% 
-    filter(Location == country,
-           Time == 2015) %>% 
-    pull(Female)
+    filter(location == country,
+           time == 2015) %>% 
+    pull(female)
   rx.t.pop <- rx[floor(rx.t )]
   # get thresholds and pop at that age in 2050
   lx.t.50 <- threshold.1y %>% 
-    filter(Location == country,
-           Time == 2050) %>% 
-    pull(Male)
+    filter(location == country,
+           time == 2050) %>% 
+    pull(male)
   lx.t.50.pop <- lx.50[floor(lx.t.50)]
   rx.t.50 <- threshold.1y %>% 
-    filter(Location == country,
-           Time == 2050) %>% 
-    pull(Female)
+    filter(location == country,
+           time == 2050) %>% 
+    pull(female)
   rx.t.50.pop <- rx.50[floor(rx.t.50 )]
   if(write) {
     postscript(file=here::here(paste0("figures/","pyramid-legend.eps")),

@@ -37,7 +37,7 @@ col.grid <- "gray85"
 
 ## 01. plotting thresholds ====================================================
 
-lapply(unique(threshold.1y$Location),
+lapply(unique(threshold.1y$location),
        function(x)  FunPlotThreshold(x,
                                      height = height.1, width = 5,
                                      col.bg = col.bg,
@@ -48,7 +48,7 @@ lapply(unique(threshold.1y$Location),
 
 ## 02. plotting proportions over 65 ===========================================
 
-lapply(unique(threshold.1y$Location), 
+lapply(unique(threshold.1y$location), 
        function(x) FunPlotProportions(x, 
                                       write = TRUE, 
                                       height = height.1,
@@ -60,7 +60,7 @@ lapply(unique(threshold.1y$Location),
 
 ##  03. plotting the pyramid  =================================================
 
-lapply(unique(threshold.1y$Location), 
+lapply(unique(threshold.1y$location), 
        function(x) FunPyramidPlotNoAxes(
          country = x, lwd = 3,
          height = height.2, width = 10,

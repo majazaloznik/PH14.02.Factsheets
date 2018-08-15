@@ -162,27 +162,20 @@ $(FIG/plots): $(CODE)/03-plotting.R
 $(CODE)/03-plotting.R: $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds $(DT/P)/mena.pop.rds $(CODE)/FunPlots.R
 	touch $@
 
-# calculate splines and process data   ########################################	
-$(DT/P)/mena.pop.rds:  $(CODE)/02-transform-data.R
+# clean up abd process data   ##################################################
+$(DT/P)/mena.pop.rds $(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds:  $(CODE)/02-transform-data.R
 	Rscript -e "source('$<')"
-
-# dependencies only
-$(DT/P)/prop.over.rds $(DT/P)/threshold.1y.rds:  $(CODE)/02-transform-data.R
 
 # required data for input to 02-clean-data
-$(CODE)/02-transform-data.R: $(DT/I)/mena.pop.rds $(DT/I)/mena.prosp.age.rds $(CODE)/FunSpline.R
+$(CODE)/02-transform-data.R: $(DT/I)/mena.pop.rds $(DT/I)/mena.prosp.age.rds 
 	touch $@
 
-# import and clean data #######################################################
-	
-$(DT/I)/mena.pop.rds: $(CODE)/01-import.R
+# import and subset data #######################################################
+$(DT/I)/mena.pop.rds $(DT/I)/mena.prosp.age.rds: $(CODE)/01-import.R
 	Rscript -e "source('$<')"
 
-# dependency only
-$(DT/I)/mena.prosp.age.rds: $(CODE)/01-import.R
-
 # required data for input to 01-import
-$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/final.data.csv
+$(CODE)/01-import.R: $(DT/R)/WPP2017_PBSAS.csv $(DT/R)/2017_prospective-ages.csv
 	touch $@
 
 # download ISO country list data for mapping

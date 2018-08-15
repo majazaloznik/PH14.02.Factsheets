@@ -31,17 +31,17 @@ dsin <- read.csv(file = here::here("data/raw/ISO.country.codes.csv"))
 
 ## 0.2 prepare data ###########################################################
 threshold.1y %>% 
-  filter(Time == 2018) %>% 
-  select(Location, Total) -> threshold.2018
+  filter(time == 2018) %>% 
+  select(location, total) -> threshold.2018
 
 prop.over %>% 
-  filter(Time == 2018) %>% 
-  select(Location, prop.over.t) -> proportion.2018
+  filter(time == 2018) %>% 
+  select(location, prop.over.t) -> proportion.2018
 
 # join with iso codes         
 df <- as.data.frame(left_join(left_join(threshold.2018, proportion.2018),
                               dsin, 
-                              by = c("Location" = "official_name_en")))
+                              by = c("location" = "official_name_en")))
 
 ## add the data to the starter map
 sPDF <- joinCountryData2Map(df, joinCode="ISO3", nameJoinColumn="ISO3166.1.Alpha.3")
@@ -91,7 +91,7 @@ plot(sPDF, xlim = c(-17, 62), ylim = c(13, 42),
      border=col.20, col=NA)
 scale <- map.scale(ratio = FALSE, relwidth=0.2)
 
-threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "Total",
+threshold.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "total",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
                              numCats = 7,
