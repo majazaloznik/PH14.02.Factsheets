@@ -187,7 +187,8 @@ $(DT/R)/WPP2017_PBSAS.csv:
 	curl -o $@ "https://esa.un.org/unpd/wpp/DVD/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2017_PopulationBySingleAgeSex.csv"
 
 # download figshare data - TODO
-       
+$(DT/R)/2017_prospective-ages.csv:  $(CODE)/00-download.R
+	Rscript -e "source('$<')"
     
 
 

@@ -8,3 +8,4 @@ data/
 *.eps
 docs/reports/
 docs/presentations/
+.httr-oauth

@@ -29,13 +29,13 @@ pop %>%
 
 # get threshold data ready for plotting 
 prospective_age %>% 
-  select(location, time, female, male, total) -> thresholds
+  select(location, time, group, threshold) %>% 
+  spread(key = group, value = threshold) -> thresholds
 
 # get proportiondata ready for plotting
 prospective_age %>% 
-  select(location, time, prop.over.65.total, prop.over.t.total) %>% 
-  rename(prop.over.65 = prop.over.65.total,
-         prop.over.t = prop.over.t.total) -> prop.over
+  filter(group == "total") %>% 
+  select(location, time, prop.over.65, prop.over.t) -> prop.over
 
 
 ## 03. save data for plotting  ================================================
