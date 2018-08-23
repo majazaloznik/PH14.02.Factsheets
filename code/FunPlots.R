@@ -173,16 +173,34 @@ FunPlotProportions <- function(country = "Algeria",
   
   
   prop.over%>% 
-    filter(location== country) %T>% 
-    lines(prop.over.65 ~ time, . ,
-          lwd = 3, col = col.65) %>% 
-    summarise(max = max(prop.over.65 )) -> m.65
+    filter(location == country) %>% 
+    lines(prop_over_65_total ~ time, . ,
+          lwd = 3, col = col.65)
+  
+  prop.over%>% 
+    filter(location == country) %>% 
+    lines(prop_over_65_female ~ time, . ,
+          lwd = 3, col = col.65, lty = "28")
+  
+  prop.over%>% 
+    filter(location == country) %>% 
+    lines(prop_over_65_male ~ time, . ,
+          lwd = 3, col = col.65, lty = "28")
   
   prop.over%>% 
     filter(location== country) %>% 
-    lines(prop.over.t ~ time, . ,
+    lines(prop_over_threshold_total ~ time, . ,
           lwd = 3, col = col.threshold)
   
+  prop.over%>% 
+    filter(location== country) %>% 
+    lines(prop_over_threshold_female ~ time, . ,
+          lwd = 3, col = col.threshold, lty = "28")
+  
+  prop.over%>% 
+    filter(location== country) %>% 
+    lines(prop_over_threshold_male ~ time, . ,
+          lwd = 3, col = col.threshold, lty = "28")
   
   abline(v = 2015, lty = 2, lwd = 2, col = "gray50")
   text(2016, .19, "P", adj = c(0,1))
@@ -546,15 +564,14 @@ FunPlotProportionLedge <- function() {
   
   prop.over%>% 
     filter(location== "Syrian Arab Republic") %>% 
-    filter(time > 2020) %T>% 
-    lines(prop.over.65 ~ time, . ,
-          lwd = 3, col = col.65) %>% 
-    summarise(max = max(prop.over.65 )) -> m.65
+    filter(time > 2020) %>% 
+    lines(prop_over_65_total ~ time, . ,
+          lwd = 3, col = col.65) 
   
   prop.over%>% 
     filter(location== "Syrian Arab Republic") %>% 
-    filter(time > 2020) %T>% 
-    lines(prop.over.t ~ time, . ,
+    filter(time > 2020) %>% 
+    lines(prop_over_threshold_total ~ time, . ,
           lwd = 3, col = col.threshold)
   
   text(2053, .12, "h")

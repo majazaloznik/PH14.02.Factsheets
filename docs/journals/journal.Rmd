@@ -183,7 +183,7 @@ So need to go back to the data transforming script and add some props to the pop
 
 # Thursday 12.7.2018
 
-1. ugh, getting stuck in the pstricks \def and caluclation stuff. WHy does this not work:
+1. ugh, getting stuck in the pstricks `\def` and caluclation stuff. WHy does this not work:
 
 ```
 \def\x{29.4 4 div}
@@ -345,3 +345,20 @@ There is something about defining x as a calculation that fucks it up.
 # Thursday 16.8.2018
 
 Added direct download of most recent version of file form figshare!
+
+# Friday 17.8.2018
+
+So can I add male and female proportions to the second line chart? 
+
+1. Start by making `prop.over` include male and female data as well. 
+
+2. OK, i get them to work, but there is sth super weird with Tunisia in the nineties. I have both male and female proportions over 65 being larger than the total proportion over 65. 
+
+
+# Thursday 23.8.2018 
+
+1. OK, there was an error in the calculations, to do with the cumulative sums being calculated at the begining of the age group instead of the end. Now this has been fixed in the prospective ages dataset, which is published as version 16. So now lets try this plotting again.
+
+2. Note to self: the population data is not downloaded programatically. Not true actually, it's just done in the makefile instead of in R..
+
+3. Plots look good, let's try the whole thing!

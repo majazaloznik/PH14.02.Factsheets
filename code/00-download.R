@@ -1,3 +1,6 @@
+
+# 01. download prospective age data from figshare =============================
+
 # preliminaires
 library(rfigshare)
 
@@ -11,3 +14,7 @@ file.url <- x$files[[file.number]]$download_url
 
 # download file to /data/01_raw
 download.file(file.url, "data/raw/2017_prospective-ages.csv")
+
+
+
+
