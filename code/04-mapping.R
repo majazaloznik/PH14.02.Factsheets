@@ -36,7 +36,7 @@ threshold.1y %>%
 
 prop.over %>% 
   filter(time == 2018) %>% 
-  select(location, prop.over.t) -> proportion.2018
+  select(location, prop_over_threshold_total) -> proportion.2018
 
 # join with iso codes         
 df <- as.data.frame(left_join(left_join(threshold.2018, proportion.2018),
@@ -126,7 +126,7 @@ par(mar = c(0,0,0,0))
 plot(sPDF, xlim = c(-12, 67), ylim = c(13, 42),
      border="grey70", col="white")
 scale <- (map.scale(ratio = FALSE, relwidth=0.2))
-proportion.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "prop.over.t",
+proportion.legend <- mapPolys(sPDF.mena, nameColumnToPlot = "prop_over_threshold_total",
                              addLegend=FALSE,
                              mapTitle ="",  borderCol="gray40", 
                              numCats = 7,

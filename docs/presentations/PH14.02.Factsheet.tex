@@ -23,7 +23,7 @@
 \usepackage[hidelinks]{hyperref}
 \hypersetup{breaklinks=true}
 \usepackage[hyphenbreaks]{breakurl}
-\setlength{\bibsep}{0pt plus 0.3ex}
+\setlength{\bibsep}{.1ex}
 \hypersetup{
     colorlinks,
     linkcolor={red!50!black},
@@ -45,6 +45,7 @@
 
 \newcommand{\minisculeyyy}{\@setfontsize\miniscule{7}{8}}% \tiny: 5/6
 \newcommand{\mini}{\@setfontsize\miniscule{8}{9}}% \tiny: 5/6
+\newcommand{\midi}{\@setfontsize\miniscule{9}{10}}% \tiny: 5/6
 \newcommand{\maxi}{\@setfontsize\miniscule{10}{11}}% \tiny: 5/6
 \newcommand{\maxier}{\@setfontsize\miniscule{11.5}{12}}% \tiny: 5/6
 \newcommand{\BBB}{\@setfontsize\BBB{32}{33}}% \tiny: 5/6
@@ -105,27 +106,30 @@
 
 \SpecialCoor
 \newlength{\myboxwidth}
-\setlength{\myboxwidth}{\x cm * \real{2} -0.4 cm}%
+\setlength{\myboxwidth}{\x cm * \real{2} -0.6 cm}%
 \newlength{\myboxwidthT}
-\setlength{\myboxwidthT}{\x cm * \real{1} -0.4 cm}%
+\setlength{\myboxwidthT}{\x cm * \real{1} -0.8 cm}%
+\newlength{\myboxwidthTt}
+\setlength{\myboxwidthTt}{\x cm * \real{1} -0.3 cm}%
 \newlength{\myboxwidthTT}
 \setlength{\myboxwidthTT}{\x cm * \real{3} -0.4 cm}%
 \setlength{\bibhang}{0cm}
+
 \rput[tl](!0 0.03 sub 6 1.2 \y div add 0.05 sub){
 \mini{\parbox[c]
 {\myboxwidth}{
 
-\maxi
+\midi
 
 This factsheet explores the ageing of the populations of Middle Eastern and North African countries using \emph{prospective age} instead of chronological age  \citep{Sanderson2008}. Using prospective age is akin to adjusting for inflation when comparing prices. It acknowledges the fact that a particular chronological age---e.g. the age of 65---means something very different in populations with low life expectancy than it does in a population with high life expectancy. 
 
 \vspace{.5em}
 
-Instead of defining old age as being over 65, we define it as being over an \emph{old-age threshold}: the age where the remaining life expectancy is 15 years or less ($RLE^{15})$
+Instead of defining old age as being over 65, we define it as being over an \emph{old-age threshold}: the age where the remaining life expectancy is 15 years ($RLE^{15}$). The changes in the old-age threshold, and in the proportion of the population over that age, are plotted for each country separately and described in more detail next to the maps below$^\dagger$. 
 
 \vspace{.5em}
 
-We use population pyramids to outline current and future (2050) age structures in each country, and the horizontal lines allow you to compare the prospective old-age thresholds (in purple) with the more common definition of old age as 65 years old (dashed horizontal line).
+Population pyramids outline current and future (2050) age structures in each country \citep{un2017}, and the horizontal lines allow you to compare the prospective old-age thresholds (in purple) with the more common definition of old age as 65 years old (dashed horizontal line).  
 
 
 
@@ -137,15 +141,15 @@ We use population pyramids to outline current and future (2050) age structures i
 
 \maxier
 \centering
-\textbf{Old-age threshold---age at which remaining life expectancy is 15 years ($RLE^{15}$)}
+\textbf{Old-age threshold---the age at which remaining life expectancy is 15 years ($RLE^{15}$)}
 \vspace{1ex}
 }}}
 
-\rput[tl](!1 0.01 sub 4 1.2 \y div add 0.12 sub){
+\rput[tl](!1 0.02 add 4 1.2 \y div add 0.12 sub){
 \mini{\parbox[c]
 {\myboxwidthT}{
-\maxi
-The old-age thresholds have been calculated$^\dagger$ from abridged life tables \citep{un2017}. The map on the right shows the current old-age thresholds in each country. Yellow indicates the $RLE^{15}$ is about 65,  orange/red means it's lower and green means it's higher. In the latter countries using 65 as a definition of old age might paint a too pessimistic picture of how old their societies are compared to the countries in the red, where the proportion of over 65 is too optimistic a measure.   
+\midi
+The old-age thresholds have been calculated from abridged life tables \citep{zaloznik2018}. The map on the right shows the current old-age thresholds in each country. Yellow indicates the $RLE^{15}$ is about 65,  orange/red means it's lower and green means it's higher. In the latter countries using 65 as a definition of old age might paint a too pessimistic picture of how old their societies are compared to the countries in the red, where the proportion of over 65 is too optimistic a measure.   
 
 }}}
 
@@ -159,13 +163,13 @@ The old-age thresholds have been calculated$^\dagger$ from abridged life tables 
 \vspace{1ex}
 }}}
 
-\rput[tl](!3 0.01 sub 3 1.2 \y div add 0.10 sub){
+\rput[tl](!3 0.01 add 3 1.2 \y div add 0.10 sub){
 \mini{\parbox[c]
 {\myboxwidthT}{
 
 
-\maxi
-A common measure of population ageing is the proportion of people over 65. The map on the left instead shows the proportion of the population over the old-age threshold in each country. This ranks the countries very differently than ranking them normally: now the oldest countries are Tunisia and Turkey rather than Israel and Lebanon. Or e.g. Yemen and Algeria have similarly old populations instead of Algeria having more than double the proportion of old people.
+\midi
+A common measure of population ageing is the proportion of people over 65. The map on the left instead shows the proportion of the population over the old-age threshold in each country. This ranks the countries very differently than ranking them normally: now the oldest countries are Tunisia and Turkey rather than Israel and Lebanon. Or take for example Yemen and Algeria that now both have around 4\% of old people, compared to Algeria having more than double the proportion of people over 65 than Yemen.
 
 }}}
 \psfrag{0.00}[c][c]{\miniscule{\emph{0}}}
@@ -394,12 +398,33 @@ A common measure of population ageing is the proportion of people over 65. The m
 \rput[bl](.45,.55){\includegraphics[width=\x cm *\real{.5}]{proportion-legend}}
 \rput[bl](0,.55){\includegraphics[width=\x cm *\real{.5}]{threshold-legend}}
 
+% Women
 \pnode(0.35,0.78){A}
-\pnode(0.385,0.87){B}
+\pnode(0.385,0.89){B}
 \nccurve[angleA = 20, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{A}{B}
+
+
+\pnode(0.535,0.89){P}
+\pnode(0.57,0.795){O}
+\nccurve[angleA = 0, , angleB = 180, nodesepA = 0pt, linewidth = .4pt]{P}{O}
+
+\pnode(0.535,0.89){P}
+\pnode(0.57,0.705){R}
+\nccurve[angleA = 20, , angleB = 190, nodesepA = 0pt, linewidth = .4pt]{P}{R}
+
+
 \pnode(0.35,0.745){C}
 \pnode(0.385,0.63){D}
 \nccurve[angleA = -20, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{C}{D}
+
+\pnode(0.47,0.63){S}
+\pnode(0.57,0.74){T}
+\nccurve[angleA = -20, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{S}{T}
+
+\pnode(0.47,0.63){S}
+\pnode(0.57,0.69){U}
+\nccurve[angleA = -24, , angleB = 180, nodesepA = 2pt, linewidth = .4pt]{S}{U}
+
 
 \pnode(0.35,0.76){E}
 \pnode(0.385,0.75){F}
@@ -504,17 +529,19 @@ A common measure of population ageing is the proportion of people over 65. The m
 
 \rput[bl](!4 0.02 1.2 \y div add ){
 \mini{\parbox[c]
-{\myboxwidthT}{\bibliographystyle{apa}
-\scriptsize \textsc{References:}
+{\myboxwidthTt}{\bibliographystyle{apa}
+\tiny \textsc{References:}
 \vspace{-2.3cm}
 
 \renewcommand\refname{}% removes default large title 
 
 %\maxi{\bibliography{../bib.bib}}
-\maxi{\bibliography{docs/bib.bib}}
+\midi{\bibliography{docs/bib.bib}}
 \vspace*{.1cm}
 
-$\dagger$ All the code, methodology, summary tables, and further details are available at \url{https://github.com/majazaloznik/PH.14.02.Factsheets}
+$\dagger$ All the code, data and methodology for producing this factsheet are openly available at \url{https://github.com/majazaloznik/PH.14.02.Factsheets}
+
+\vspace*{.1cm}
 }}}
 
 

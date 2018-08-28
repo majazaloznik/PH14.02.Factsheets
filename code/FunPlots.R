@@ -78,9 +78,8 @@ FunPlotThreshold <- function(country = "Algeria",
   
   # background lines
   threshold.1y %>% 
-    group_by(location) %>% 
-    lines(total ~ time, . ,
-          lwd = 3, col = col.20)
+    split(., .$location) %>% 
+    lapply( function(x) lines(x$time, x$total, lwd = 3, col = col.20))
   lines(c(1980, 2050), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
   # total
@@ -180,12 +179,12 @@ FunPlotProportions <- function(country = "Algeria",
   prop.over%>% 
     filter(location == country) %>% 
     lines(prop_over_65_female ~ time, . ,
-          lwd = 3, col = col.65, lty = "28")
+          lwd = 3, col = col.65, lty = "63")
   
   prop.over%>% 
     filter(location == country) %>% 
     lines(prop_over_65_male ~ time, . ,
-          lwd = 3, col = col.65, lty = "28")
+          lwd = 3, col = col.65, lty = "63")
   
   prop.over%>% 
     filter(location== country) %>% 
@@ -195,12 +194,12 @@ FunPlotProportions <- function(country = "Algeria",
   prop.over%>% 
     filter(location== country) %>% 
     lines(prop_over_threshold_female ~ time, . ,
-          lwd = 3, col = col.threshold, lty = "28")
+          lwd = 3, col = col.threshold, lty = "63")
   
   prop.over%>% 
     filter(location== country) %>% 
     lines(prop_over_threshold_male ~ time, . ,
-          lwd = 3, col = col.threshold, lty = "28")
+          lwd = 3, col = col.threshold, lty = "63")
   
   abline(v = 2015, lty = 2, lwd = 2, col = "gray50")
   text(2016, .19, "P", adj = c(0,1))
@@ -495,10 +494,9 @@ FunPlotThresholdLedge <- function() {
   
   # background lines
   threshold.1y %>% 
-    group_by(location) %>% 
     filter(time > 2005, time < 2025) %>% 
-    lines(total ~ time, . ,
-          lwd = 3, col = col.20)
+    split(., .$location) %>% 
+    lapply( function(x) lines(x$time, x$total, lwd = 3, col = col.20))
   lines(c(2000, 2030), c(65,65), col = "gray50", lty = 3, lwd = 2)
   
   # total
@@ -565,17 +563,42 @@ FunPlotProportionLedge <- function() {
   prop.over%>% 
     filter(location== "Syrian Arab Republic") %>% 
     filter(time > 2020) %>% 
-    lines(prop_over_65_total ~ time, . ,
+    lines(prop_over_65_total + .04 ~ time, . ,
           lwd = 3, col = col.65) 
   
+  prop.over%>% 
+    filter(location== "Syrian Arab Republic") %>% 
+    filter(time > 2020) %>% 
+    lines(prop_over_65_female + .05 ~ time, . ,
+          lwd = 3, col = col.65, lty = "63")
+  
+  prop.over%>% 
+    filter(location== "Syrian Arab Republic") %>% 
+    filter(time > 2020) %>% 
+    lines(prop_over_65_male + .03 ~ time, . ,
+          lwd = 3, col = col.65, lty = "63")
+
   prop.over%>% 
     filter(location== "Syrian Arab Republic") %>% 
     filter(time > 2020) %>% 
     lines(prop_over_threshold_total ~ time, . ,
           lwd = 3, col = col.threshold)
   
-  text(2053, .12, "h")
-  text(2053, .06, "i")
+  prop.over%>% 
+    filter(location== "Syrian Arab Republic") %>% 
+    filter(time > 2020) %>% 
+    lines(prop_over_threshold_female + .01~ time, . ,
+          lwd = 3, col = col.threshold, lty = "63")
+  
+  prop.over%>% 
+    filter(location== "Syrian Arab Republic") %>% 
+    filter(time > 2020) %>% 
+    lines(prop_over_threshold_male -.01 ~ time, . ,
+          lwd = 3, col = col.threshold, lty = "63")
+  
+  
+  text(2053, .16, "h")
+  text(2053, .08, "i")
   
   dev.off() 
   

@@ -362,3 +362,32 @@ So can I add male and female proportions to the second line chart?
 2. Note to self: the population data is not downloaded programatically. Not true actually, it's just done in the makefile instead of in R..
 
 3. Plots look good, let's try the whole thing!
+
+# Monday 27.8.2018
+
+1. Everything works, just the mapping script needs to be updated to new var names that had been updated. 
+
+2. Need to update the legend for the proportion of the population
+
+3. Bibliography from Mendeley doesn't work if you try to add latex code e.g. `url`. I'll manually fix the bib file, but it would be good to have a cleaner way to do this in the future.
+
+4. Also I'm not clear why bibtex works from the makefile but not directly from texmaker?
+
+# Tuesday 28.8.2018
+
+1. fixed references
+
+2. Align text and polish it up a bit. 
+
+3. The threshold legend background has some weird lines that shouldn't be there. Hmm looks like all the background lines are wrong... FIXED
+
+4. Spell check.
+
+5. Write up intro for editorial. 
+
+... four papers and one factsheet. 
+
+Finally, the factsheet by Zaloznik supplements the papers with a detailed look at the ageing process in 20 MENA countries using prospective age instead of chronological age as an alternative measure of old age. 
+
+6. Finished?
+
