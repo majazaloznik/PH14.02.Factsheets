@@ -30,7 +30,7 @@ DT/I/.rds :=  $(DT/I)/*.rds
 DT/P/.rds := $(DT/P)/*.rds
 
 # poster filename
-POSTER := $(DIR)/docs/presentations/PH14.02.Factsheet
+POSTER := $(DIR)/docs/presentations/PH14.02.Factsheet-A1
 
 # final human readable data 
 RESULTS := $(DIR)/results/human-readable/final.data.csv
